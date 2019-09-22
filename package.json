@@ -1,0 +1,52 @@
+{
+  "name": "svelte-realworld",
+  "description": "A Svelte/Sapper implementation of RealWorld",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "sapper dev",
+    "build": "sapper build",
+    "export": "sapper export",
+    "start": "node __sapper__/build",
+    "cy:run": "cypress run",
+    "cy:open": "cypress open",
+    "test": "(npm run build && export PORT=3100 && node __sapper__/build) & cypress run",
+    "deploy": "make deploy"
+  },
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "compression": "^1.7.1",
+    "express-session": "^1.16.2",
+    "marked": "^0.6.2",
+    "node-fetch": "^2.1.2",
+    "polka": "^0.5.2",
+    "sapper": "^0.27.4",
+    "session-file-store": "^1.2.0",
+    "sirv": "^0.4.2"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.1.5",
+    "@babel/plugin-syntax-dynamic-import": "^7.0.0",
+    "@babel/plugin-transform-runtime": "^7.1.0",
+    "@babel/preset-env": "^7.1.5",
+    "@babel/runtime": "^7.1.5",
+    "chokidar": "^3.0.1",
+    "cypress": "^3.3.1",
+    "npm-run-all": "^4.1.2",
+    "rollup": "^1.15.1",
+    "rollup-plugin-babel": "^4.3.2",
+    "rollup-plugin-commonjs": "^10.0.0",
+    "rollup-plugin-node-resolve": "^5.0.1",
+    "rollup-plugin-replace": "^2.2.0",
+    "rollup-plugin-svelte": "^5.1.0",
+    "rollup-plugin-terser": "^5.0.0",
+    "svelte": "^3.5.1",
+    "svelte-loader": "^2.13.4"
+  },
+  "now": {
+    "alias": "svelte-realworld.now.sh",
+    "files": [
+      "__sapper__",
+      "yarn.lock"
+    ]
+  }
+}
