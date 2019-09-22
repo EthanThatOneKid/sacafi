@@ -1,6 +1,6 @@
 {
-  "name": "svelte-realworld",
-  "description": "A Svelte/Sapper implementation of RealWorld",
+  "name": "sacawifi",
+  "description": "",
   "version": "0.0.1",
   "scripts": {
     "dev": "sapper dev",
