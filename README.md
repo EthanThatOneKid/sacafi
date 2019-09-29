@@ -1,5 +1,5 @@
-# Sacafi
-> Gimme dat wifi bois!!
+# Sacafi 🥡
+> Gimme dat wifi baus!!
 
 ## Dev Setup
 1. Boot up MongoDB: `"C:\Program Files\MongoDB\Server\4.2\bin\mongod" --dbpath="C:\Users\Ethan\Documents\GitHub\sacawifi\backend\data\db"`
