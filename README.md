@@ -8,6 +8,12 @@
 1. Spin up frontend server in frontend directory: `npm run serve`
 1. Test in [Postman](https://github.com/gothinkster/realworld/blob/master/api/Conduit.postman_collection.json) and on [localhost](http://localhost:8080)
 
+## Feature Doc
+* Accounts can view map of places with verified wifi access, but can only unlock one per day using their free account.
+* Unverified wifi access points can be used once per free account in order to verify the access point.
+* Paid accounts can view any wifi access point.
+* Open wifi access points (ones without passwords) are viewable for free as well. Users can verify if that access point is secure (safe to use; not a phish).
+
 ---
 
 Engineered with 💖 by EthanThatOneKid
