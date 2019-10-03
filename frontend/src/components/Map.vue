@@ -6,7 +6,7 @@
       <span>Bounds: {{ bounds }}</span>
     </div>
     <l-map
-      style="height: 80%; width: 100%"
+      style="height: 50vh; width: 50vw"
       :zoom="zoom"
       :center="center"
       @update:zoom="zoomUpdated"
@@ -50,7 +50,7 @@ export default {
 </script>
 
 <style>
-@import "../../node_modules/leaflet/dist/leaflet.css";
+@import "~leaflet/dist/leaflet.css";
 .leaflet-fake-icon-image-2x {
   background-image: url(../../node_modules/leaflet/dist/images/marker-icon-2x.png);
 }
