@@ -71,6 +71,11 @@ export default new Router({
       path: "/editor/:slug?",
       props: true,
       component: () => import("@/views/ArticleEdit")
+    },
+    {
+      name: "map",
+      path: "/map",
+      component: () => import("@/views/Map")
     }
   ]
 });

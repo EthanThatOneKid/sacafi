@@ -14,6 +14,10 @@
 * Paid accounts can view any wifi access point.
 * Open wifi access points (ones without passwords) are viewable for free as well. Users can verify if that access point is secure (safe to use; not a phish).
 
+## Todo ✔
+* Get Leaflet working ([quickstart](https://korigan.github.io/Vue2Leaflet/#/quickstart.md))
+* Research for a good web transaction processor
+
 ---
 
 Engineered with 💖 by EthanThatOneKid
