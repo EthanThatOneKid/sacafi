@@ -13,8 +13,8 @@
       @update:center="centerUpdated"
       @update:bounds="boundsUpdated"
     >
-      <l-tile-layer :url="url"></l-tile-layer>
       <v-geosearch :options="geosearchOptions"></v-geosearch>
+      <l-tile-layer :url="url"></l-tile-layer>
     </l-map>
   </div>
 </template>
