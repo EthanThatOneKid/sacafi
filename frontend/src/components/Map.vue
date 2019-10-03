@@ -20,22 +20,22 @@
 </template>
 
 <script>
-import {LMap, LTileLayer} from 'vue2-leaflet';
-import { OpenStreetMapProvider } from 'leaflet-geosearch';
-import VGeosearch from 'vue2-leaflet-geosearch';
+import { LMap, LTileLayer } from "vue2-leaflet";
+import { OpenStreetMapProvider } from "leaflet-geosearch";
+import VGeosearch from "vue2-leaflet-geosearch";
 
 export default {
-  name: 'Map',
+  name: "Map",
   components: {
-      LMap,
-      LTileLayer,
-      VGeosearch
+    LMap,
+    LTileLayer,
+    VGeosearch
   },
-  data () {
+  data() {
     return {
-      url: 'http://{s}.tile.osm.org/{z}/{x}/{y}.png',
+      url: "http://{s}.tile.osm.org/{z}/{x}/{y}.png",
       zoom: 3,
-      center: [47.413220, -1.219482],
+      center: [47.41322, -1.219482],
       bounds: null,
       geosearchOptions: {
         provider: new OpenStreetMapProvider()
@@ -43,13 +43,13 @@ export default {
     };
   },
   methods: {
-    zoomUpdated (zoom) {
+    zoomUpdated(zoom) {
       this.zoom = zoom;
     },
-    centerUpdated (center) {
+    centerUpdated(center) {
       this.center = center;
     },
-    boundsUpdated (bounds) {
+    boundsUpdated(bounds) {
       this.bounds = bounds;
     }
   }
