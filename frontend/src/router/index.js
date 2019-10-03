@@ -73,9 +73,9 @@ export default new Router({
       component: () => import("@/views/ArticleEdit")
     },
     {
-      name: "map",
+      name: "MapView",
       path: "/map",
-      component: () => import("@/views/Map")
+      component: () => import("@/views/MapView")
     }
   ]
 });
