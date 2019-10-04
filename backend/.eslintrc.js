@@ -17,6 +17,9 @@ module.exports = {
         "no-process-exit": "off",
         "object-shorthand": "off",
         "class-methods-use-this": "off",
-        "no-underscore-dangle": "warn"
+        "no-underscore-dangle": "warn",
+        "no-bitwise": "warn",
+        "no-param-reassign": "warn",
+        "no-underscore-dangle": "off"
     }
 };

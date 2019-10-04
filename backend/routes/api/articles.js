@@ -69,14 +69,15 @@ router.get("/", auth.optional, (req, res, next) => {
           .exec(),
         Article.count(query).exec(),
         req.payload ? User.findById(req.payload.id) : null
-      ]).then(results => {
-        const [articles, articlesCount, user] = results;
-        return res.json({
-          articles: articles.map(article => {
-            return article.toJSONFor(user);
-          }),
-          articlesCount
-        });
+      ]);
+    })
+    .then(results => {
+      const [articles, articlesCount, user] = results;
+      return res.json({
+        articles: articles.map(article => {
+          return article.toJSONFor(user);
+        }),
+        articlesCount
       });
     })
     .catch(next);
@@ -85,35 +86,38 @@ router.get("/", auth.optional, (req, res, next) => {
 router.get("/feed", auth.required, (req, res, next) => {
   let limit = 20;
   let offset = 0;
+  let user;
   if (typeof req.query.limit !== "undefined") {
     limit = req.query.limit;
   }
   if (typeof req.query.offset !== "undefined") {
     offset = req.query.offset;
   }
-  User.findById(req.payload.id).then(user => {
-    if (!user) {
-      return res.sendStatus(401);
-    }
-    Promise.all([
-      Article.find({ author: { $in: user.following } })
-        .limit(Number(limit))
-        .skip(Number(offset))
-        .populate("author")
-        .exec(),
-      Article.count({ author: { $in: user.following } })
-    ])
-      .then(results => {
-        const [articles, articlesCount] = results;
-        return res.json({
-          articles: articles.map(article => {
-            return article.toJSONFor(user);
-          }),
-          articlesCount
-        });
-      })
-      .catch(next);
-  });
+  return User.findById(req.payload.id)
+    .then(_user => {
+      user = _user;
+      if (!user) {
+        return res.sendStatus(401);
+      }
+      return Promise.all([
+        Article.find({ author: { $in: user.following } })
+          .limit(Number(limit))
+          .skip(Number(offset))
+          .populate("author")
+          .exec(),
+        Article.count({ author: { $in: user.following } })
+      ]);
+    })
+    .then(results => {
+      const [articles, articlesCount] = results;
+      return res.json({
+        articles: articles.map(article => {
+          return article.toJSONFor(user);
+        }),
+        articlesCount
+      });
+    })
+    .catch(next);
 });
 
 router.post("/", auth.required, (req, res, next) => {
@@ -132,7 +136,7 @@ router.post("/", auth.required, (req, res, next) => {
     .catch(next);
 });
 
-// Return a article
+// Return article
 router.get("/:article", auth.optional, (req, res, next) => {
   Promise.all([
     req.payload ? User.findById(req.payload.id) : null,
@@ -147,7 +151,7 @@ router.get("/:article", auth.optional, (req, res, next) => {
 
 // Update article
 router.put("/:article", auth.required, (req, res, next) => {
-  User.findById(req.payload.id).then(user => {
+  return User.findById(req.payload.id).then(user => {
     if (req.article.author._id.toString() === req.payload.id.toString()) {
       if (typeof req.body.article.title !== "undefined") {
         req.article.title = req.body.article.title;
@@ -161,21 +165,20 @@ router.put("/:article", auth.required, (req, res, next) => {
       if (typeof req.body.article.tagList !== "undefined") {
         req.article.tagList = req.body.article.tagList;
       }
-      req.article
+      return req.article
         .save()
         .then(article => {
           return res.json({ article: article.toJSONFor(user) });
         })
         .catch(next);
-    } else {
-      return res.sendStatus(403);
     }
+    return res.sendStatus(403);
   });
 });
 
 // Delete article
 router.delete("/:article", auth.required, (req, res, next) => {
-  User.findById(req.payload.id)
+  return User.findById(req.payload.id)
     .then(user => {
       if (!user) {
         return res.sendStatus(401);
@@ -190,7 +193,7 @@ router.delete("/:article", auth.required, (req, res, next) => {
     .catch(next);
 });
 
-// Favorite an article
+// Favorite article
 router.post("/:article/favorite", auth.required, (req, res, next) => {
   const articleId = req.article._id;
   User.findById(req.payload.id)
@@ -241,7 +244,8 @@ router.get("/:article/comments", auth.optional, (req, res, next) => {
           }
         })
         .execPopulate()
-        .then(article => {
+        .then(() => {
+          // Passes article data object
           return res.json({
             comments: req.article.comments.map(comment => {
               return comment.toJSONFor(user);
@@ -264,7 +268,8 @@ router.post("/:article/comments", auth.required, (req, res, next) => {
       comment.author = user;
       return comment.save().then(() => {
         req.article.comments.push(comment);
-        return req.article.save().then(article => {
+        return req.article.save().then(() => {
+          // Passes article data object
           res.json({ comment: comment.toJSONFor(user) });
         });
       });
@@ -272,26 +277,22 @@ router.post("/:article/comments", auth.required, (req, res, next) => {
     .catch(next);
 });
 
-router.delete(
-  "/:article/comments/:comment",
-  auth.required,
-  (req, res, next) => {
-    if (req.comment.author.toString() === req.payload.id.toString()) {
-      req.article.comments.remove(req.comment._id);
-      req.article
-        .save()
-        .then(
-          Comment.find({ _id: req.comment._id })
-            .remove()
-            .exec()
-        )
-        .then(() => {
-          res.sendStatus(204);
-        });
-    } else {
-      res.sendStatus(403);
-    }
+router.delete("/:article/comments/:comment", auth.required, (req, res) => {
+  if (req.comment.author.toString() === req.payload.id.toString()) {
+    req.article.comments.remove(req.comment._id);
+    req.article
+      .save()
+      .then(
+        Comment.find({ _id: req.comment._id })
+          .remove()
+          .exec()
+      )
+      .then(() => {
+        res.sendStatus(204);
+      });
+  } else {
+    res.sendStatus(403);
   }
-);
+});
 
 module.exports = router;
