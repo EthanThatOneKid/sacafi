@@ -38,7 +38,7 @@ UserSchema.plugin(uniqueValidator, { message: "is already taken." });
 
 UserSchema.methods.validPassword = password => {
   const hash = crypto
-    .pbkdf2Sync(password, this.salt, 10000, 512, "sha512")
+    .pbkdf2Sync(password, this.salt, 10000, 512, "sha512") // SALT INVALID ARG TYPE ERROR
     .toString("hex");
   return this.hash === hash;
 };
@@ -68,7 +68,7 @@ UserSchema.methods.toAuthJSON = () => {
   return {
     username: this.username,
     email: this.email,
-    token: this.generateJWT(),
+    token: this.generateJWT(), // NOT A FUNCTION
     bio: this.bio,
     image: this.image
   };
