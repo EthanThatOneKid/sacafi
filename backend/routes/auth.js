@@ -1,24 +1,26 @@
-var jwt = require('express-jwt');
-var secret = require('../config').secret;
+// Dependencies
+const jwt = require("express-jwt");
+const { secret } = require("../config");
 
-function getTokenFromHeader(req){
-  if (req.headers.authorization && req.headers.authorization.split(' ')[0] === 'Token' ||
-      req.headers.authorization && req.headers.authorization.split(' ')[0] === 'Bearer') {
-    return req.headers.authorization.split(' ')[1];
-  }
+// Helpers
+const getTokenFromHeader = req => {
+  const authData = req.headers.authorization;
+  const isTokenBearer =
+    (authData && authData.split(" ")[0] === "Token") ||
+    (authData && authData.split(" ")[0] === "Bearer");
+  return isTokenBearer ? authData.split(" ")[1] : null;
+};
 
-  return null;
-}
-
-var auth = {
+// Main process
+const auth = {
   required: jwt({
-    secret: secret,
-    userProperty: 'payload',
+    secret,
+    userProperty: "payload",
     getToken: getTokenFromHeader
   }),
   optional: jwt({
-    secret: secret,
-    userProperty: 'payload',
+    secret,
+    userProperty: "payload",
     credentialsRequired: false,
     getToken: getTokenFromHeader
   })
