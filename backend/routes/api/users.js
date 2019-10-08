@@ -39,7 +39,7 @@ router.put("/user", auth.required, (req, res, next) => {
         }
       });
       return user.save().then(() => {
-        return res.json({ user: user.toAuthJSON() });
+        return res.json({ user: user.toAuthJSON(user.generateJWT()) });
       });
     })
     .catch(next);
@@ -62,7 +62,7 @@ router.post("/users/login", (req, res, next) => {
       }
       if (user) {
         user.token = user.generateJWT();
-        return res.json({ user: user.toAuthJSON() });
+        return res.json({ user: user.toAuthJSON(user.generateJWT()) });
       }
       return res.status(422).json(info);
     }
@@ -78,7 +78,7 @@ router.post("/users", (req, res, next) => {
   user
     .save()
     .then(() => {
-      return res.json({ user: user.toAuthJSON() });
+      return res.json({ user: user.toAuthJSON(user.generateJWT()) });
     })
     .catch(next);
 });
