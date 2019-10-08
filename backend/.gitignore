@@ -4,11 +4,7 @@ logs
 .DS_Store
 
 npm-debug.log*
-
-# Secrets
 .env
-
-# MongoDB
 data/db/*
 
 # Runtime data
@@ -39,4 +35,5 @@ node_modules
 
 # Optional REPL history
 .node_repl_history
+
 .idea

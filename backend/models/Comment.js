@@ -1,23 +1,19 @@
-// Dependencies
-const mongoose = require("mongoose");
+var mongoose = require('mongoose');
 
-// Main Process
-const CommentSchema = new mongoose.Schema(
-  {
-    body: String,
-    author: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
-    article: { type: mongoose.Schema.Types.ObjectId, ref: "Article" }
-  },
-  { timestamps: true }
-);
+var CommentSchema = new mongoose.Schema({
+  body: String,
+  author: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+  article: { type: mongoose.Schema.Types.ObjectId, ref: 'Article' }
+}, {timestamps: true});
 
-CommentSchema.methods.toJSONFor = user => {
+// Requires population of author
+CommentSchema.methods.toJSONFor = function(user){
   return {
     id: this._id,
     body: this.body,
     createdAt: this.createdAt,
-    author: this.author.toProfileJSONFor(user) // Requires population of author
+    author: this.author.toProfileJSONFor(user)
   };
 };
 
-mongoose.model("Comment", CommentSchema);
+mongoose.model('Comment', CommentSchema);
