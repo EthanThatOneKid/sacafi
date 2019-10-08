@@ -1,9 +1,7 @@
-// Dependencies
 const mongoose = require("mongoose");
 const uniqueValidator = require("mongoose-unique-validator");
 const slug = require("slug");
 
-// Main process
 const User = mongoose.model("User");
 
 const ArticleSchema = new mongoose.Schema(
@@ -22,27 +20,34 @@ const ArticleSchema = new mongoose.Schema(
 
 ArticleSchema.plugin(uniqueValidator, { message: "is already taken" });
 
-ArticleSchema.pre("validate", next => {
+ArticleSchema.pre("validate", function(next) {
   if (!this.slug) {
     this.slugify();
   }
+
   next();
 });
 
-ArticleSchema.methods.slugify = () => {
-  const slugId = (36 ** 6 * Math.random()) | 0;
-  this.slug = `${slug(this.title)}-${slugId.toString(36)}`;
+ArticleSchema.methods.slugify = function() {
+  this.slug = `${slug(this.title)}-${(
+    (Math.random() * Math.pow(36, 6)) |
+    0
+  ).toString(36)}`;
 };
 
-ArticleSchema.methods.updateFavoriteCount = () => {
+ArticleSchema.methods.updateFavoriteCount = function() {
   const article = this;
-  return User.count({ favorites: { $in: [article._id] } }).then(count => {
+
+  return User.count({ favorites: { $in: [article._id] } }).then(function(
+    count
+  ) {
     article.favoritesCount = count;
+
     return article.save();
   });
 };
 
-ArticleSchema.methods.toJSONFor = user => {
+ArticleSchema.methods.toJSONFor = function(user) {
   return {
     slug: this.slug,
     title: this.title,
