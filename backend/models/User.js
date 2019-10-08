@@ -38,7 +38,7 @@ UserSchema.plugin(uniqueValidator, { message: "is already taken." });
 
 UserSchema.methods.validPassword = password => {
   const hash = crypto
-    .pbkdf2Sync(password, this.salt, 10000, 512, "sha512") // SALT INVALID ARG TYPE ERROR
+    .pbkdf2Sync(password, this.salt, 10000, 512, "sha512")
     .toString("hex");
   return this.hash === hash;
 };
@@ -52,7 +52,7 @@ UserSchema.methods.setPassword = password => {
 
 UserSchema.methods.generateJWT = () => {
   const today = new Date();
-  const exp = new Date(today);
+  const exp = new Date(today); // Expiration
   exp.setDate(today.getDate() + 60);
   return jwt.sign(
     {
@@ -64,14 +64,9 @@ UserSchema.methods.generateJWT = () => {
   );
 };
 
-UserSchema.methods.toAuthJSON = () => {
-  return {
-    username: this.username,
-    email: this.email,
-    token: this.generateJWT(), // NOT A FUNCTION
-    bio: this.bio,
-    image: this.image
-  };
+UserSchema.methods.toAuthJSON = token => {
+  const {username, email, bio, image} = this;
+  return {username, email, token, bio, image};
 };
 
 UserSchema.methods.toProfileJSONFor = user => {
