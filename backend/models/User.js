@@ -24,21 +24,30 @@ const UserSchema = new mongoose.Schema(
     },
     bio: String,
     image: String,
-    ratings: [{
-      location: {
+    ratings: [
+      {
+        location: {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: "Location"
+        },
+        value: {
+          type: Number,
+          min: 0,
+          max: 10,
+          default: 5
+        }
+      }
+    ],
+    following: [
+      {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "Location"
-      },
-      value: Number
-    }],
-    following: [{
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "User"
-    }],
+        ref: "User"
+      }
+    ],
     hash: String,
     salt: String
   },
-  { timestamps: true }
+  { timestamps: true, usePushEach: true }
 );
 
 UserSchema.plugin(uniqueValidator, { message: "is already taken." });
@@ -91,10 +100,13 @@ UserSchema.methods.toProfileJSONFor = function(user) {
   };
 };
 
-UserSchema.methods.rate = function(id, val) {
-  console.log({id})
-  if (this.ratings.indexOf(id) === -1) {
-    this.ratings.push(id);
+UserSchema.methods.rate = function(location, value) {
+  console.log({ ratings: this.ratings, location, value});
+  const preexistingRatingIndex = this.ratings.findIndex(
+    rating => rating.location === location
+  );
+  if (preexistingRatingIndex === -1) {
+    this.ratings.push({ location, value }); // Unknown modifier: $pushAll. Expected a valid update modifier or pipeline-style update specified as an array
   }
   return this.save();
 };

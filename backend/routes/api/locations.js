@@ -201,8 +201,7 @@ router.delete("/:location", auth.required, function(req, res, next) {
 // Rate location
 router.post("/:location/rate", auth.required, function(req, res, next) {
   const locationId = req.location._id;
-  const ratingValue = req.payload.ratingValue;
-  console.log({...req})
+  const ratingValue = req.body.value;
   User.findById(req.payload.id)
     .then(function(user) {
       if (!user) {

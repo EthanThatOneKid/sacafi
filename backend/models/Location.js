@@ -30,7 +30,7 @@ LocationSchema.pre("validate", function(next) {
 });
 
 LocationSchema.methods.slugify = function() {
-  const discriminatorValue = ((Math.random() * Math.pow(36, 6)) | 0);
+  const discriminatorValue = (Math.random() * Math.pow(36, 6)) | 0;
   const discriminator = discriminatorValue.toString(36);
   const titleSlug = slug(this.title);
   this.slug = `${titleSlug}-${discriminator}`;
@@ -38,12 +38,13 @@ LocationSchema.methods.slugify = function() {
 
 LocationSchema.methods.updateRating = function() {
   const locationData = this;
-  const query = {ratings: {$in : [locationData._id]}};
+  const query = { ratings: { $in: [{location:locationData._id}] } };
   return new Promise(async (res, rej) => {
-    let rating = 0, totalRatings = 0;
+    let rating = 0;
+    let totalRatings = 0;
     for await (const doc of User.find(query)) {
-      console.log({doc});
-      rating = (rating + doc.value) / (++totalRatings);
+      console.log({ doc });
+      rating = (rating * totalRatings + doc.value) / ++totalRatings;
     }
     locationData.rating = rating;
     res(locationData.save());
