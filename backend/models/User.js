@@ -24,8 +24,17 @@ const UserSchema = new mongoose.Schema(
     },
     bio: String,
     image: String,
-    ratings: [{ type: mongoose.Schema.Types.ObjectId, ref: "Location", value: Number}],
-    following: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
+    ratings: [{
+      location: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Location"
+      },
+      value: Number
+    }],
+    following: [{
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User"
+    }],
     hash: String,
     salt: String
   },
@@ -82,11 +91,18 @@ UserSchema.methods.toProfileJSONFor = function(user) {
   };
 };
 
+UserSchema.methods.rate = function(id, val) {
+  console.log({id})
+  if (this.ratings.indexOf(id) === -1) {
+    this.ratings.push(id);
+  }
+  return this.save();
+};
+
 UserSchema.methods.favorite = function(id) {
   if (this.favorites.indexOf(id) === -1) {
     this.favorites.push(id);
   }
-
   return this.save();
 };
 

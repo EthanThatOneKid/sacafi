@@ -198,16 +198,18 @@ router.delete("/:location", auth.required, function(req, res, next) {
     .catch(next);
 });
 
-// Favorite an location
-router.post("/:location/favorite", auth.required, function(req, res, next) {
+// Rate location
+router.post("/:location/rate", auth.required, function(req, res, next) {
   const locationId = req.location._id;
+  const ratingValue = req.payload.ratingValue;
+  console.log({...req})
   User.findById(req.payload.id)
     .then(function(user) {
       if (!user) {
         return res.sendStatus(401);
       }
-      return user.favorite(locationId).then(function() {
-        return req.location.updateFavoriteCount().then(location => {
+      return user.rate(locationId, ratingValue).then(function() {
+        return req.location.updateRating().then(location => {
           return res.json({ location: location.toJSONFor(user) });
         });
       });
@@ -215,8 +217,8 @@ router.post("/:location/favorite", auth.required, function(req, res, next) {
     .catch(next);
 });
 
-// Unfavorite an location
-router.delete("/:location/favorite", auth.required, function(req, res, next) {
+// Remove a location's rating
+router.delete("/:location/rate", auth.required, function(req, res, next) {
   const locationId = req.location._id;
   User.findById(req.payload.id)
     .then(function(user) {

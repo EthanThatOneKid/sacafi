@@ -36,7 +36,7 @@ LocationSchema.methods.slugify = function() {
   this.slug = `${titleSlug}-${discriminator}`;
 };
 
-LocationSchema.methods.updateFavoriteCount = () => {
+LocationSchema.methods.updateRating = function() {
   const locationData = this;
   const query = {ratings: {$in : [locationData._id]}};
   return new Promise(async (res, rej) => {
@@ -59,8 +59,9 @@ LocationSchema.methods.toJSONFor = function(user) {
     createdAt: this.createdAt,
     updatedAt: this.updatedAt,
     tagList: this.tagList,
-    favorited: user ? user.isFavorite(this._id) : false,
-    favoritesCount: this.favoritesCount,
+    rating: this.rating,
+    // favorited: false, // !!user ? user.isFavorite(this._id) : false,
+    // favoritesCount: this.favoritesCount,
     author: this.author.toProfileJSONFor(user)
   };
 };
