@@ -22,14 +22,14 @@ const LocationSchema = new mongoose.Schema(
 
 LocationSchema.plugin(uniqueValidator, { message: "is already taken" });
 
-LocationSchema.pre("validate", next => {
+LocationSchema.pre("validate", function(next) {
   if (!this.slug) {
     this.slugify();
   }
   next();
 });
 
-LocationSchema.methods.slugify = () => {
+LocationSchema.methods.slugify = function() {
   const discriminatorValue = ((Math.random() * Math.pow(36, 6)) | 0);
   const discriminator = discriminatorValue.toString(36);
   const titleSlug = slug(this.title);

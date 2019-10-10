@@ -7,10 +7,10 @@ const User = mongoose.model("User");
 const auth = require("../auth");
 
 // Preload location objects on routes with ':location'
-router.param("location", (req, res, next, slug) => {
+router.param("location", function(req, res, next, slug) {
   Location.findOne({ slug })
     .populate("author")
-    .then(location => {
+    .then(function(location) {
       if (!location) {
         return res.sendStatus(404);
       }
@@ -20,9 +20,9 @@ router.param("location", (req, res, next, slug) => {
     .catch(next);
 });
 
-router.param("comment", (req, res, next, id) => {
+router.param("comment", function(req, res, next, id) {
   Comment.findById(id)
-    .then(comment => {
+    .then(function(comment) {
       if (!comment) {
         return res.sendStatus(404);
       }
@@ -33,7 +33,7 @@ router.param("comment", (req, res, next, id) => {
 });
 
 // GET /api/locations/
-router.get("/", auth.optional, (req, res, next) => {
+router.get("/", auth.optional, function(req, res, next) {
   const query = {};
   let limit = 20;
   let offset = 0;
@@ -50,7 +50,7 @@ router.get("/", auth.optional, (req, res, next) => {
     req.query.author ? User.findOne({ username: req.query.author }) : null,
     req.query.favorited ? User.findOne({ username: req.query.favorited }) : null
   ])
-    .then(results => {
+    .then(function(results) {
       const author = results[0];
       const favoriter = results[1];
       if (author) {
@@ -70,7 +70,7 @@ router.get("/", auth.optional, (req, res, next) => {
           .exec(),
         Location.count(query).exec(),
         req.payload ? User.findById(req.payload.id) : null
-      ]).then(results => {
+      ]).then(function(results) {
         const locations = results[0];
         const locationsCount = results[1];
         const user = results[2];
@@ -86,7 +86,7 @@ router.get("/", auth.optional, (req, res, next) => {
 });
 
 // GET /api/locations/feed
-router.get("/feed", auth.required, (req, res, next) => {
+router.get("/feed", auth.required, function(req, res, next) {
   let limit = 20;
   let offset = 0;
   if (typeof req.query.limit !== "undefined") {
@@ -95,7 +95,7 @@ router.get("/feed", auth.required, (req, res, next) => {
   if (typeof req.query.offset !== "undefined") {
     offset = req.query.offset;
   }
-  User.findById(req.payload.id).then(user => {
+  User.findById(req.payload.id).then(function(user) {
     if (!user) {
       return res.sendStatus(401);
     }
@@ -107,7 +107,7 @@ router.get("/feed", auth.required, (req, res, next) => {
         .exec(),
       Location.count({ author: { $in: user.following } })
     ])
-      .then(results => {
+      .then(function(results) {
         const locations = results[0];
         const locationsCount = results[1];
         return res.json({
@@ -122,15 +122,15 @@ router.get("/feed", auth.required, (req, res, next) => {
 });
 
 // POST /api/locations
-router.post("/", auth.required, (req, res, next) => {
+router.post("/", auth.required, function(req, res, next) {
   User.findById(req.payload.id)
-    .then(user => {
+    .then(function(user) {
       if (!user) {
         return res.sendStatus(401);
       }
       const location = new Location(req.body.location);
       location.author = user;
-      return location.save().then(() => {
+      return location.save().then(function() {
         return res.json({ location: location.toJSONFor(user) });
       });
     })
@@ -138,12 +138,12 @@ router.post("/", auth.required, (req, res, next) => {
 });
 
 // GET /api/locations/:location (location id)
-router.get("/:location", auth.optional, (req, res, next) => {
+router.get("/:location", auth.optional, function(req, res, next) {
   Promise.all([
     req.payload ? User.findById(req.payload.id) : null,
     req.location.populate("author").execPopulate()
   ])
-    .then(results => {
+    .then(function(results) {
       const user = results[0];
       return res.json({ location: req.location.toJSONFor(user) });
     })
@@ -151,8 +151,8 @@ router.get("/:location", auth.optional, (req, res, next) => {
 });
 
 // PUT /api/locations/:location (update location)
-router.put("/:location", auth.required, (req, res, next) => {
-  User.findById(req.payload.id).then(user => {
+router.put("/:location", auth.required, function(req, res, next) {
+  User.findById(req.payload.id).then(function(user) {
     if (req.location.author._id.toString() === req.payload.id.toString()) {
       if (typeof req.body.location.title !== "undefined") {
         req.location.title = req.body.location.title;
@@ -171,7 +171,7 @@ router.put("/:location", auth.required, (req, res, next) => {
       }
       req.location
         .save()
-        .then(location => {
+        .then(function(location) {
           return res.json({ location: location.toJSONFor(user) });
         })
         .catch(next);
@@ -182,9 +182,9 @@ router.put("/:location", auth.required, (req, res, next) => {
 });
 
 // DELETE /api/locations/:location (delete location)
-router.delete("/:location", auth.required, (req, res, next) => {
+router.delete("/:location", auth.required, function(req, res, next) {
   User.findById(req.payload.id)
-    .then(user => {
+    .then(function(user) {
       if (!user) {
         return res.sendStatus(401);
       }
@@ -199,14 +199,14 @@ router.delete("/:location", auth.required, (req, res, next) => {
 });
 
 // Favorite an location
-router.post("/:location/favorite", auth.required, (req, res, next) => {
+router.post("/:location/favorite", auth.required, function(req, res, next) {
   const locationId = req.location._id;
   User.findById(req.payload.id)
-    .then(user => {
+    .then(function(user) {
       if (!user) {
         return res.sendStatus(401);
       }
-      return user.favorite(locationId).then(() => {
+      return user.favorite(locationId).then(function() {
         return req.location.updateFavoriteCount().then(location => {
           return res.json({ location: location.toJSONFor(user) });
         });
@@ -216,15 +216,15 @@ router.post("/:location/favorite", auth.required, (req, res, next) => {
 });
 
 // Unfavorite an location
-router.delete("/:location/favorite", auth.required, (req, res, next) => {
+router.delete("/:location/favorite", auth.required, function(req, res, next) {
   const locationId = req.location._id;
   User.findById(req.payload.id)
-    .then(user => {
+    .then(function(user) {
       if (!user) {
         return res.sendStatus(401);
       }
-      return user.unfavorite(locationId).then(() => {
-        return req.location.updateFavoriteCount().then(location => {
+      return user.unfavorite(locationId).then(function() {
+        return req.location.updateFavoriteCount().then(function(location) {
           return res.json({ location: location.toJSONFor(user) });
         });
       });

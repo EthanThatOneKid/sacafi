@@ -2,6 +2,7 @@ const router = require("express").Router();
 const mongoose = require("mongoose");
 
 const Article = mongoose.model("Article");
+// const Location = mongoose.model("Location");
 
 // return a list of tags
 router.get("/", function(req, res, next) {
