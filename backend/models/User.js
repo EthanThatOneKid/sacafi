@@ -24,7 +24,7 @@ const UserSchema = new mongoose.Schema(
     },
     bio: String,
     image: String,
-    favorites: [{ type: mongoose.Schema.Types.ObjectId, ref: "Article" }],
+    ratings: [{ type: mongoose.Schema.Types.ObjectId, ref: "Location", value: Number}],
     following: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
     hash: String,
     salt: String
@@ -52,7 +52,6 @@ UserSchema.methods.generateJWT = function() {
   const today = new Date();
   const exp = new Date(today);
   exp.setDate(today.getDate() + 60);
-
   return jwt.sign(
     {
       id: this._id,

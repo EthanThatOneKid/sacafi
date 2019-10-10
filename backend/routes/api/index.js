@@ -3,6 +3,7 @@ const router = require("express").Router();
 router.use("/", require("./users"));
 router.use("/profiles", require("./profiles"));
 router.use("/articles", require("./articles"));
+router.use("/locations", require("./locations"));
 router.use("/tags", require("./tags"));
 
 router.use(function(err, req, res, next) {
@@ -10,12 +11,10 @@ router.use(function(err, req, res, next) {
     return res.status(422).json({
       errors: Object.keys(err.errors).reduce(function(errors, key) {
         errors[key] = err.errors[key].message;
-
         return errors;
       }, {})
     });
   }
-
   return next(err);
 });
 
