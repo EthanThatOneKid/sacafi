@@ -36,20 +36,24 @@ LocationSchema.methods.slugify = function() {
   this.slug = `${titleSlug}-${discriminator}`;
 };
 
-LocationSchema.methods.updateRating = function() {
-  const locationData = this;
-  const query = { ratings: { $in: [{location:locationData._id}] } };
-  return new Promise(async (res, rej) => {
-    let rating = 0;
-    let totalRatings = 0;
-    for await (const doc of User.find(query)) {
-      console.log({ doc });
-      rating = (rating * totalRatings + doc.value) / ++totalRatings;
-    }
-    locationData.rating = rating;
-    res(locationData.save());
-  });
+LocationSchema.methods.isVerified = function() {
+  return this.verifications >= 3;
 };
+
+// LocationSchema.methods.updateRating = function() {
+//   const locationData = this;
+//   const query = { ratings: { $in: [{location:locationData._id}] } };
+//   return new Promise(async (res, rej) => {
+//     let rating = 0;
+//     let totalRatings = 0;
+//     for await (const doc of User.find(query)) {
+//       console.log({ doc });
+//       rating = (rating * totalRatings + doc.value) / ++totalRatings;
+//     }
+//     locationData.rating = rating;
+//     res(locationData.save());
+//   });
+// };
 
 LocationSchema.methods.toJSONFor = function(user) {
   return {
@@ -60,10 +64,11 @@ LocationSchema.methods.toJSONFor = function(user) {
     createdAt: this.createdAt,
     updatedAt: this.updatedAt,
     tagList: this.tagList,
-    rating: this.rating,
-    // favorited: false, // !!user ? user.isFavorite(this._id) : false,
-    // favoritesCount: this.favoritesCount,
+    isVerified: this.isVerified(),
     author: this.author.toProfileJSONFor(user)
+    // rating: this.rating,
+    // favorited: false, // !!user ? user.isFavorite(this._id) : false,
+    // favoritesCount: this.favoritesCount
   };
 };
 

@@ -24,26 +24,26 @@ const UserSchema = new mongoose.Schema(
     },
     bio: String,
     image: String,
-    ratings: [
-      {
-        location: {
-          type: mongoose.Schema.Types.ObjectId,
-          ref: "Location"
-        },
-        value: {
-          type: Number,
-          min: 0,
-          max: 10,
-          default: 5
-        }
-      }
-    ],
-    following: [
-      {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "User"
-      }
-    ],
+    // ratings: [
+    //   {
+    //     location: {
+    //       type: mongoose.Schema.Types.ObjectId,
+    //       ref: "Location"
+    //     },
+    //     value: {
+    //       type: Number,
+    //       min: 0,
+    //       max: 10,
+    //       default: 5
+    //     }
+    //   }
+    // ],
+    // following: [
+    //   {
+    //     type: mongoose.Schema.Types.ObjectId,
+    //     ref: "User"
+    //   }
+    // ],
     hash: String,
     salt: String
   },
@@ -100,16 +100,16 @@ UserSchema.methods.toProfileJSONFor = function(user) {
   };
 };
 
-UserSchema.methods.rate = function(location, value) {
-  console.log({ ratings: this.ratings, location, value});
-  const preexistingRatingIndex = this.ratings.findIndex(
-    rating => rating.location === location
-  );
-  if (preexistingRatingIndex === -1) {
-    this.ratings.push({ location, value }); // Unknown modifier: $pushAll. Expected a valid update modifier or pipeline-style update specified as an array
-  }
-  return this.save();
-};
+// UserSchema.methods.rate = function(location, value) {
+//   console.log({ ratings: this.ratings, location, value});
+//   const preexistingRatingIndex = this.ratings.findIndex(
+//     rating => rating.location === location
+//   );
+//   if (preexistingRatingIndex === -1) {
+//     this.ratings.push({ location, value }); // Unknown modifier: $pushAll. Expected a valid update modifier or pipeline-style update specified as an array
+//   }
+//   return this.save();
+// };
 
 UserSchema.methods.favorite = function(id) {
   if (this.favorites.indexOf(id) === -1) {
