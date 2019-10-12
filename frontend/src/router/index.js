@@ -1,11 +1,8 @@
-// Dependencies
 import Vue from "vue";
 import Router from "vue-router";
 
-// Plug router
 Vue.use(Router);
 
-// Initialize routes
 export default new Router({
   routes: [
     {
@@ -44,6 +41,9 @@ export default new Router({
       path: "/settings",
       component: () => import("@/views/Settings")
     },
+    // Handle child routes with a default, by giving the name to the
+    // child.
+    // SO: https://github.com/vuejs/vue-router/issues/777
     {
       path: "/@:username",
       component: () => import("@/views/Profile"),
@@ -71,11 +71,6 @@ export default new Router({
       path: "/editor/:slug?",
       props: true,
       component: () => import("@/views/ArticleEdit")
-    },
-    {
-      name: "MapView",
-      path: "/map",
-      component: () => import("@/views/MapView")
     }
   ]
 });
