@@ -18,7 +18,7 @@ module.exports = {
         "object-shorthand": "off",
         "class-methods-use-this": "off",
         "no-underscore-dangle": "warn",
-        "no-bitwise": "warn",
+        "no-bitwise": "off", // ./models/Article.js:ArticleSchema.methods.slugify
         "no-param-reassign": "warn",
         "no-underscore-dangle": "off"
     }
