@@ -38,12 +38,12 @@ const UserSchema = new mongoose.Schema(
     //     }
     //   }
     // ],
-    // following: [
-    //   {
-    //     type: mongoose.Schema.Types.ObjectId,
-    //     ref: "User"
-    //   }
-    // ],
+    following: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User"
+      }
+    ],
     hash: String,
     salt: String
   },
