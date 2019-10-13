@@ -1,94 +1,109 @@
 <template>
-  <div style="height: 100%; width: 100%">
-    <div class="info" style="height: 15%">
-      <span>Center: {{ center }}</span>
-      <span>Zoom: {{ zoom }}</span>
-      <span>Bounds: {{ bounds }}</span>
+    <div style="height: 100%; width: 100%">
+        <div class="info" style="height: 15%">
+            <span>Center: {{ center }}</span>
+            <span>Zoom: {{ zoom }}</span>
+            <span>Bounds: {{ bounds }}</span>
+        </div>
+        <l-map
+            style="height: 50vh; width: 50vw"
+            :zoom="zoom"
+            :center="center"
+            :minZoom="minZoom"
+            @update:zoom="zoomUpdated"
+            @update:center="centerUpdated"
+            @update:bounds="boundsUpdated"
+        >
+            <v-geosearch :options="geosearchOptions"></v-geosearch>
+            <l-tile-layer :url="url"></l-tile-layer>
+            <l-marker v-if="isSelecting" :lat-lng="center">
+                <l-popup>
+                    <span>hi</span>
+                    <button v-on:click="closeCreateLocation">
+                        X
+                    </button>
+                </l-popup>
+            </l-marker>
+        </l-map>
+        <button v-on:click="createLocation">+</button>
+        <div v-if="isSelecting">
+            <router-link
+                :to="{ name: 'article-edit' }"
+            >
+                create location @ <span v-text="center"></span>
+            </router-link>
+        </div>
     </div>
-    <l-map
-      style="height: 50vh; width: 50vw"
-      :zoom="zoom"
-      :center="center"
-      :minZoom="minZoom"
-      @update:zoom="zoomUpdated"
-      @update:center="centerUpdated"
-      @update:bounds="boundsUpdated"
-    >
-      <v-geosearch :options="geosearchOptions"></v-geosearch>
-      <l-tile-layer :url="url"></l-tile-layer>
-      <l-marker v-if="isSelecting" :lat-lng="center">
-        <l-popup>
-          <span>hi</span>
-        </l-popup>
-      </l-marker>
-    </l-map>
-    <button v-on:click="createLocation">+</button>
-  </div>
 </template>
 
 <script>
+
 import { LMap, LTileLayer, LMarker, LPopup } from "vue2-leaflet";
 import { OpenStreetMapProvider } from "leaflet-geosearch";
 import VGeosearch from "vue2-leaflet-geosearch";
-// import ArticleEdit from "../views/ArticleEdit";
 
 export default {
-  name: "map",
-  components: {
-    LMap,
-    LTileLayer,
-    LMarker,
-    LPopup,
-    // ArticleEdit,
-    VGeosearch
-  },
-  data() {
-    return {
-      url: "http://{s}.tile.osm.org/{z}/{x}/{y}.png",
-      zoom: 12,
-      center: [47.41322, -1.219482],
-      minZoom: 12,
-      bounds: null,
-      geosearchOptions: {
-        provider: new OpenStreetMapProvider()
-      },
-      isSelecting: false
-    };
-  },
-  created() {
-    if ("geolocation" in navigator) {
-      navigator.geolocation.getCurrentPosition(pos => {
-        const { latitude, longitude } = pos.coords;
-        this.center = [latitude, longitude];
-        this.zoom = 16;
-      });
+    name: "Map",
+    components: {
+        LMap,
+        LTileLayer,
+        LMarker,
+        LPopup,
+        VGeosearch
+    },
+    data() {
+        return {
+            url: "http://{s}.tile.osm.org/{z}/{x}/{y}.png",
+            zoom: 12,
+            center: [47.41322, -1.219482],
+            minZoom: 12,
+            bounds: null,
+            geosearchOptions: {
+                provider: new OpenStreetMapProvider()
+            },
+            isSelecting: false
+        };
+    },
+    created() {
+        if ("geolocation" in navigator) {
+            navigator.geolocation.getCurrentPosition(pos => {
+                const { latitude, longitude } = pos.coords;
+                this.center = [latitude, longitude];
+                this.zoom = 16;
+            });
+        }
+    },
+    methods: {
+        createLocation(event) {
+            this.isSelecting = true;
+        },
+        closeCreateLocation(event) {
+            this.isSelecting = false;
+        },
+        openLocationEditor(event) {
+            console.log("opening creation editor");
+        },
+        zoomUpdated(zoom) {
+            this.zoom = zoom;
+        },
+        centerUpdated(center) {
+            this.center = center;
+        },
+        boundsUpdated(bounds) {
+            this.bounds = bounds;
+        }
     }
-  },
-  methods: {
-    createLocation(event) {
-      console.log({ event });
-      this.isSelecting = true;
-    },
-    zoomUpdated(zoom) {
-      this.zoom = zoom;
-    },
-    centerUpdated(center) {
-      this.center = center;
-    },
-    boundsUpdated(bounds) {
-      this.bounds = bounds;
-    }
-  }
 };
+
 </script>
 
 <style>
 @import "~leaflet/dist/leaflet.css";
 @import "~leaflet-geosearch/assets/css/leaflet.css";
 .leaflet-fake-icon-image-2x {
-  background-image: url(../../node_modules/leaflet/dist/images/marker-icon-2x.png);
+    background-image: url(../../node_modules/leaflet/dist/images/marker-icon-2x.png);
 }
 .leaflet-fake-icon-shadow {
-  background-image: url(../../node_modules/leaflet/dist/images/marker-shadow.png);
+    background-image: url(../../node_modules/leaflet/dist/images/marker-shadow.png);
 }
 </style>

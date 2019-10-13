@@ -1,17 +1,13 @@
 <template>
   <div>
-    <h1>WTF</h1>
-    <map></map>
+    <Map></Map>
   </div>
 </template>
 
 <script>
 import Map from "../components/Map";
-
 export default {
-  name: "locations",
-  components: {
-    Map
-  }
+  name: "Locations",
+  components: { Map }
 };
 </script>
