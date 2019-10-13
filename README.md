@@ -14,6 +14,12 @@
 * Paid accounts can view any wifi access point.
 * Open wifi access points (ones without passwords) are viewable for free as well. Users can verify if that access point is secure (safe to use; not a phish).
 
+## DevNotes 📝
+* To add a new property to the Article (location) schema:
+    * Add it to `ArticleSchema`'s initialization in [Article.js](backend\models\Article.js).
+    * Add it to `ArticleSchema.methods.toJSONFor` (JSON output) in [Article.js](backend\models\Article.js)
+    * Make appropriate adjustments where the schema is used, such as in[Article.vue](frontend\src\views\Article.vue), [ArticleEdit.vue](frontend\src\views\ArticleEdit.vue), etc.
+
 ## Todo ✔
 * Research for a good web transaction processor.
 * Quick fetching algorithm for fetching wifi locations quickly to display on map.
