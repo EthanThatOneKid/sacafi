@@ -16,23 +16,22 @@
     >
       <v-geosearch :options="geosearchOptions"></v-geosearch>
       <l-tile-layer :url="url"></l-tile-layer>
-			<!-- <l-marker v-for=""></l-marker> -->
+      <l-marker :lat-lng="center" :draggable="true" @dragend="markerDragged"></l-marker>
     </l-map>
   </div>
 </template>
 
 <script>
-import { LMap, LTileLayer, LMarker, LPopup } from "vue2-leaflet";
+import { LMap, LTileLayer, LMarker } from "vue2-leaflet";
 import { OpenStreetMapProvider } from "leaflet-geosearch";
 import VGeosearch from "vue2-leaflet-geosearch";
 
 export default {
-  name: "Map",
+  name: "MapInput",
   components: {
     LMap,
     LTileLayer,
     LMarker,
-    LPopup,
     VGeosearch
   },
   data() {
@@ -44,8 +43,7 @@ export default {
       bounds: null,
       geosearchOptions: {
         provider: new OpenStreetMapProvider()
-      },
-      isSelecting: false
+      }
     };
   },
   created() {
@@ -58,23 +56,26 @@ export default {
     }
   },
   methods: {
-    createLocation(event) {
-      this.isSelecting = true;
-    },
-    closeCreateLocation(event) {
-      this.isSelecting = false;
-    },
-    openLocationEditor(event) {
-      console.log("opening creation editor");
+    markerDragged(event) {
+      this.center = event.target._latlng;
+      this.changeMarkerPosition();
     },
     zoomUpdated(zoom) {
       this.zoom = zoom;
+      this.changeMarkerPosition();
     },
     centerUpdated(center) {
       this.center = center;
+      this.changeMarkerPosition();
     },
     boundsUpdated(bounds) {
       this.bounds = bounds;
+      this.changeMarkerPosition();
+    },
+    changeMarkerPosition() {
+      // TODO: Also get beneath-marker info
+      const data = JSON.stringify(this.center, null, 2);
+      this.$emit("input", data);
     }
   }
 };

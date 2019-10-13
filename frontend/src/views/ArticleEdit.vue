@@ -11,7 +11,7 @@
                   type="text"
                   class="form-control form-control-lg"
                   v-model="article.title"
-                  placeholder="Article Title"
+                  placeholder="Location Title"
                 />
               </fieldset>
               <fieldset class="form-group">
@@ -19,10 +19,10 @@
                   type="text"
                   class="form-control"
                   v-model="article.description"
-                  placeholder="What's this article about?"
+                  placeholder="Give a brief description of this location..."
                 />
               </fieldset>
-              <fieldset class="form-group">
+              <!-- <fieldset class="form-group">
                 <textarea
                   class="form-control"
                   rows="8"
@@ -30,15 +30,28 @@
                   placeholder="Write your article (in markdown)"
                 >
                 </textarea>
+              </fieldset> -->
+              <fieldset class="form-group">
+                <MapInput
+                  v-model="article.body"
+                >
+                </MapInput>
               </fieldset>
               <fieldset class="form-group">
+                <!-- TODO: Make this a select element with premade options loaded from another file (e.g. cafe, library, other) -->
                 <input
                   type="text"
                   class="form-control"
-                  placeholder="Enter tags"
+                  placeholder="Enter tags (comma-seperated)"
+                  list="tagOptions"
                   v-model="tagInput"
                   v-on:keypress.enter.prevent="addTag(tagInput)"
                 />
+                <datalist id="tagOptions">
+                  <option>cafe</option>
+                  <option>library</option>
+                  <option>school</option>
+                </datalist>
                 <div class="tag-list">
                   <span
                     class="tag-default tag-pill"
@@ -69,6 +82,7 @@
 import { mapGetters } from "vuex";
 import store from "@/store";
 import RwvListErrors from "@/components/ListErrors";
+import MapInput from "@/components/MapInput";
 import {
   ARTICLE_PUBLISH,
   ARTICLE_EDIT,
@@ -80,7 +94,7 @@ import {
 
 export default {
   name: "RwvArticleEdit",
-  components: { RwvListErrors },
+  components: { RwvListErrors, MapInput },
   props: {
     previousArticle: {
       type: Object,
