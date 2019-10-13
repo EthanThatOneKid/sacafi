@@ -74,6 +74,7 @@ export default {
     },
     changeMarkerPosition() {
       // TODO: Also get beneath-marker info
+      // REFERENCE: https://www.smashingmagazine.com/2017/08/creating-custom-inputs-vue-js/
       const data = JSON.stringify(this.center, null, 2);
       this.$emit("input", data);
     }
