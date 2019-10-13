@@ -18,21 +18,19 @@
       <l-tile-layer :url="url"></l-tile-layer>
       <l-marker v-if="isSelecting" :lat-lng="center">
         <l-popup>
-          <location-edit></location-edit>
+          <span>hi</span>
         </l-popup>
       </l-marker>
     </l-map>
-    <button v-on:click="createLocation">
-      +
-    </button>
+    <button v-on:click="createLocation">+</button>
   </div>
 </template>
 
 <script>
-import { LMap, LTileLayer, LMarker } from "vue2-leaflet";
+import { LMap, LTileLayer, LMarker, LPopup } from "vue2-leaflet";
 import { OpenStreetMapProvider } from "leaflet-geosearch";
 import VGeosearch from "vue2-leaflet-geosearch";
-import LocationEdit from "./LocationEdit";
+// import ArticleEdit from "../views/ArticleEdit";
 
 export default {
   name: "map",
@@ -40,7 +38,8 @@ export default {
     LMap,
     LTileLayer,
     LMarker,
-    LocationEdit,
+    LPopup,
+    // ArticleEdit,
     VGeosearch
   },
   data() {
