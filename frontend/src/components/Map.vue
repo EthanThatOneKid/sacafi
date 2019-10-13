@@ -9,40 +9,67 @@
       style="height: 50vh; width: 50vw"
       :zoom="zoom"
       :center="center"
+      :minZoom="minZoom"
       @update:zoom="zoomUpdated"
       @update:center="centerUpdated"
       @update:bounds="boundsUpdated"
     >
       <v-geosearch :options="geosearchOptions"></v-geosearch>
       <l-tile-layer :url="url"></l-tile-layer>
+      <l-marker v-if="isSelecting" :lat-lng="center">
+        <l-popup>
+          <location-edit></location-edit>
+        </l-popup>
+      </l-marker>
     </l-map>
+    <button v-on:click="createLocation">
+      +
+    </button>
   </div>
 </template>
 
 <script>
-import { LMap, LTileLayer } from "vue2-leaflet";
+import { LMap, LTileLayer, LMarker } from "vue2-leaflet";
 import { OpenStreetMapProvider } from "leaflet-geosearch";
 import VGeosearch from "vue2-leaflet-geosearch";
+import LocationEdit from "./LocationEdit";
 
 export default {
-  name: "Map",
+  name: "map",
   components: {
     LMap,
     LTileLayer,
+    LMarker,
+    LocationEdit,
     VGeosearch
   },
   data() {
     return {
       url: "http://{s}.tile.osm.org/{z}/{x}/{y}.png",
-      zoom: 3,
+      zoom: 12,
       center: [47.41322, -1.219482],
+      minZoom: 12,
       bounds: null,
       geosearchOptions: {
         provider: new OpenStreetMapProvider()
-      }
+      },
+      isSelecting: false
     };
   },
+  created() {
+    if ("geolocation" in navigator) {
+      navigator.geolocation.getCurrentPosition(pos => {
+        const { latitude, longitude } = pos.coords;
+        this.center = [latitude, longitude];
+        this.zoom = 16;
+      });
+    }
+  },
   methods: {
+    createLocation(event) {
+      console.log({ event });
+      this.isSelecting = true;
+    },
     zoomUpdated(zoom) {
       this.zoom = zoom;
     },

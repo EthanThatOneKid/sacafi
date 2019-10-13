@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Map></Map>
+    <map></map>
     <!-- <component id="full_div" :is="currentView" /> -->
   </div>
 </template>
@@ -9,13 +9,13 @@
 import Map from "../components/Map";
 
 export default {
-  name: "MapView",
+  name: "locations",
   components: {
     Map
   },
   data() {
     return {
-      currentView: "Map"
+      currentView: "map"
     };
   }
 };
