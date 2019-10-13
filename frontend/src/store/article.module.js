@@ -109,8 +109,7 @@ export const mutations = {
     state.article.tagList = state.article.tagList.filter(t => t !== tag);
   },
   [RESET_STATE]() {
-    let f;
-    for (f in state) {
+    for (let f in state) {
       Vue.set(state, f, initialState[f]);
     }
   }

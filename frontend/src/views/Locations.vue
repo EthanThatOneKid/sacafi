@@ -1,7 +1,7 @@
 <template>
   <div>
-    <h1>WTF</h1>
     <map></map>
+    <!-- <component id="full_div" :is="currentView" /> -->
   </div>
 </template>
 
@@ -12,6 +12,11 @@ export default {
   name: "locations",
   components: {
     Map
+  },
+  data() {
+    return {
+      currentView: "map"
+    };
   }
 };
 </script>

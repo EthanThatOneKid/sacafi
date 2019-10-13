@@ -41,15 +41,6 @@
           <router-link
             class="nav-link"
             active-class="active"
-            :to="{ name: 'locations' }"
-          >
-            Locations
-          </router-link>
-        </li>
-        <li class="nav-item">
-          <router-link
-            class="nav-link"
-            active-class="active"
             exact
             :to="{ name: 'home' }"
           >
