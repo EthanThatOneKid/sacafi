@@ -8,8 +8,16 @@ var ArticleSchema = new mongoose.Schema(
     slug: { type: String, lowercase: true, unique: true },
     title: String,
     description: String,
-    body: String,
+    // body: String,
     favoritesCount: { type: Number, default: 0 },
+    coords: {
+      lat: { type: Number },
+      lng: { type: Number }
+    },
+    meta: {
+      type: mongoose.Schema.Types.Mixed,
+      default: {}
+    },
     comments: [{ type: mongoose.Schema.Types.ObjectId, ref: "Comment" }],
     tagList: [{ type: String }],
     author: { type: mongoose.Schema.Types.ObjectId, ref: "User" }
@@ -51,7 +59,7 @@ ArticleSchema.methods.toJSONFor = function(user) {
     slug: this.slug,
     title: this.title,
     description: this.description,
-    body: this.body,
+    coords: this.coords,
     createdAt: this.createdAt,
     updatedAt: this.updatedAt,
     tagList: this.tagList,

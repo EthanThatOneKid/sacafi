@@ -83,9 +83,8 @@ router.get("/", auth.optional, function(req, res, next) {
         var articles = results[0];
         var articlesCount = results[1];
         var user = results[2];
-
         return res.json({
-          articles: articles.map(function(article) {
+          articles: articles.map(function(article, i) {
             return article.toJSONFor(user);
           }),
           articlesCount: articlesCount
@@ -298,7 +297,7 @@ router.post("/:article/comments", auth.required, function(req, res, next) {
       comment.author = user;
 
       return comment.save().then(function() {
-        req.article.comments.push(comment);
+        req.article.comments = req.article.comments.concat(comment);
 
         return req.article.save().then(function(article) {
           res.json({ comment: comment.toJSONFor(user) });

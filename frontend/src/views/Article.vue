@@ -9,7 +9,8 @@
     <div class="container page">
       <div class="row article-content">
         <div class="col-xs-12">
-          <div v-html="parseMarkdown(article.body)"></div>
+          <i><div v-html="parseMarkdown(article.description)"></div></i>
+          <pre><code v-text="JSON.stringify(article, null, 2)"></code></pre>
           <ul class="tag-list">
             <li v-for="(tag, index) of article.tagList" :key="tag + index">
               <RwvTag

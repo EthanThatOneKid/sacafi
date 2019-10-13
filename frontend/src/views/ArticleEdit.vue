@@ -33,7 +33,7 @@
               </fieldset> -->
               <fieldset class="form-group">
                 <MapInput
-                  v-model="article.body"
+                  v-model="article.coords"
                 >
                 </MapInput>
               </fieldset>
