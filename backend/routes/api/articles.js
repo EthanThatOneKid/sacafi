@@ -36,9 +36,17 @@ router.param("comment", function(req, res, next, id) {
 });
 
 router.get("/", auth.optional, function(req, res, next) {
-  var query = {};
-  var limit = 20;
-  var offset = 0;
+  let query = {};
+  let limit = 20;
+  let offset = 0;
+
+  if (typeof req.query.bbox !== "undefined") {
+    const [west, south, east, north] = req.query.bbox.split(",").map(Number);
+    // query.coords = {
+    //   lat: { $gt: south, $lt: north },
+    //   lng: { $gt: west, $lt: east }
+    // };
+  }
 
   if (typeof req.query.limit !== "undefined") {
     limit = req.query.limit;

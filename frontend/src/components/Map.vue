@@ -16,7 +16,11 @@
     >
       <v-geosearch :options="geosearchOptions"></v-geosearch>
       <l-tile-layer :url="url"></l-tile-layer>
-			<!-- <l-marker v-for=""></l-marker> -->
+			<l-marker
+        v-for="article in articles"
+        :lat-lng="article.coords"
+        :key="article.slug"
+      ></l-marker>
     </l-map>
   </div>
 </template>
@@ -25,6 +29,8 @@
 import { LMap, LTileLayer, LMarker, LPopup } from "vue2-leaflet";
 import { OpenStreetMapProvider } from "leaflet-geosearch";
 import VGeosearch from "vue2-leaflet-geosearch";
+import { mapGetters } from "vuex";
+import { FETCH_ARTICLES } from '../store/actions.type';
 
 export default {
   name: "Map",
@@ -57,24 +63,36 @@ export default {
       });
     }
   },
+  mounted() {
+    this.fetchLocationList();
+  },
+  computed: {
+    listConfig() {
+      const west = this.bounds._southWest.lng;
+      const south = this.bounds._southWest.lat;
+      const east = this.bounds._northEast.lng;
+      const north = this.bounds._northEast.lat;
+      const bbox = [west, south, east, north].join(",");
+      return {
+        filters: { bbox }
+      };
+    },
+    ...mapGetters(["articles"])
+  },
   methods: {
-    createLocation(event) {
-      this.isSelecting = true;
-    },
-    closeCreateLocation(event) {
-      this.isSelecting = false;
-    },
-    openLocationEditor(event) {
-      console.log("opening creation editor");
-    },
     zoomUpdated(zoom) {
       this.zoom = zoom;
     },
     centerUpdated(center) {
       this.center = center;
+      console.log(this.articles, this.bounds)
     },
     boundsUpdated(bounds) {
       this.bounds = bounds;
+      this.fetchLocationList();
+    },
+    fetchLocationList() {
+      this.$store.dispatch(FETCH_ARTICLES, this.listConfig);
     }
   }
 };
