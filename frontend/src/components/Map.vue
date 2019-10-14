@@ -18,7 +18,7 @@
       <l-tile-layer :url="url"></l-tile-layer>
 			<l-marker
         v-for="article in articles"
-        :lat-lng="article.coords"
+        :lat-lng="article.location"
         :key="article.slug"
       ></l-marker>
     </l-map>
@@ -85,11 +85,11 @@ export default {
     },
     centerUpdated(center) {
       this.center = center;
-      console.log(this.articles, this.bounds)
     },
     boundsUpdated(bounds) {
       this.bounds = bounds;
       this.fetchLocationList();
+      console.log(this.articles)
     },
     fetchLocationList() {
       this.$store.dispatch(FETCH_ARTICLES, this.listConfig);

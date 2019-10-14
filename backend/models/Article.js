@@ -10,10 +10,21 @@ var ArticleSchema = new mongoose.Schema(
     description: String,
     // body: String,
     favoritesCount: { type: Number, default: 0 },
-    coords: {
-      lat: { type: Number },
-      lng: { type: Number }
+    location: {
+      type: {
+        type: String,
+        enum: ['Point'],
+        required: true
+      },
+      coordinates: {
+        type: [Number],
+        required: true
+      }
     },
+    // coords: {
+    //   lat: { type: Number },
+    //   lng: { type: Number }
+    // },
     meta: {
       type: mongoose.Schema.Types.Mixed,
       default: {}
@@ -55,11 +66,13 @@ ArticleSchema.methods.updateFavoriteCount = function() {
 };
 
 ArticleSchema.methods.toJSONFor = function(user) {
+  const [lng, lat] = this.location.coordinates;
   return {
     slug: this.slug,
     title: this.title,
     description: this.description,
-    coords: this.coords,
+    // coords: this.coords,
+    location: { lat, lng },
     createdAt: this.createdAt,
     updatedAt: this.updatedAt,
     tagList: this.tagList,

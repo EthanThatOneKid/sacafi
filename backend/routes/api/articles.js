@@ -42,10 +42,11 @@ router.get("/", auth.optional, function(req, res, next) {
 
   if (typeof req.query.bbox !== "undefined") {
     const [west, south, east, north] = req.query.bbox.split(",").map(Number);
-    // query.coords = {
-    //   lat: { $gt: south, $lt: north },
-    //   lng: { $gt: west, $lt: east }
-    // };
+    query.location = {
+      $geoWithin: {
+        $box: [ [west, north], [east, south] ]
+      }
+    };
   }
 
   if (typeof req.query.limit !== "undefined") {
