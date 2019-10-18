@@ -46,6 +46,7 @@ add password option button
   type a password out
 open in google maps link
 */
+
 export default {
   name: "Map",
   components: {
