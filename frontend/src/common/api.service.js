@@ -104,3 +104,11 @@ export const FavoriteService = {
     return ApiService.delete(`articles/${slug}/favorite`);
   }
 };
+
+export const OsmService = {
+  get(location) {
+    const [lat, lng] = location.coordinates;
+    const stringifiedCoords = [lat, lng].join(",");
+    return ApiService.get("articles/osm", stringifiedCoords);
+  }
+};

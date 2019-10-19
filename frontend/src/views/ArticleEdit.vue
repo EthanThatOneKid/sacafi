@@ -33,8 +33,12 @@
               </fieldset> -->
               <fieldset class="form-group">
                 <MapInput
+                  :value="article.location"
+                  v-on:input="updateTitle"
                   v-model="article.location"
                 >
+                <!-- v-model="article.location"
+                v-on:input="updateTitle" -->
                 </MapInput>
               </fieldset>
               <fieldset class="form-group">
@@ -84,12 +88,13 @@ import store from "@/store";
 import RwvListErrors from "@/components/ListErrors";
 import MapInput from "@/components/MapInput";
 import {
-  ARTICLE_PUBLISH,
   ARTICLE_EDIT,
-  FETCH_ARTICLE,
   ARTICLE_EDIT_ADD_TAG,
   ARTICLE_EDIT_REMOVE_TAG,
-  ARTICLE_RESET_STATE
+  ARTICLE_PUBLISH,
+  ARTICLE_RESET_STATE,
+  FETCH_ARTICLE,
+  FETCH_OSM
 } from "@/store/actions.type";
 
 export default {
@@ -158,6 +163,12 @@ export default {
     addTag(tag) {
       this.$store.dispatch(ARTICLE_EDIT_ADD_TAG, tag);
       this.tagInput = null;
+    },
+    updateTitle(location) {
+      console.log("updateTitle");
+      this.$store
+        .dispatch(FETCH_OSM, location)
+        .then(data => console.log({ data }));
     }
   }
 };

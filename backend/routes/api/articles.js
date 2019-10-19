@@ -1,9 +1,10 @@
-var router = require("express").Router();
-var mongoose = require("mongoose");
-var Article = mongoose.model("Article");
-var Comment = mongoose.model("Comment");
-var User = mongoose.model("User");
-var auth = require("../auth");
+const router = require("express").Router();
+const mongoose = require("mongoose");
+const Article = mongoose.model("Article");
+const Comment = mongoose.model("Comment");
+const User = mongoose.model("User");
+const auth = require("../auth");
+const OsmDude = require("osm-dude");
 
 // Preload article objects on routes with ':article'
 router.param("article", function(req, res, next, slug) {
@@ -13,9 +14,7 @@ router.param("article", function(req, res, next, slug) {
       if (!article) {
         return res.sendStatus(404);
       }
-
       req.article = article;
-
       return next();
     })
     .catch(next);
@@ -27,9 +26,7 @@ router.param("comment", function(req, res, next, id) {
       if (!comment) {
         return res.sendStatus(404);
       }
-
       req.comment = comment;
-
       return next();
     })
     .catch(next);
@@ -39,7 +36,6 @@ router.get("/", auth.optional, function(req, res, next) {
   let query = {};
   let limit = 20;
   let offset = 0;
-
   if (typeof req.query.bbox !== "undefined") {
     const [west, south, east, north] = req.query.bbox.split(",").map(Number);
     query.location = {
@@ -48,37 +44,29 @@ router.get("/", auth.optional, function(req, res, next) {
       }
     };
   }
-
   if (typeof req.query.limit !== "undefined") {
     limit = req.query.limit;
   }
-
   if (typeof req.query.offset !== "undefined") {
     offset = req.query.offset;
   }
-
   if (typeof req.query.tag !== "undefined") {
     query.tagList = { $in: [req.query.tag] };
   }
-
   Promise.all([
     req.query.author ? User.findOne({ username: req.query.author }) : null,
     req.query.favorited ? User.findOne({ username: req.query.favorited }) : null
   ])
     .then(function(results) {
-      var author = results[0];
-      var favoriter = results[1];
-
+      const [author, favoriter] = results;
       if (author) {
         query.author = author._id;
       }
-
       if (favoriter) {
         query._id = { $in: favoriter.favorites };
       } else if (req.query.favorited) {
         query._id = { $in: [] };
       }
-
       return Promise.all([
         Article.find(query)
           .limit(Number(limit))
@@ -88,16 +76,15 @@ router.get("/", auth.optional, function(req, res, next) {
           .exec(),
         Article.count(query).exec(),
         req.payload ? User.findById(req.payload.id) : null
-      ]).then(function(results) {
-        var articles = results[0];
-        var articlesCount = results[1];
-        var user = results[2];
-        return res.json({
-          articles: articles.map(function(article, i) {
-            return article.toJSONFor(user);
-          }),
-          articlesCount: articlesCount
-        });
+      ]);
+    })
+    .then(function(results) {
+      const [articles, articlesCount, user] = results;
+      return res.json({
+        articles: articles.map(function(article, i) {
+          return article.toJSONFor(user);
+        }),
+        articlesCount: articlesCount
       });
     })
     .catch(next);
@@ -291,6 +278,15 @@ router.get("/:article/comments", auth.optional, function(req, res, next) {
         });
     })
     .catch(next);
+});
+
+// Get osm data from coord
+router.get("/osm/:coords", auth.required, function(req, res) {
+  console.log({ req });
+  // XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+  return res.json({
+    "Hello": "world"
+  });
 });
 
 // create a new comment

@@ -12,6 +12,7 @@ export const FAVORITE_REMOVE = "removeFavorite";
 export const FETCH_ARTICLE = "fetchArticle";
 export const FETCH_ARTICLES = "fetchArticles";
 export const FETCH_COMMENTS = "fetchComments";
+export const FETCH_OSM = "fetchOsm";
 export const FETCH_PROFILE = "fetchProfile";
 export const FETCH_PROFILE_FOLLOW = "fetchProfileFollow";
 export const FETCH_PROFILE_UNFOLLOW = "fetchProfileUnfollow";

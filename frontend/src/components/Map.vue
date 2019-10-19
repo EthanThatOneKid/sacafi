@@ -34,6 +34,12 @@ import { FETCH_ARTICLES } from '../store/actions.type';
 
 export default {
   name: "Map",
+  props: {
+    slug: {
+      type: String,
+      required: false
+    }
+  },
   components: {
     LMap,
     LTileLayer,
@@ -50,8 +56,7 @@ export default {
       bounds: null,
       geosearchOptions: {
         provider: new OpenStreetMapProvider()
-      },
-      isSelecting: false
+      }
     };
   },
   created() {
@@ -68,6 +73,11 @@ export default {
   },
   computed: {
     listConfig() {
+      if (this.bounds === null) {
+        return {
+          filters: null
+        };
+      }
       const west = this.bounds._southWest.lng;
       const south = this.bounds._southWest.lat;
       const east = this.bounds._northEast.lng;

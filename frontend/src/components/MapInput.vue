@@ -28,6 +28,12 @@ import VGeosearch from "vue2-leaflet-geosearch";
 
 export default {
   name: "MapInput",
+  props: {
+    value: {
+      type: Object,
+      required: false
+    }
+  },
   components: {
     LMap,
     LTileLayer,
@@ -35,10 +41,11 @@ export default {
     VGeosearch
   },
   data() {
+    console.log({ props: this.value });
     return {
       url: "http://{s}.tile.osm.org/{z}/{x}/{y}.png",
       zoom: 12,
-      center: [47.41322, -1.219482],
+      center: [47.41322, -1.219482], // null,
       minZoom: 12,
       bounds: null,
       geosearchOptions: {
@@ -47,7 +54,11 @@ export default {
     };
   },
   created() {
-    if ("geolocation" in navigator) {
+    if (!!this.value && !!this.value.lat && !!this.value.lng) {
+      const { lat, lng } = this.value;
+      this.center = { lat, lng };
+      this.zoom = 16;
+    } else if ("geolocation" in navigator) {
       navigator.geolocation.getCurrentPosition(pos => {
         const { latitude, longitude } = pos.coords;
         this.center = [latitude, longitude];
@@ -58,11 +69,9 @@ export default {
   methods: {
     markerDragged(event) {
       this.center = event.target._latlng;
-      this.changeMarkerPosition();
     },
     zoomUpdated(zoom) {
       this.zoom = zoom;
-      this.changeMarkerPosition();
     },
     centerUpdated(center) {
       this.center = center;
@@ -70,9 +79,9 @@ export default {
     },
     boundsUpdated(bounds) {
       this.bounds = bounds;
-      this.changeMarkerPosition();
     },
     changeMarkerPosition() {
+      // BUG: This method gets called twice
       const { lat, lng } = this.center;
       const data = {
         type: "Point",

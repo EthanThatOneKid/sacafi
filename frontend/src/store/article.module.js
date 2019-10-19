@@ -2,7 +2,8 @@ import Vue from "vue";
 import {
   ArticlesService,
   CommentsService,
-  FavoriteService
+  FavoriteService,
+  OsmService
 } from "@/common/api.service";
 import {
   FETCH_ARTICLE,
@@ -16,7 +17,8 @@ import {
   ARTICLE_EDIT_ADD_TAG,
   ARTICLE_EDIT_REMOVE_TAG,
   ARTICLE_DELETE,
-  ARTICLE_RESET_STATE
+  ARTICLE_RESET_STATE,
+  FETCH_OSM
 } from "./actions.type";
 import {
   RESET_STATE,
@@ -91,6 +93,10 @@ export const actions = {
   },
   [ARTICLE_RESET_STATE]({ commit }) {
     commit(RESET_STATE);
+  },
+  [FETCH_OSM](context, location) {
+    console.log({ context, location });
+    return OsmService.get(location);
   }
 };
 
