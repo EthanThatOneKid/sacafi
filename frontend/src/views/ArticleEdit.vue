@@ -92,11 +92,6 @@ import {
   ARTICLE_RESET_STATE
 } from "@/store/actions.type";
 
-// title; as map value changeds, auto-update with name of building underneath from backend
-// radios; open-access or closed-access (no ask for pw rn)
-// tags; cafe, quiet, fun, loud, productive, business, entertainment, custom
-// publish button
-
 export default {
   name: "RwvArticleEdit",
   components: { RwvListErrors, MapInput },

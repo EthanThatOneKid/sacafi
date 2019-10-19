@@ -32,21 +32,6 @@ import VGeosearch from "vue2-leaflet-geosearch";
 import { mapGetters } from "vuex";
 import { FETCH_ARTICLES } from '../store/actions.type';
 
-/*
-Location Panel
-tags
-user; badge
-date published; date edited
-open access
-closed access; available reveals (paid = ♾)
-  list of password components
-    password reveal with bubbles for 2 seconds cross eye ball thing
-    upvotes; downvotes; percent
-add password option button
-  type a password out
-open in google maps link
-*/
-
 export default {
   name: "Map",
   components: {
