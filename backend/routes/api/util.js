@@ -16,7 +16,7 @@ router.get("/osm/:coord", auth.required, async function(req, res) {
   try {
     const collisions = await OsmDude.peek(lat, lng);
     if (collisions.length > 0) {
-      result = collisions.pop().rawData.meta;
+      result = collisions.pop().rawData.meta; // Documentation: https://github.com/EthanThatOneKid/osm-dude
     }
   } catch (err) {
     console.warn(err);
