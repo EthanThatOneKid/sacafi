@@ -6,7 +6,7 @@
       <span>Bounds: {{ bounds }}</span>
     </div>
     <l-map
-      style="height: 50vh; width: 50vw"
+      style="height: 50vh; width: 100%"
       :zoom="zoom"
       :center="center"
       :minZoom="minZoom"
@@ -20,8 +20,15 @@
         v-for="article in articles"
         :lat-lng="article.location"
         :key="article.slug"
+        @click="selectLocation(article.slug)"
       ></l-marker>
     </l-map>
+    <LocationPanel
+      v-if="selectedLocation !== null"
+      :slug="selectedLocation"
+      @exit="exitLocationPanel"
+    >
+    </LocationPanel>
   </div>
 </template>
 
@@ -29,6 +36,7 @@
 import { LMap, LTileLayer, LMarker, LPopup } from "vue2-leaflet";
 import { OpenStreetMapProvider } from "leaflet-geosearch";
 import VGeosearch from "vue2-leaflet-geosearch";
+import LocationPanel from "@/components/LocationPanel";
 import { mapGetters } from "vuex";
 import { FETCH_ARTICLES } from '../store/actions.type';
 
@@ -45,7 +53,8 @@ export default {
     LTileLayer,
     LMarker,
     LPopup,
-    VGeosearch
+    VGeosearch,
+    LocationPanel
   },
   data() {
     return {
@@ -56,7 +65,8 @@ export default {
       bounds: null,
       geosearchOptions: {
         provider: new OpenStreetMapProvider()
-      }
+      },
+      selectedLocation: null
     };
   },
   created() {
@@ -99,10 +109,15 @@ export default {
     boundsUpdated(bounds) {
       this.bounds = bounds;
       this.fetchLocationList();
-      console.log(this.articles)
     },
     fetchLocationList() {
       this.$store.dispatch(FETCH_ARTICLES, this.listConfig);
+    },
+    selectLocation(slug) {
+      this.selectedLocation = slug;
+    },
+    exitLocationPanel() {
+      this.selectedLocation = null;
     }
   }
 };
