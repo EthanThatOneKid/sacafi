@@ -4,11 +4,14 @@
 
     .navbar-brand {
         display: flex;
-        align-content: left;
+        align-self: center;
+        font-family: 'Pacifico', cursive;
+        font-size: 2em;
     }
 
     .navbar-nav {
         display: flex;
+        align-self: center;
         list-style-type: none;
         margin: 0;
         padding: 0;

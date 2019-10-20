@@ -1,8 +1,24 @@
+@keyframes slide-in {
+    from {
+        width: 0;
+    }
+    to {
+        width: auto;
+        min-width: calc(100vw / 3);
+    }
+}
+
 .map-content {
     height: 100%;
     display: flex;
     flex-direction: row;
+
     .map-container {
         flex: 1;
+    }
+
+    .location-panel-container {
+        min-width: calc(100vw / 3);
+        transition: width 2s;
     }
 }

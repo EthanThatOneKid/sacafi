@@ -1,7 +1,16 @@
+// Dependencies
+// @import "http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css";
+@import url('https://fonts.googleapis.com/css?family=Pacifico&display=swap');
+
+// Modules
 @import "./components/_TheHeader.scss";
 @import "./components/_Map.scss";
 // @import "./_TheFooter.scss";
 
+// Mixins
+@import "./_mixins.scss";
+
+// Entry Styles
 html, body {
     height: 100%;
     padding: 0;

@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css?family=Pacifico&display=swap");
 .navbar .container {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -12,14 +13,18 @@
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -ms-flex-line-pack: left;
-      align-content: left;
+  -ms-flex-item-align: center;
+      align-self: center;
+  font-family: 'Pacifico', cursive;
+  font-size: 2em;
 }
 
 .navbar .container .navbar-nav {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -ms-flex-item-align: center;
+      align-self: center;
   list-style-type: none;
   margin: 0;
   padding: 0;
@@ -37,6 +42,26 @@
   padding: 15px;
 }
 
+@-webkit-keyframes slide-in {
+  from {
+    width: 0;
+  }
+  to {
+    width: auto;
+    min-width: calc(100vw / 3);
+  }
+}
+
+@keyframes slide-in {
+  from {
+    width: 0;
+  }
+  to {
+    width: auto;
+    min-width: calc(100vw / 3);
+  }
+}
+
 .map-content {
   height: 100%;
   display: -webkit-box;
@@ -52,6 +77,12 @@
   -webkit-box-flex: 1;
       -ms-flex: 1;
           flex: 1;
+}
+
+.map-content .location-panel-container {
+  min-width: calc(100vw / 3);
+  -webkit-transition: width 2s;
+  transition: width 2s;
 }
 
 html, body {
