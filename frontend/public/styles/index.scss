@@ -1,0 +1,19 @@
+// @import "./_TheHeader.scss";
+@import "./components/_Map.scss";
+// @import "./_TheFooter.scss";
+
+html, body {
+    height: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+#app {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    .the-content {
+        flex: 1;
+        background-color: red;
+    }
+}

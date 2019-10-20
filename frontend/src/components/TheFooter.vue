@@ -1,5 +1,5 @@
 <template>
-  <footer>
+  <footer class="the-footer">
     <div class="container">
       <router-link class="logo-font" :to="{ name: 'home', params: {} }">
         conduit

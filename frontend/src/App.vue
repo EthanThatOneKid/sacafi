@@ -1,8 +1,8 @@
 <template>
   <div id="app">
-    <RwvHeader />
-    <router-view></router-view>
-    <RwvFooter />
+    <RwvHeader class="the-header" />
+    <router-view class="the-content" />
+    <RwvFooter class="the-footer" />
   </div>
 </template>
 
@@ -18,5 +18,3 @@ export default {
   }
 };
 </script>
-
-<style></style>

@@ -1,34 +1,32 @@
 <template>
-  <div style="height: 100%; width: 100%">
-    <div class="info" style="height: 15%">
-      <span>Center: {{ center }}</span>
-      <span>Zoom: {{ zoom }}</span>
-      <span>Bounds: {{ bounds }}</span>
+  <div class="map-content">
+    <div class="map-container">
+      <l-map
+        style="height: 100%; width: 100%"
+        :zoom="zoom"
+        :center="center"
+        :minZoom="minZoom"
+        @update:zoom="zoomUpdated"
+        @update:center="centerUpdated"
+        @update:bounds="boundsUpdated"
+      >
+        <v-geosearch :options="geosearchOptions"></v-geosearch>
+        <l-tile-layer :url="url"></l-tile-layer>
+        <l-marker
+          v-for="article in articles"
+          :lat-lng="article.location"
+          :key="article.slug"
+          @click="selectLocation(article.slug)"
+        ></l-marker>
+      </l-map>
     </div>
-    <l-map
-      style="height: 50vh; width: 100%"
-      :zoom="zoom"
-      :center="center"
-      :minZoom="minZoom"
-      @update:zoom="zoomUpdated"
-      @update:center="centerUpdated"
-      @update:bounds="boundsUpdated"
-    >
-      <v-geosearch :options="geosearchOptions"></v-geosearch>
-      <l-tile-layer :url="url"></l-tile-layer>
-			<l-marker
-        v-for="article in articles"
-        :lat-lng="article.location"
-        :key="article.slug"
-        @click="selectLocation(article.slug)"
-      ></l-marker>
-    </l-map>
-    <LocationPanel
-      v-if="selectedLocation !== null"
-      :slug="selectedLocation"
-      @exit="exitLocationPanel"
-    >
-    </LocationPanel>
+    <div class="location-panel-container" v-if="selectedLocation !== null">
+      <LocationPanel
+        :slug="selectedLocation"
+        @exit="exitLocationPanel"
+      >
+      </LocationPanel>
+    </div>
   </div>
 </template>
 

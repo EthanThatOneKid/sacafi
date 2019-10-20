@@ -1,0 +1,8 @@
+.map-content {
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    .map-container {
+        flex: 1;
+    }
+}
