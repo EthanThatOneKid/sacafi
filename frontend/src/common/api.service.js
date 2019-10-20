@@ -106,9 +106,9 @@ export const FavoriteService = {
 };
 
 export const OsmService = {
-  get(location) {
-    const [lat, lng] = location.coordinates;
-    const stringifiedCoords = [lat, lng].join(",");
-    return ApiService.get("articles/osm", stringifiedCoords);
+  get(coord) {
+    const { lat, lng } = coord;
+    const stringifiedCoord = [lat, lng].join(",");
+    return ApiService.get("osm", stringifiedCoord);
   }
 };

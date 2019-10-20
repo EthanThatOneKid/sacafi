@@ -10,8 +10,8 @@
                 <input
                   type="text"
                   class="form-control form-control-lg"
-                  v-model="article.title"
                   placeholder="Location Title"
+                  v-bind:value="article.title"
                 />
               </fieldset>
               <fieldset class="form-group">
@@ -165,10 +165,15 @@ export default {
       this.tagInput = null;
     },
     updateTitle(location) {
-      console.log("updateTitle");
+      const [lng, lat] = location.coordinates;
+      const coord = { lat, lng };
       this.$store
-        .dispatch(FETCH_OSM, location)
-        .then(data => console.log({ data }));
+        .dispatch(FETCH_OSM, coord)
+        .then(({ data }) => {
+          if (!!data.name) {
+            this.article.title = data.name;
+          }
+        });
     }
   }
 };

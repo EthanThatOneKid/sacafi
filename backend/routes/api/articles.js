@@ -40,7 +40,7 @@ router.get("/", auth.optional, function(req, res, next) {
     const [west, south, east, north] = req.query.bbox.split(",").map(Number);
     query.location = {
       $geoWithin: {
-        $box: [ [west, north], [east, south] ]
+        $box: [[west, north], [east, south]]
       }
     };
   }
@@ -278,15 +278,6 @@ router.get("/:article/comments", auth.optional, function(req, res, next) {
         });
     })
     .catch(next);
-});
-
-// Get osm data from coord
-router.get("/osm/:coords", auth.required, function(req, res) {
-  console.log({ req });
-  // XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-  return res.json({
-    "Hello": "world"
-  });
 });
 
 // create a new comment
