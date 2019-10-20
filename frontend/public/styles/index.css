@@ -1,3 +1,42 @@
+.navbar .container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+.navbar .container .navbar-brand {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-line-pack: left;
+      align-content: left;
+}
+
+.navbar .container .navbar-nav {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  margin-left: auto;
+}
+
+.navbar .container .navbar-nav .nav-item {
+  float: left;
+}
+
+.navbar .container .navbar-nav .nav-item .nav-link {
+  display: block;
+  text-align: center;
+  text-decoration: none;
+  padding: 15px;
+}
+
 .map-content {
   height: 100%;
   display: -webkit-box;
@@ -36,6 +75,6 @@ html, body {
   -webkit-box-flex: 1;
       -ms-flex: 1;
           flex: 1;
-  background-color: red;
+  background-color: #ccc;
 }
 /*# sourceMappingURL=index.css.map */

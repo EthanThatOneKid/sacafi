@@ -1,7 +1,28 @@
-.navbar {
-    flex: none;
-}
+.navbar .container {
+    display: flex;
+    flex-direction: row;
 
-.navbar-brand {
-    font-size: 2em;
+    .navbar-brand {
+        display: flex;
+        align-content: left;
+    }
+
+    .navbar-nav {
+        display: flex;
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        margin-left: auto;
+    
+        .nav-item {
+            float: left;
+    
+            .nav-link {
+                display: block;
+                text-align: center;
+                text-decoration: none;
+                padding: 15px;
+            }
+        }
+    }
 }
