@@ -10,7 +10,7 @@ export default {
   name: "Locations",
   data() {
     return {
-      slug: this.$route.query.slug || null
+      slug: this.$route.query.l || null
     };
   },
   components: { Map }

@@ -35,7 +35,7 @@ import { OpenStreetMapProvider } from "leaflet-geosearch";
 import VGeosearch from "vue2-leaflet-geosearch";
 import LocationPanel from "@/components/LocationPanel";
 import { mapGetters } from "vuex";
-import { FETCH_ARTICLES } from '../store/actions.type';
+import { FETCH_ARTICLE, FETCH_ARTICLES } from '../store/actions.type';
 
 export default {
   name: "Map",
@@ -76,7 +76,15 @@ export default {
     }
   },
   mounted() {
-    this.fetchLocationList();
+    if (this.slug) {
+      this.$store
+        .dispatch(FETCH_ARTICLE, this.slug)
+        .then(({ article }) => {
+          this.center = article.location;
+        });
+    } else {
+      this.fetchLocationList();
+    }
   },
   computed: {
     listConfig() {
