@@ -20,13 +20,12 @@
         ></l-marker>
       </l-map>
     </div>
-    <div class="location-panel-container" v-if="selectedLocation !== null">
       <LocationPanel
+        v-if="selectedLocation !== null"
         :slug="selectedLocation"
         @exit="exitLocationPanel"
       >
       </LocationPanel>
-    </div>
   </div>
 </template>
 
@@ -64,7 +63,7 @@ export default {
       geosearchOptions: {
         provider: new OpenStreetMapProvider()
       },
-      selectedLocation: null
+      selectedLocation: this.slug || null
     };
   },
   created() {
@@ -112,7 +111,8 @@ export default {
       this.$store.dispatch(FETCH_ARTICLES, this.listConfig);
     },
     selectLocation(slug) {
-      this.selectedLocation = slug;
+      this.exitLocationPanel();
+      setTimeout(() => (this.selectedLocation = slug), 0);
     },
     exitLocationPanel() {
       this.selectedLocation = null;

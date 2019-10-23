@@ -1,0 +1,17 @@
+@import "../_variables.scss";
+
+.card {
+    border: 1px solid $off-black;
+    margin: 5px;
+
+    .card-footer {
+
+        .comment-author {
+
+            .comment-author-img {
+                width: 50px;
+                border-radius: 50%;
+            }
+        }
+    }
+}

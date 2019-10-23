@@ -85,6 +85,16 @@
   transition: width 2s;
 }
 
+.card {
+  border: 1px solid #3E3F41;
+  margin: 5px;
+}
+
+.card .card-footer .comment-author .comment-author-img {
+  width: 50px;
+  border-radius: 50%;
+}
+
 html, body {
   height: 100%;
   padding: 0;

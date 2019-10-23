@@ -5,10 +5,12 @@
 // Modules
 @import "./components/_TheHeader.scss";
 @import "./components/_Map.scss";
+@import "./components/_Comment.scss";
 // @import "./_TheFooter.scss";
 
-// Mixins
+// Mixins and Variables
 @import "./_mixins.scss";
+@import "./_variables.scss";
 
 // Entry Styles
 html, body {
