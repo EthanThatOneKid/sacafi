@@ -7,7 +7,7 @@
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
-  background-color: #FFD2AB;
+  background-color: #B85A00;
 }
 
 .navbar .container .navbar-brand {
@@ -73,7 +73,7 @@
   width: calc(100vw / 3);
   overflow-x: hidden;
   overflow-y: scroll;
-  background-color: #FFD2AB;
+  background-color: #FAA757;
 }
 
 .map-content .article-page::-webkit-scrollbar {
@@ -83,7 +83,7 @@
 
 .map-content .article-page::-webkit-scrollbar-thumb {
   border-radius: 1em;
-  background: #66A6B3;
+  background: #2794B3;
 }
 
 .map-content .article-page::-webkit-scrollbar-track {
@@ -98,13 +98,24 @@
 }
 
 .card {
-  border: 1px solid #3E3F41;
+  border: 1px solid #302222;
   margin: 5px;
 }
 
 .card .card-footer .comment-author .comment-author-img {
   width: 50px;
   border-radius: 50%;
+}
+
+.the-footer {
+  -webkit-box-flex: 0;
+      -ms-flex: none;
+          flex: none;
+  background-color: #B85A00;
+}
+
+.attribution {
+  font-size: 1em;
 }
 
 html, body {
