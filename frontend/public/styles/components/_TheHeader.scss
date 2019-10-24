@@ -1,6 +1,9 @@
+@import "../_variables.scss";
+
 .navbar .container {
     display: flex;
     flex-direction: row;
+    background-color: $secondary-light;
 
     .navbar-brand {
         display: flex;

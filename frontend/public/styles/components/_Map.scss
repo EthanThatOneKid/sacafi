@@ -1,24 +1,29 @@
-@keyframes slide-in {
-    from {
-        width: 0;
-    }
-    to {
-        width: auto;
-        min-width: calc(100vw / 3);
-    }
-}
+@import "../_variables.scss";
+@import "../_mixins.scss";
 
 .map-content {
     height: 100%;
     display: flex;
     flex-direction: row;
 
+    @media (max-width: $desktop-width) {
+        flex-direction: column;
+    }
+
     .map-container {
         flex: 1;
     }
 
-    .location-panel-container {
-        min-width: calc(100vw / 3);
-        transition: width 2s;
+    .article-page {
+        width: calc(100vw / 3);
+        overflow-x: hidden;
+        overflow-y: scroll;
+        background-color: $secondary;
+        @include custom-scrollbar;
+
+        @media (max-width: $desktop-width) {
+            width: auto;
+            height: calc(100vh / 3);
+        }
     }
 }

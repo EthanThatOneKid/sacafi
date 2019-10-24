@@ -1,5 +1,21 @@
+@import "./_variables.scss";
+
 @mixin flex-center {
     display: flex;
     flex-direction: column;
     justify-content: center;
+}
+
+@mixin custom-scrollbar {
+    &::-webkit-scrollbar {
+        width: $scrollbar-size;
+        height: $scrollbar-size;
+    }
+    &::-webkit-scrollbar-thumb {
+        border-radius: $scrollbar-size;
+        background: $primary-dark;
+    }
+    &::-webkit-scrollbar-track {
+        background: none;
+    }
 }
