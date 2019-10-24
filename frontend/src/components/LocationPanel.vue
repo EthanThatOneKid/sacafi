@@ -47,7 +47,7 @@ export default {
   components: {
     // RwvArticleMeta,
     RwvComment,
-    RwvCommentEditor,
+    RwvCommentEditor
     // RwvTag
   },
   created() {

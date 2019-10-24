@@ -37,7 +37,7 @@
                   v-on:input="updateTitle"
                   v-model="article.location"
                 >
-                <!-- v-model="article.location"
+                  <!-- v-model="article.location"
                 v-on:input="updateTitle" -->
                 </MapInput>
               </fieldset>
@@ -167,13 +167,11 @@ export default {
     updateTitle(location) {
       const [lng, lat] = location.coordinates;
       const coord = { lat, lng };
-      this.$store
-        .dispatch(FETCH_OSM, coord)
-        .then(({ data }) => {
-          if (!!data.name) {
-            this.article.title = data.name;
-          }
-        });
+      this.$store.dispatch(FETCH_OSM, coord).then(({ data }) => {
+        if (data.name) {
+          this.article.title = data.name;
+        }
+      });
     }
   }
 };

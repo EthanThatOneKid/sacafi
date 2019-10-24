@@ -16,7 +16,11 @@
     >
       <v-geosearch :options="geosearchOptions"></v-geosearch>
       <l-tile-layer :url="url"></l-tile-layer>
-      <l-marker :lat-lng="center" :draggable="true" @dragend="markerDragged"></l-marker>
+      <l-marker
+        :lat-lng="center"
+        :draggable="true"
+        @dragend="markerDragged"
+      ></l-marker>
     </l-map>
   </div>
 </template>

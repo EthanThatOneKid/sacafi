@@ -20,12 +20,12 @@
         ></l-marker>
       </l-map>
     </div>
-      <LocationPanel
-        v-if="selectedLocation !== null"
-        :slug="selectedLocation"
-        @exit="exitLocationPanel"
-      >
-      </LocationPanel>
+    <LocationPanel
+      v-if="selectedLocation !== null"
+      :slug="selectedLocation"
+      @exit="exitLocationPanel"
+    >
+    </LocationPanel>
   </div>
 </template>
 
@@ -35,7 +35,7 @@ import { OpenStreetMapProvider } from "leaflet-geosearch";
 import VGeosearch from "vue2-leaflet-geosearch";
 import LocationPanel from "@/components/LocationPanel";
 import { mapGetters } from "vuex";
-import { FETCH_ARTICLE, FETCH_ARTICLES } from '../store/actions.type';
+import { FETCH_ARTICLE, FETCH_ARTICLES } from "../store/actions.type";
 
 export default {
   name: "Map",
@@ -77,11 +77,9 @@ export default {
   },
   mounted() {
     if (this.slug) {
-      this.$store
-        .dispatch(FETCH_ARTICLE, this.slug)
-        .then(({ article }) => {
-          this.center = article.location;
-        });
+      this.$store.dispatch(FETCH_ARTICLE, this.slug).then(({ article }) => {
+        this.center = article.location;
+      });
     } else {
       this.fetchLocationList();
     }
