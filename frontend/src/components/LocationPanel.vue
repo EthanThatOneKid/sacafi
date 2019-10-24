@@ -1,9 +1,10 @@
 <template>
   <div class="article-page">
     <h1>{{ article.title }}</h1>
-    <button v-on:click="exit">X</button>
+    <i class="ion-close" v-on:click="exit"></i>
     <i><div v-html="parseMarkdown(article.description)"></div></i>
     <pre><code v-text="JSON.stringify(article, null, 2)"></code></pre>
+    <h2>Comments</h2>
     <RwvCommentEditor
       v-if="isAuthenticated"
       :slug="slug"
