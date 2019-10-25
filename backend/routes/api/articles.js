@@ -2,9 +2,9 @@ const router = require("express").Router();
 const mongoose = require("mongoose");
 const Article = mongoose.model("Article");
 const Comment = mongoose.model("Comment");
+const Password = mongoose.model("Password");
 const User = mongoose.model("User");
 const auth = require("../auth");
-const OsmDude = require("osm-dude");
 
 // Preload article objects on routes with ':article'
 router.param("article", function(req, res, next, slug) {
@@ -27,6 +27,18 @@ router.param("comment", function(req, res, next, id) {
         return res.sendStatus(404);
       }
       req.comment = comment;
+      return next();
+    })
+    .catch(next);
+});
+
+router.param("password", function(req, res, next, id) {
+  Password.findById(id)
+    .then(function(password) {
+      if (!password) {
+        return res.sendStatus(404);
+      }
+      req.password = password;
       return next();
     })
     .catch(next);
@@ -142,7 +154,6 @@ router.post("/", auth.required, function(req, res, next) {
       article.author = user;
 
       return article.save().then(function() {
-        console.log(article.author);
         return res.json({ article: article.toJSONFor(user) });
       });
     })
@@ -173,10 +184,6 @@ router.put("/:article", auth.required, function(req, res, next) {
 
       if (typeof req.body.article.description !== "undefined") {
         req.article.description = req.body.article.description;
-      }
-
-      if (typeof req.body.article.body !== "undefined") {
-        req.article.body = req.body.article.body;
       }
 
       if (typeof req.body.article.tagList !== "undefined") {
@@ -323,6 +330,69 @@ router.delete("/:article/comments/:comment", auth.required, function(
   } else {
     res.sendStatus(403);
   }
+});
+
+// Create a new password
+router.post("/:article/passwords", auth.required, function(req, res, next) {
+  let password, user;
+  User.findById(req.payload.id)
+    .then(function(_user) {
+      if (!_user) {
+        return res.sendStatus(401);
+      }
+      user = _user;
+      password = new Password(req.body.password);
+      password.article = req.article;
+      password.author = user;
+      return password.save();
+    })
+    .then(function() {
+      req.article.passwords = req.article.passwords.concat(password);
+      return req.article.save();
+    })
+    .then(function(article) {
+      res.json({ password: password.toJSONFor(user) });
+    })
+    .catch(next);
+});
+
+router.delete("/:article/passwords/:password", auth.required, function(
+  req,
+  res,
+  next
+) {
+  if (req.password.author.toString() === req.payload.id.toString()) {
+    req.article.passwords.remove(req.password._id);
+    req.article
+      .save()
+      .then(
+        Password.find({ _id: req.password._id })
+          .remove()
+          .exec()
+      )
+      .then(function() {
+        res.sendStatus(204);
+      });
+  } else {
+    res.sendStatus(403);
+  }
+});
+
+// Approve a password
+router.post("/:article/passwords/:password/approve", auth.required, function(req, res, next) {
+  let user;
+  User.findById(req.payload.id)
+    .then(function(_user) {
+      if (!_user) {
+        return res.sendStatus(401);
+      }
+      user = _user;
+      return req.password.approve(user);
+    })
+    .then(function() {
+      return res.json({ article: req.article.toJSONFor(user) })
+    })
+    .catch(next);
 });
 
 module.exports = router;

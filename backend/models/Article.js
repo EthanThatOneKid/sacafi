@@ -8,7 +8,6 @@ var ArticleSchema = new mongoose.Schema(
     slug: { type: String, lowercase: true, unique: true },
     title: String,
     description: String,
-    // body: String,
     favoritesCount: { type: Number, default: 0 },
     location: {
       type: {
@@ -21,10 +20,13 @@ var ArticleSchema = new mongoose.Schema(
         required: true
       }
     },
-    // coords: {
-    //   lat: { type: Number },
-    //   lng: { type: Number }
-    // },
+    networkTitle: {
+      type: String,
+      default: ""
+      // required: true
+    },
+    isOpenAccess: Boolean,
+    passwords: [{ type: mongoose.Schema.Types.ObjectId, ref: "Password" }],
     meta: {
       type: mongoose.Schema.Types.Mixed,
       default: {}
@@ -71,14 +73,16 @@ ArticleSchema.methods.toJSONFor = function(user) {
     slug: this.slug,
     title: this.title,
     description: this.description,
-    // coords: this.coords,
     location: { lat, lng },
     createdAt: this.createdAt,
     updatedAt: this.updatedAt,
     tagList: this.tagList,
     favorited: user ? user.isFavorite(this._id) : false,
     favoritesCount: this.favoritesCount,
-    author: this.author.toProfileJSONFor(user)
+    author: this.author.toProfileJSONFor(user),
+    networkTitle: this.networkTitle,
+    isOpenAccess: this.isOpenAccess,
+    passwords: this.passwords
   };
 };
 
