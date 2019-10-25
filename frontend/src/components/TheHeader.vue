@@ -62,7 +62,8 @@
             active-class="active"
             :to="{ name: 'article-edit' }"
           >
-            <i class="ion-compose"></i>&nbsp;New Article
+            <i class="ion-compose"></i>
+            &nbsp;New Article
           </router-link>
         </li>
         <li class="nav-item">
@@ -72,7 +73,8 @@
             exact
             :to="{ name: 'settings' }"
           >
-            <i class="ion-gear-a"></i>&nbsp;Settings
+            <i class="ion-gear-a"></i>
+            &nbsp;Settings
           </router-link>
         </li>
         <li class="nav-item" v-if="currentUser.username">
@@ -85,7 +87,8 @@
               params: { username: currentUser.username }
             }"
           >
-            {{ currentUser.username }}
+            <i class="ion-person"></i>
+            &nbsp;{{ currentUser.username }}
           </router-link>
         </li>
       </ul>

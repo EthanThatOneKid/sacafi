@@ -22,50 +22,19 @@
                   placeholder="Give a brief description of this location..."
                 />
               </fieldset>
-              <!-- <fieldset class="form-group">
-                <textarea
-                  class="form-control"
-                  rows="8"
-                  v-model="article.body"
-                  placeholder="Write your article (in markdown)"
-                >
-                </textarea>
-              </fieldset> -->
               <fieldset class="form-group">
                 <MapInput
                   :value="article.location"
                   v-on:input="updateTitle"
                   v-model="article.location"
                 >
-                  <!-- v-model="article.location"
-                v-on:input="updateTitle" -->
                 </MapInput>
               </fieldset>
               <fieldset class="form-group">
-                <!-- TODO: Make this a select element with premade options loaded from another file (e.g. cafe, library, other) -->
-                <input
-                  type="text"
-                  class="form-control"
-                  placeholder="Enter tags (comma-seperated)"
-                  list="tagOptions"
-                  v-model="tagInput"
-                  v-on:keypress.enter.prevent="addTag(tagInput)"
+                <TagList
+                  :isEditable="true"
+                  v-model="article.tagList"
                 />
-                <datalist id="tagOptions">
-                  <option>cafe</option>
-                  <option>library</option>
-                  <option>school</option>
-                </datalist>
-                <div class="tag-list">
-                  <span
-                    class="tag-default tag-pill"
-                    v-for="(tag, index) of article.tagList"
-                    :key="tag + index"
-                  >
-                    <i class="ion-close-round" v-on:click="removeTag(tag)"> </i>
-                    {{ tag }}
-                  </span>
-                </div>
               </fieldset>
             </fieldset>
             <button
@@ -87,6 +56,7 @@ import { mapGetters } from "vuex";
 import store from "@/store";
 import RwvListErrors from "@/components/ListErrors";
 import MapInput from "@/components/MapInput";
+import TagList from "@/components/TagList";
 import {
   ARTICLE_EDIT,
   ARTICLE_EDIT_ADD_TAG,
@@ -99,7 +69,7 @@ import {
 
 export default {
   name: "RwvArticleEdit",
-  components: { RwvListErrors, MapInput },
+  components: { RwvListErrors, MapInput, TagList },
   props: {
     previousArticle: {
       type: Object,

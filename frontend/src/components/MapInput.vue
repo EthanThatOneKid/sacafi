@@ -6,7 +6,7 @@
       <span>Bounds: {{ bounds }}</span>
     </div>
     <l-map
-      style="height: 50vh; width: 50vw"
+      style="height: 50vh; width: 100%"
       :zoom="zoom"
       :center="center"
       :minZoom="minZoom"

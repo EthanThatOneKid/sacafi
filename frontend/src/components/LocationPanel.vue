@@ -3,6 +3,7 @@
     <h1>{{ article.title }}</h1>
     <i class="ion-close" v-on:click="exit"></i>
     <i><div v-html="parseMarkdown(article.description)"></div></i>
+    <TagList :value="article.tagList"></TagList>
     <pre><code v-text="JSON.stringify(article, null, 2)"></code></pre>
     <h2>Comments</h2>
     <RwvCommentEditor
@@ -34,6 +35,7 @@ import store from "@/store";
 // import RwvArticleMeta from "@/components/ArticleMeta";
 import RwvComment from "@/components/Comment";
 import RwvCommentEditor from "@/components/CommentEditor";
+import TagList from "@/components/TagList";
 // import RwvTag from "@/components/VTag";
 import { FETCH_ARTICLE, FETCH_COMMENTS } from "@/store/actions.type";
 
@@ -48,7 +50,8 @@ export default {
   components: {
     // RwvArticleMeta,
     RwvComment,
-    RwvCommentEditor
+    RwvCommentEditor,
+    TagList
     // RwvTag
   },
   created() {
