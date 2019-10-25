@@ -1,7 +1,7 @@
 <template>
   <div class="article-page">
     <h1>{{ article.title }}</h1>
-    <i class="ion-close" v-on:click="exit"></i>
+    <i class="ion-md-close" v-on:click="exit"></i>
     <i><div v-html="parseMarkdown(article.description)"></div></i>
     <TagList :value="article.tagList"></TagList>
     <pre><code v-text="JSON.stringify(article, null, 2)"></code></pre>

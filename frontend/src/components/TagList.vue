@@ -14,14 +14,12 @@
             v-on:change="event => updateTag(event, index)"
             v-on:keypress.enter.prevent="event => updateTag(event, index)"
           />
-          <i class="ion-trash-a" v-on:click="removeTag(index)"></i>
+          <i class="ion-md-trash" v-on:click="removeTag(index)"></i>
         </span>
         <span v-else v-text="tag" />
       </li>
       <li class="add-tag" v-if="isEditable" key="add-tag">
-        <i class="ion-add-circle-outline-a" v-on:click="addTag">
-          add tag
-        </i>
+        <i class="ion-md-add-circle-outline" v-on:click="addTag"></i>
       </li>
     </ul>
     <datalist id="tagOptions">

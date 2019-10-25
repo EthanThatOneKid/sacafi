@@ -43,7 +43,8 @@
             active-class="active"
             :to="{ name: 'locations' }"
           >
-            Locations
+            <i class="ion-md-pin"></i>
+            &nbsp;Locations
           </router-link>
         </li>
         <li class="nav-item">
@@ -53,7 +54,8 @@
             exact
             :to="{ name: 'home' }"
           >
-            Home
+            <i class="ion-md-home"></i>
+            &nbsp;Home
           </router-link>
         </li>
         <li class="nav-item">
@@ -62,8 +64,8 @@
             active-class="active"
             :to="{ name: 'article-edit' }"
           >
-            <i class="ion-compose"></i>
-            &nbsp;New Article
+            <i class="ion-md-add"></i>
+            &nbsp;New Location
           </router-link>
         </li>
         <li class="nav-item">
@@ -73,7 +75,7 @@
             exact
             :to="{ name: 'settings' }"
           >
-            <i class="ion-gear-a"></i>
+            <i class="ion-md-cog"></i>
             &nbsp;Settings
           </router-link>
         </li>
@@ -87,7 +89,7 @@
               params: { username: currentUser.username }
             }"
           >
-            <i class="ion-person"></i>
+            <i class="ion-md-person"></i>
             &nbsp;{{ currentUser.username }}
           </router-link>
         </li>
