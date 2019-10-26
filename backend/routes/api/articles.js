@@ -390,6 +390,63 @@ router.post("/:article/passwords/:password/approve", auth.required, function(req
       return req.password.approve(user);
     })
     .then(function() {
+      return req.password.undisapprove(user);
+    })
+    .then(function() {
+      return res.json({ article: req.article.toJSONFor(user) })
+    })
+    .catch(next);
+});
+
+// Unapprove a password
+router.delete("/:article/passwords/:password/approve", auth.required, function(req, res, next) {
+  let user;
+  User.findById(req.payload.id)
+    .then(function(_user) {
+      if (!_user) {
+        return res.sendStatus(401);
+      }
+      user = _user;
+      return req.password.unapprove(user);
+    })
+    .then(function() {
+      return res.json({ article: req.article.toJSONFor(user) })
+    })
+    .catch(next);
+});
+
+// Disapprove a password
+router.post("/:article/passwords/:password/disapprove", auth.required, function(req, res, next) {
+  let user;
+  User.findById(req.payload.id)
+    .then(function(_user) {
+      if (!_user) {
+        return res.sendStatus(401);
+      }
+      user = _user;
+      return req.password.disapprove(user);
+    })
+    .then(function() {
+      return req.password.unapprove(user);
+    })
+    .then(function() {
+      return res.json({ article: req.article.toJSONFor(user) })
+    })
+    .catch(next);
+});
+
+// Undisapprove a password
+router.delete("/:article/passwords/:password/disapprove", auth.required, function(req, res, next) {
+  let user;
+  User.findById(req.payload.id)
+    .then(function(_user) {
+      if (!_user) {
+        return res.sendStatus(401);
+      }
+      user = _user;
+      return req.password.undisapprove(user);
+    })
+    .then(function() {
       return res.json({ article: req.article.toJSONFor(user) })
     })
     .catch(next);
