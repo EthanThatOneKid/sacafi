@@ -44,7 +44,6 @@ ArticleSchema.pre("validate", function(next) {
   if (!this.slug) {
     this.slugify();
   }
-
   next();
 });
 
@@ -56,14 +55,11 @@ ArticleSchema.methods.slugify = function() {
 };
 
 ArticleSchema.methods.updateFavoriteCount = function() {
-  var article = this;
-
-  return User.count({ favorites: { $in: [article._id] } }).then(function(
+  return User.count({ favorites: { $in: [this._id] } }).then(function(
     count
   ) {
-    article.favoritesCount = count;
-
-    return article.save();
+    this.favoritesCount = count;
+    return this.save();
   });
 };
 
@@ -81,8 +77,7 @@ ArticleSchema.methods.toJSONFor = function(user) {
     favoritesCount: this.favoritesCount,
     author: this.author.toProfileJSONFor(user),
     networkTitle: this.networkTitle,
-    isOpenAccess: this.isOpenAccess,
-    passwords: this.passwords
+    isOpenAccess: this.isOpenAccess
   };
 };
 

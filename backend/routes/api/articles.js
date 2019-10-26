@@ -378,6 +378,34 @@ router.delete("/:article/passwords/:password", auth.required, function(
   }
 });
 
+// Return an article's passwords
+router.get("/:article/passwords", auth.required, function(req, res, next) {
+  Promise.resolve(req.payload ? User.findById(req.payload.id) : null)
+    .then(function(user) {
+      return req.article
+        .populate({
+          path: "passwords",
+          populate: {
+            path: "author"
+          },
+          options: {
+            sort: {
+              createdAt: "desc"
+            }
+          }
+        })
+        .execPopulate()
+        .then(function(article) {
+          return res.json({
+            passwords: req.article.passwords.map(function(password) {
+              return password.toJSONFor(user);
+            })
+          });
+        });
+    })
+    .catch(next);
+});
+
 // Approve a password
 router.post("/:article/passwords/:password/approve", auth.required, function(req, res, next) {
   let user;
@@ -393,7 +421,7 @@ router.post("/:article/passwords/:password/approve", auth.required, function(req
       return req.password.undisapprove(user);
     })
     .then(function() {
-      return res.json({ article: req.article.toJSONFor(user) })
+      return res.json({ article: req.article.toJSONFor(user) });
     })
     .catch(next);
 });
@@ -410,7 +438,7 @@ router.delete("/:article/passwords/:password/approve", auth.required, function(r
       return req.password.unapprove(user);
     })
     .then(function() {
-      return res.json({ article: req.article.toJSONFor(user) })
+      return res.json({ article: req.article.toJSONFor(user) });
     })
     .catch(next);
 });
@@ -430,7 +458,7 @@ router.post("/:article/passwords/:password/disapprove", auth.required, function(
       return req.password.unapprove(user);
     })
     .then(function() {
-      return res.json({ article: req.article.toJSONFor(user) })
+      return res.json({ article: req.article.toJSONFor(user) });
     })
     .catch(next);
 });
@@ -447,7 +475,7 @@ router.delete("/:article/passwords/:password/disapprove", auth.required, functio
       return req.password.undisapprove(user);
     })
     .then(function() {
-      return res.json({ article: req.article.toJSONFor(user) })
+      return res.json({ article: req.article.toJSONFor(user) });
     })
     .catch(next);
 });

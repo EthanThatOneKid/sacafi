@@ -84,15 +84,39 @@ export const CommentsService = {
     }
     return ApiService.get("articles", `${slug}/comments`);
   },
-
   post(slug, payload) {
     return ApiService.post(`articles/${slug}/comments`, {
       comment: { body: payload }
     });
   },
-
   destroy(slug, commentId) {
     return ApiService.delete(`articles/${slug}/comments/${commentId}`);
+  }
+};
+
+export const PasswordsService = {
+  get(slug) {
+    if (typeof slug !== "string" || typeof id !== "string") {
+      throw new Error(
+        "[RWV] CommentsService.get() article slug required to fetch comments"
+      );
+    }
+    return ApiService.get(`articles/${slug}/passwords`);
+  },
+  destroy(slug, id) {
+    return ApiService.delete(`articles/${slug}/passwords/${id}`);
+  },
+  approve(slug, id) {
+    return ApiService.post(`articles/${slug}/passwords/${id}/approve`);
+  },
+  disapprove(slug, id) {
+    return ApiService.post(`articles/${slug}/passwords/${id}/disapprove`);
+  },
+  unapprove(slug, id) {
+    return ApiService.delete(`articles/${slug}/passwords/${id}/approve`);
+  },
+  undisapprove(slug, id) {
+    return ApiService.delete(`articles/${slug}/passwords/${id}/disapprove`);
   }
 };
 

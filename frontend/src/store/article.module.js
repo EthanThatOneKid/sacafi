@@ -2,7 +2,8 @@ import Vue from "vue";
 import {
   ArticlesService,
   CommentsService,
-  FavoriteService
+  FavoriteService,
+  PasswordsService
 } from "@/common/api.service";
 import {
   FETCH_ARTICLE,
@@ -16,16 +17,25 @@ import {
   ARTICLE_EDIT_ADD_TAG,
   ARTICLE_EDIT_REMOVE_TAG,
   ARTICLE_DELETE,
-  ARTICLE_RESET_STATE
+  ARTICLE_RESET_STATE,
+  FETCH_PASSWORDS,
+  PASSWORD_APPROVE,
+  PASSWORD_CREATE,
+  PASSWORD_DESTROY,
+  PASSWORD_DISAPPROVE,
+  PASSWORD_UNAPPROVE,
+  PASSWORD_UNDISAPPROVE
 } from "./actions.type";
 import {
   RESET_STATE,
   SET_ARTICLE,
   SET_COMMENTS,
+  SET_PASSWORDS,
   TAG_ADD,
   TAG_REMOVE,
   UPDATE_ARTICLE_IN_LIST
 } from "./mutations.type";
+// import { stat } from "fs";
 
 const initialState = {
   article: {
@@ -91,6 +101,35 @@ export const actions = {
   },
   [ARTICLE_RESET_STATE]({ commit }) {
     commit(RESET_STATE);
+  },
+  async [FETCH_PASSWORDS](context, articleSlug) {
+    const { data } = await PasswordsService.get(articleSlug);
+    context.commit(SET_PASSWORDS, data.passwords);
+    return data.passwords;
+  },
+  async [PASSWORD_CREATE](context, payload) {
+    await PasswordsService.post(payload.slug, payload.password);
+    context.dispatch(FETCH_PASSWORDS, payload.slug);
+  },
+  async [PASSWORD_DESTROY](context, payload) {
+    await PasswordsService.destroy(payload.slug, payload.passwordId);
+    context.dispatch(FETCH_PASSWORDS, payload.slug);
+  },
+  async [PASSWORD_APPROVE](context, slug, id) {
+    const { data } = await PasswordsService.approve(slug, id);
+    context.commit(SET_ARTICLE, data.article);
+  },
+  async [PASSWORD_UNAPPROVE](context, slug, id) {
+    const { data } = await PasswordsService.unapprove(slug, id);
+    context.commit(SET_ARTICLE, data.article);
+  },
+  async [PASSWORD_DISAPPROVE](context, slug, id) {
+    const { data } = await PasswordsService.disapprove(slug, id);
+    context.commit(SET_ARTICLE, data.article);
+  },
+  async [PASSWORD_UNDISAPPROVE](context, slug, id) {
+    const { data } = await PasswordsService.undisapprove(slug, id);
+    context.commit(SET_ARTICLE, data.article);
   }
 };
 
@@ -101,6 +140,9 @@ export const mutations = {
   },
   [SET_COMMENTS](state, comments) {
     state.comments = comments;
+  },
+  [SET_PASSWORDS](state, passwords) {
+    state.passwords = passwords;
   },
   [TAG_ADD](state, tag) {
     state.article.tagList = state.article.tagList.concat([tag]);
@@ -122,6 +164,9 @@ const getters = {
   },
   comments(state) {
     return state.comments;
+  },
+  passwords(state) {
+    return state.passwords;
   }
 };
 
