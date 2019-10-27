@@ -1,7 +1,11 @@
 <template>
   <div>
     <ul class="tag-list">
-      <li class="tag-pill" v-for="(tag, index) of tagList" :key="`tag-idx-${index}`">
+      <li
+        class="tag-pill"
+        v-for="(tag, index) of tagList"
+        :key="`tag-idx-${index}`"
+      >
         <span v-if="isEditable">
           <input
             v-if="isEditable"
@@ -37,7 +41,7 @@ export default {
     value: {
       type: Array,
       required: false
-    }, 
+    },
     isEditable: {
       type: Boolean,
       required: false
@@ -53,7 +57,9 @@ export default {
   methods: {
     addTag() {
       const isTooManyTags = this.tagList.length + 1 > this.tagThresh;
-      const isLastTagPopulated = this.tagList.length === 0 || this.tagList[this.tagList.length - 1].length !== 0
+      const isLastTagPopulated =
+        this.tagList.length === 0 ||
+        this.tagList[this.tagList.length - 1].length !== 0;
       if (!isTooManyTags && isLastTagPopulated) {
         this.tagList.push("");
       }
@@ -61,15 +67,12 @@ export default {
     updateTag({ target }, index) {
       let { value } = target;
       if (value.length === 0) {
-        setTimeout(() => (this.removeTag(index)), 0);
+        setTimeout(() => this.removeTag(index), 0);
         return;
       }
-      this.tagList[index] = value
-        .toLowerCase()
-        .replace(/\s/, "-");
+      this.tagList[index] = value.toLowerCase().replace(/\s/, "-");
       const data = [...new Set(this.tagList.filter(tag => tag.length > 0))];
       this.$emit("input", data);
-      console.log(this.tagList, data);
     },
     removeTag(index) {
       this.tagList.splice(index, 1);

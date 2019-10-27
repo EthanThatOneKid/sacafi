@@ -11,7 +11,15 @@
                   type="text"
                   class="form-control form-control-lg"
                   placeholder="Location Title"
-                  v-bind:value="article.title"
+                  v-model="article.title"
+                />
+              </fieldset>
+              <fieldset class="form-group">
+                <input
+                  type="text"
+                  class="form-control form-control-lg"
+                  placeholder="Network name"
+                  v-model="article.networkTitle"
                 />
               </fieldset>
               <fieldset class="form-group">
@@ -31,10 +39,16 @@
                 </MapInput>
               </fieldset>
               <fieldset class="form-group">
-                <TagList
-                  :isEditable="true"
-                  v-model="article.tagList"
+                <input
+                  id="isOpenAccessToggle"
+                  type="checkbox"
+                  class="form-control"
+                  v-model="article.isOpenAccess"
                 />
+                <label for="isOpenAccessToggle">Requires password</label>
+              </fieldset>
+              <fieldset class="form-group">
+                <TagList :isEditable="true" v-model="article.tagList" />
               </fieldset>
             </fieldset>
             <button
@@ -117,10 +131,7 @@ export default {
         .dispatch(action)
         .then(({ data }) => {
           this.inProgress = false;
-          this.$router.push({
-            name: "article",
-            params: { slug: data.article.slug }
-          });
+          this.$router.push(`locations?l=${data.article.slug}`);
         })
         .catch(({ response }) => {
           this.inProgress = false;
@@ -138,7 +149,7 @@ export default {
       const [lng, lat] = location.coordinates;
       const coord = { lat, lng };
       this.$store.dispatch(FETCH_OSM, coord).then(({ data }) => {
-        if (data.name) {
+        if (!!data.name && data.name.length > 0) {
           this.article.title = data.name;
         }
       });

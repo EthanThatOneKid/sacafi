@@ -1,10 +1,5 @@
 <template>
   <div style="height: 100%; width: 100%">
-    <div class="info" style="height: 15%">
-      <span>Center: {{ center }}</span>
-      <span>Zoom: {{ zoom }}</span>
-      <span>Bounds: {{ bounds }}</span>
-    </div>
     <l-map
       style="height: 50vh; width: 100%"
       :zoom="zoom"
@@ -45,11 +40,10 @@ export default {
     VGeosearch
   },
   data() {
-    console.log({ props: this.value });
     return {
       url: "http://{s}.tile.osm.org/{z}/{x}/{y}.png",
       zoom: 12,
-      center: [47.41322, -1.219482], // null,
+      center: [40.83583, -73.923692], // Joker Stairs
       minZoom: 12,
       bounds: null,
       geosearchOptions: {

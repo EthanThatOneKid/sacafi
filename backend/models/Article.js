@@ -22,10 +22,12 @@ var ArticleSchema = new mongoose.Schema(
     },
     networkTitle: {
       type: String,
-      default: ""
-      // required: true
+      required: true
     },
-    isOpenAccess: Boolean,
+    isOpenAccess: {
+      type: Boolean,
+      required: true
+    },
     passwords: [{ type: mongoose.Schema.Types.ObjectId, ref: "Password" }],
     meta: {
       type: mongoose.Schema.Types.Mixed,
@@ -77,7 +79,8 @@ ArticleSchema.methods.toJSONFor = function(user) {
     favoritesCount: this.favoritesCount,
     author: this.author.toProfileJSONFor(user),
     networkTitle: this.networkTitle,
-    isOpenAccess: this.isOpenAccess
+    isOpenAccess: this.isOpenAccess,
+    passwords: this.passwords
   };
 };
 
