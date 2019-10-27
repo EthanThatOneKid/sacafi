@@ -18,7 +18,7 @@
 * To add a new property to the Article (location) schema:
     * Add it to `ArticleSchema`'s initialization in [Article.js](backend\models\Article.js).
     * Add it to `ArticleSchema.methods.toJSONFor` (JSON output) in [Article.js](backend\models\Article.js)
-    * Make appropriate adjustments where the schema is used, such as in[Article.vue](frontend\src\views\Article.vue), [ArticleEdit.vue](frontend\src\views\ArticleEdit.vue), etc.
+    * Make appropriate adjustments where the schema is used, such as in [Article.vue](frontend\src\views\Article.vue), [ArticleEdit.vue](frontend\src\views\ArticleEdit.vue), etc.
 * Check out [Ionicons](https://ionicons.com/) to pick out the perfect icon for some element or another.
 
 ## Todo ✔

@@ -24,7 +24,7 @@ var ArticleSchema = new mongoose.Schema(
       type: String,
       required: true
     },
-    isOpenAccess: {
+    requiresPassword: {
       type: Boolean,
       required: true
     },
@@ -79,7 +79,7 @@ ArticleSchema.methods.toJSONFor = function(user) {
     favoritesCount: this.favoritesCount,
     author: this.author.toProfileJSONFor(user),
     networkTitle: this.networkTitle,
-    isOpenAccess: this.isOpenAccess,
+    requiresPassword: this.requiresPassword,
     passwords: this.passwords
   };
 };
