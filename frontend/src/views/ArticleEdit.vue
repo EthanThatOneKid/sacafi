@@ -43,7 +43,7 @@
                   id="isOpenAccessToggle"
                   type="checkbox"
                   class="form-control"
-                  v-model="article.isOpenAccess"
+                  v-model="article.requiresPassword"
                 />
                 <label for="isOpenAccessToggle">Requires password</label>
               </fieldset>

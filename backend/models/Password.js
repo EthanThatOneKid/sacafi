@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const PasswordSchema = new mongoose.Schema(
   {
-    secret: String,
+    secret: { type: String, required: true },
     author: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
     article: { type: mongoose.Schema.Types.ObjectId, ref: "Article" },
     approvals: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
@@ -40,8 +40,8 @@ PasswordSchema.methods.toJSONFor = function(user) {
   return {
     id: this._id,
     secret: this.secret,
-    approvals: this.approvals.length,
-    disapprovals: this.disapprovals.length,
+    approvals: this.approvals,
+    disapprovals: this.disapprovals,
     rating: this.approvals.length - this.disapprovals.length,
     createdAt: this.createdAt,
     author: this.author.toProfileJSONFor(user)

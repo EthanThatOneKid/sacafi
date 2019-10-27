@@ -45,7 +45,8 @@ const initialState = {
     body: "",
     tagList: []
   },
-  comments: []
+  comments: [],
+  passwords: []
 };
 
 export const state = { ...initialState };
@@ -115,20 +116,20 @@ export const actions = {
     await PasswordsService.destroy(payload.slug, payload.passwordId);
     context.dispatch(FETCH_PASSWORDS, payload.slug);
   },
-  async [PASSWORD_APPROVE](context, slug, id) {
-    const { data } = await PasswordsService.approve(slug, id);
+  async [PASSWORD_APPROVE](context, { slug, passwordId }) {
+    const { data } = await PasswordsService.approve(slug, passwordId);
     context.commit(SET_ARTICLE, data.article);
   },
-  async [PASSWORD_UNAPPROVE](context, slug, id) {
-    const { data } = await PasswordsService.unapprove(slug, id);
+  async [PASSWORD_UNAPPROVE](context, { slug, passwordId }) {
+    const { data } = await PasswordsService.unapprove(slug, passwordId);
     context.commit(SET_ARTICLE, data.article);
   },
-  async [PASSWORD_DISAPPROVE](context, slug, id) {
-    const { data } = await PasswordsService.disapprove(slug, id);
+  async [PASSWORD_DISAPPROVE](context, { slug, passwordId }) {
+    const { data } = await PasswordsService.disapprove(slug, passwordId);
     context.commit(SET_ARTICLE, data.article);
   },
-  async [PASSWORD_UNDISAPPROVE](context, slug, id) {
-    const { data } = await PasswordsService.undisapprove(slug, id);
+  async [PASSWORD_UNDISAPPROVE](context, { slug, passwordId }) {
+    const { data } = await PasswordsService.undisapprove(slug, passwordId);
     context.commit(SET_ARTICLE, data.article);
   }
 };

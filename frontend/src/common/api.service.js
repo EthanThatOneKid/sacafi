@@ -96,12 +96,18 @@ export const CommentsService = {
 
 export const PasswordsService = {
   get(slug) {
-    if (typeof slug !== "string" || typeof id !== "string") {
+    if (typeof slug !== "string") {
       throw new Error(
-        "[RWV] CommentsService.get() article slug required to fetch comments"
+        "[RWV] PasswordsService.get() article slug required to fetch passwords"
       );
     }
     return ApiService.get(`articles/${slug}/passwords`);
+  },
+  post(slug, payload) {
+    console.log({ payload });
+    return ApiService.post(`articles/${slug}/passwords`, {
+      password: { secret: payload }
+    });
   },
   destroy(slug, id) {
     return ApiService.delete(`articles/${slug}/passwords/${id}`);

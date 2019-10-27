@@ -78,7 +78,6 @@ const actions = {
     if (password) {
       user.password = password;
     }
-
     return ApiService.put("user", user).then(({ data }) => {
       context.commit(SET_AUTH, data.user);
       return data;
