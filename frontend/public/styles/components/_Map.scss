@@ -5,6 +5,7 @@
     height: 100%;
     display: flex;
     flex-direction: row;
+    // position: fixed;
 
     @media (max-width: $desktop-width) {
         flex-direction: column;
@@ -16,6 +17,7 @@
 
     .article-page {
         width: calc(100vw / 3);
+        // max-height: height-of-div-that-fits-here-normally
         overflow-x: hidden;
         overflow-y: scroll;
         background-color: $secondary;
@@ -24,6 +26,7 @@
         @media (max-width: $desktop-width) {
             width: auto;
             height: calc(100vh / 3);
+            flex: none;
         }
     }
 }

@@ -94,6 +94,9 @@
   .map-content .article-page {
     width: auto;
     height: calc(100vh / 3);
+    -webkit-box-flex: 0;
+        -ms-flex: none;
+            flex: none;
   }
 }
 
