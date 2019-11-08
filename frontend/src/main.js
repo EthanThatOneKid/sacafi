@@ -4,6 +4,9 @@ import router from "./router";
 import store from "./store";
 import "./registerServiceWorker";
 
+import VueClipboard from "vue-clipboard2";
+Vue.use(VueClipboard);
+
 import { CHECK_AUTH } from "./store/actions.type";
 import ApiService from "./common/api.service";
 import DateFilter from "./common/date.filter";

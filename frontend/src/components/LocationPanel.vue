@@ -1,8 +1,17 @@
 <template>
   <div class="article-page">
     <h1>{{ article.title }}</h1>
-    <i class="ion-md-close" v-on:click="exit"></i>
-    <i><div v-html="parseMarkdown(article.description)"></div></i>
+    <button
+      v-clipboard:copy="locationUrl"
+      v-clipboard:success="onShare"
+      v-clipboard:error="onShareError"
+    >
+      <i class="ion-md-share-alt"></i>
+    </button>
+    <button v-on:click="exit">
+      <i class="ion-md-close"></i>
+    </button>
+    <div v-html="parseMarkdown(article.description)"></div>
     <TagList :value="article.tagList"></TagList>
     <pre><code v-text="JSON.stringify(article, null, 2)"></code></pre>
     <hr />
@@ -82,6 +91,12 @@ export default {
     Secret,
     SecretEditor
   },
+  data() {
+    const currUrl = location.toString().split("?").shift();
+    return {
+      locationUrl: `${currUrl}?l=${this.slug}`
+    };
+  },
   created() {
     Promise.all([
       store.dispatch(FETCH_ARTICLE, this.slug),
@@ -107,6 +122,12 @@ export default {
     },
     refreshSecrets() {
       this.$store.dispatch(FETCH_PASSWORDS, this.slug);
+    },
+    onShare(event) {
+      console.log("share", {event});
+    },
+    onShareError(event) {
+      console.log("share error", {event});
     }
   }
 };
