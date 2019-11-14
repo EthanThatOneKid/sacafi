@@ -2,7 +2,7 @@
   <div class="article-page">
     <h1>{{ article.title }}</h1>
     <button
-      v-clipboard:copy="locationUrl"
+      v-clipboard:copy="shareableUrl"
       v-clipboard:success="onShare"
       v-clipboard:error="onShareError"
     >
@@ -27,14 +27,11 @@
         <router-link :to="{ name: 'register' }">sign up</router-link>
         to add secrets on this location.
       </p>
-      <Secret
-        v-for="(secret, index) in passwords"
+      <SecretList
         :slug="slug"
-        :secret="secret"
-        :key="index"
+        :secrets="passwords"
         @update="refreshSecrets"
-      >
-      </Secret>
+      />
     </div>
     <hr />
     <h2>Comments</h2>
@@ -57,7 +54,6 @@
       :key="index"
     >
     </RwvComment>
-    <!-- copy link to this location -->
   </div>
 </template>
 
@@ -67,7 +63,7 @@ import marked from "marked";
 import store from "@/store";
 import RwvComment from "@/components/Comment";
 import RwvCommentEditor from "@/components/CommentEditor";
-import Secret from "@/components/Secret";
+import SecretList from "@/components/SecretList";
 import SecretEditor from "@/components/SecretEditor";
 import TagList from "@/components/TagList";
 import {
@@ -88,13 +84,13 @@ export default {
     RwvComment,
     RwvCommentEditor,
     TagList,
-    Secret,
+    SecretList,
     SecretEditor
   },
   data() {
     const currUrl = location.toString().split("?").shift();
     return {
-      locationUrl: `${currUrl}?l=${this.slug}`
+      shareableUrl: `${currUrl}?l=${this.slug}`
     };
   },
   created() {

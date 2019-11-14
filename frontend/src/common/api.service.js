@@ -104,7 +104,6 @@ export const PasswordsService = {
     return ApiService.get(`articles/${slug}/passwords`);
   },
   post(slug, payload) {
-    console.log({ payload });
     return ApiService.post(`articles/${slug}/passwords`, {
       password: { secret: payload }
     });

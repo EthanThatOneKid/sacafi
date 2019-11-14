@@ -19,3 +19,21 @@
         background: none;
     }
 }
+
+@mixin border-label {
+    padding: 10px;
+    margin: 10px;
+    border: 2px solid $secondary-dark;
+
+    & > label {
+        position: absolute;
+        top: -1px;
+        left: 20px;
+    }
+
+    & > * {
+        border: none;
+    }
+
+
+}

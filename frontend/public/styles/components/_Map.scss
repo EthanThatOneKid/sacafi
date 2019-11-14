@@ -5,7 +5,6 @@
     height: 100%;
     display: flex;
     flex-direction: row;
-    // position: fixed;
 
     @media (max-width: $desktop-width) {
         flex-direction: column;
@@ -16,17 +15,42 @@
     }
 
     .article-page {
+        z-index: 400; // Enough to stay above the leaflet map tiles
+        position: absolute;
+        right: 20px;
+        padding: 20px 10px 20px 10px;
+        border-radius: 20px;
         width: calc(100vw / 3);
-        // max-height: height-of-div-that-fits-here-normally
+        height: calc(100vh * 4 / 5);
+        align-self: center;
         overflow-x: hidden;
         overflow-y: scroll;
         background-color: $secondary;
+        box-shadow: 5px 5px 5px grey;
         @include custom-scrollbar;
 
         @media (max-width: $desktop-width) {
-            width: auto;
-            height: calc(100vh / 3);
-            flex: none;
+            right: 0;
+            padding: 0;
+            position: relative;
+            width: 100%;
+            height: calc(100vh / 2);
+            border-radius: 0;
+            box-shadow: none;
         }
     }
+
+    // .article-page {
+    //     width: calc(100vw / 3);
+    //     overflow-x: hidden;
+    //     overflow-y: scroll;
+    //     background-color: $secondary;
+    //     @include custom-scrollbar;
+
+    //     @media (max-width: $desktop-width) {
+    //         width: auto;
+    //         height: calc(100vh / 3);
+    //         flex: none;
+    //     }
+    // }
 }
