@@ -3,11 +3,7 @@
     <RwvListErrors :errors="errors" />
     <form class="card comment-form" @submit.prevent="onSubmit(slug, password)">
       <div class="card-block">
-        <VuePassword
-          v-model="password"
-          :disableStrength="true"
-          type="text"
-        />
+        <VuePassword v-model="password" :disableStrength="true" type="text" />
       </div>
       <div class="card-footer">
         <button class="btn btn-sm btn-primary">Post Secret</button>

@@ -27,11 +27,7 @@
         <router-link :to="{ name: 'register' }">sign up</router-link>
         to add secrets on this location.
       </p>
-      <SecretList
-        :slug="slug"
-        :secrets="passwords"
-        @update="refreshSecrets"
-      />
+      <SecretList :slug="slug" :secrets="passwords" @update="refreshSecrets" />
     </div>
     <hr />
     <h2>Comments</h2>
@@ -88,7 +84,10 @@ export default {
     SecretEditor
   },
   data() {
-    const currUrl = location.toString().split("?").shift();
+    const currUrl = location
+      .toString()
+      .split("?")
+      .shift();
     return {
       shareableUrl: `${currUrl}?l=${this.slug}`
     };
@@ -120,10 +119,10 @@ export default {
       this.$store.dispatch(FETCH_PASSWORDS, this.slug);
     },
     onShare(event) {
-      console.log("share", {event});
+      console.log("share", { event });
     },
     onShareError(event) {
-      console.log("share error", {event});
+      console.log("share error", { event });
     }
   }
 };

@@ -21,7 +21,7 @@
 
 <script>
 import { mapGetters } from "vuex";
-import Secret from './Secret';
+import Secret from "./Secret";
 
 export default {
   name: "SecretList",

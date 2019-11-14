@@ -23,7 +23,13 @@
 
 <script>
 import { mapGetters } from "vuex";
-import { PASSWORD_DESTROY, PASSWORD_APPROVE, PASSWORD_DISAPPROVE, PASSWORD_UNAPPROVE, PASSWORD_UNDISAPPROVE } from "@/store/actions.type";
+import {
+  PASSWORD_DESTROY,
+  PASSWORD_APPROVE,
+  PASSWORD_DISAPPROVE,
+  PASSWORD_UNAPPROVE,
+  PASSWORD_UNDISAPPROVE
+} from "@/store/actions.type";
 
 export default {
   name: "Secret",
@@ -45,18 +51,16 @@ export default {
       this.$store.dispatch(PASSWORD_DESTROY, { slug, passwordId });
     },
     approve(slug, passwordId) {
-      return (
-        this.isCurrentlyApproved()
-          ? this.$store.dispatch(PASSWORD_UNAPPROVE, { slug, passwordId })
-          : this.$store.dispatch(PASSWORD_APPROVE, { slug, passwordId })
-        ).then(() => this.$emit("update"));
+      return (this.isCurrentlyApproved()
+        ? this.$store.dispatch(PASSWORD_UNAPPROVE, { slug, passwordId })
+        : this.$store.dispatch(PASSWORD_APPROVE, { slug, passwordId })
+      ).then(() => this.$emit("update"));
     },
     disapprove(slug, passwordId) {
-      return (
-        this.isCurrentlyDisapproved()
-          ? this.$store.dispatch(PASSWORD_UNDISAPPROVE, { slug, passwordId })
-          : this.$store.dispatch(PASSWORD_DISAPPROVE, { slug, passwordId })
-        ).then(() => this.$emit("update"));
+      return (this.isCurrentlyDisapproved()
+        ? this.$store.dispatch(PASSWORD_UNDISAPPROVE, { slug, passwordId })
+        : this.$store.dispatch(PASSWORD_DISAPPROVE, { slug, passwordId })
+      ).then(() => this.$emit("update"));
     },
     isCurrentlyApproved() {
       return this.secret.approvals.indexOf(this.currentUser.id) > -1;
