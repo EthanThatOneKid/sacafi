@@ -4,7 +4,7 @@
       <li
         class="tag-pill"
         v-for="(tag, index) of tagList"
-        :key="`tag-idx-${index}`"
+        :key="`tag-idx-${index}-${~~(1e3 * Math.random())}`"
       >
         <span v-if="isEditable">
           <input
@@ -24,13 +24,13 @@
       </li>
       <li class="add-tag" v-if="isEditable" key="add-tag">
         <i class="ion-md-add-circle-outline" v-on:click="addTag"></i>
+        <datalist id="tagOptions">
+          <option v-for="tagOption of tagOptions" :key="`tag-opt-${tagOption}`">
+            {{ tagOption }}
+          </option>
+        </datalist>
       </li>
     </ul>
-    <datalist id="tagOptions">
-      <option v-for="tagOption of tagOptions" :key="`tag-opt-${tagOption}`">
-        {{ tagOption }}
-      </option>
-    </datalist>
   </div>
 </template>
 
@@ -50,9 +50,16 @@ export default {
   data() {
     return {
       tagOptions: ["cafe", "quiet", "library"],
-      tagList: this.value || [],
+      tagList: [],
       tagThresh: 10
     };
+  },
+  watch: {
+    value(tags) {
+      if (tags !== undefined) {
+        this.tagList = tags;
+      }
+    }
   },
   methods: {
     addTag() {

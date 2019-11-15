@@ -17,6 +17,7 @@
     }
     &::-webkit-scrollbar-track {
         background: none;
+        margin: $scrollbar-size;
     }
 }
 
@@ -34,6 +35,5 @@
     & > * {
         border: none;
     }
-
 
 }

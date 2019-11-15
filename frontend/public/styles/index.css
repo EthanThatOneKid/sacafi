@@ -99,6 +99,7 @@
 
 .map-content .article-page::-webkit-scrollbar-track {
   background: none;
+  margin: 10px;
 }
 
 @media (max-width: 1024px) {
@@ -112,6 +113,98 @@
     -webkit-box-shadow: none;
             box-shadow: none;
   }
+}
+
+.map-content .article-page .header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+.map-content .article-page .header .article-info {
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+}
+
+.map-content .article-page .header .article-menu {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  text-align: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  padding: 1em;
+}
+
+.map-content .article-page .article-tags .tag-list {
+  margin: 0;
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.map-content .article-page .article-tags .tag-list .tag-pill {
+  display: inline-block;
+  padding: 2px 10px 2px 10px;
+  margin: 0px 3px 0px 3px;
+  border-radius: 1em;
+  background-color: #B85A00;
+  color: white;
+}
+
+.map-content .article-page .secret-section .secret {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  background-color: #B85A00;
+  color: white;
+  border-radius: 1em;
+  padding: 1em;
+}
+
+.map-content .article-page .secret-section .secret .header {
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+.map-content .article-page .secret-section .secret .header .secret-info {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.map-content .article-page .secret-section .secret .header .secret-info .secret-value {
+  font-size: 1.5em;
+}
+
+.map-content .article-page .secret-section .secret .header .secret-copy-container {
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
 }
 
 .card {

@@ -38,19 +38,67 @@
             border-radius: 0;
             box-shadow: none;
         }
+
+        .header {
+            display: flex;
+            flex-direction: row;
+
+            .article-info {
+                flex-direction: column;
+                flex: 1;
+            }
+
+            .article-menu {
+                display: flex;
+                flex-direction: column;
+                text-align: center;
+                justify-content: center;
+                padding: 1em;
+            }
+        }
+
+        .article-tags .tag-list {
+            margin: 0;
+            list-style-type: none;
+            padding-left: 0;
+
+            .tag-pill {
+                display: inline-block;
+                padding: 2px 10px 2px 10px;
+                margin: 0px 3px 0px 3px;
+                border-radius: 1em;
+                background-color: $secondary-dark;
+                color: white;
+            }
+        }
+
+        .secret-section {
+
+            .secret {
+                display: flex;
+                flex-direction: column;
+                background-color: $secondary-dark;
+                color: white;
+                border-radius: 1em;
+                padding: 1em;
+
+                .header {
+                    flex-direction: row;
+
+                    .secret-info {
+                        flex: 1;
+                        flex-direction: column;
+
+                        .secret-value {
+                            font-size: 1.5em;
+                        }
+                    }
+
+                    .secret-copy-container {
+                        flex-direction: column;
+                    }
+                }
+            }
+        }
     }
-
-    // .article-page {
-    //     width: calc(100vw / 3);
-    //     overflow-x: hidden;
-    //     overflow-y: scroll;
-    //     background-color: $secondary;
-    //     @include custom-scrollbar;
-
-    //     @media (max-width: $desktop-width) {
-    //         width: auto;
-    //         height: calc(100vh / 3);
-    //         flex: none;
-    //     }
-    // }
 }

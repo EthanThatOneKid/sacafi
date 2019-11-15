@@ -1,25 +1,57 @@
 <template>
   <div class="article-page">
-    <h1>{{ article.title }}</h1>
-    <button
-      v-clipboard:copy="shareableUrl"
-      v-clipboard:success="onShare"
-      v-clipboard:error="onShareError"
-    >
-      <i class="ion-md-share-alt"></i>
-    </button>
-    <button v-on:click="exit">
-      <i class="ion-md-close"></i>
-    </button>
-    <div v-html="parseMarkdown(article.description)"></div>
-    <TagList :value="article.tagList"></TagList>
-    <pre><code v-text="JSON.stringify(article, null, 2)"></code></pre>
+    <div class="header">
+      <div class="article-info">
+        <h1 class="article-title">{{ article.title }}</h1>
+        <p class="article-author">
+          <a :href="authorUrl">@{{ article.author.username }}</a>
+          |
+          <code class="article-date">{{ publishDate }}</code>
+        </p>
+      </div>
+      <div class="article-menu">
+        <button v-on:click="exit">
+          <i class="ion-md-close"></i>
+        </button>
+        <br />
+        <button v-on:click="onFavorite">
+          <i class="ion-md-heart"></i>
+        </button>
+        <br />
+        <button
+          v-clipboard:copy="shareableUrl"
+          v-clipboard:success="onShare"
+          v-clipboard:error="onShareError"
+        >
+          <i class="ion-md-share-alt"></i>
+        </button>
+      </div>
+    </div>
+    <div class="article-tags">
+      <TagList :value="tags"></TagList>
+    </div>
+    <div class="article-description">
+      <p>Description:</p>
+      <p v-html="parseMarkdown(article.description)"></p>
+    </div>
     <hr />
+    <div class="network-info">
+      <p>
+        Network:
+        <code>{{ article.networkTitle }}</code>
+        <button
+          v-clipboard:copy="article.networkTitle"
+          v-clipboard:success="onShare"
+          v-clipboard:error="onShareError"
+        >
+          <i class="ion-md-copy"></i>
+        </button>
+      </p>
+    </div>
     <div v-if="!article.requiresPassword">
       <span><i>no password necessary</i></span>
     </div>
-    <div v-else>
-      <h2>Secrets</h2>
+    <div class="secret-section" v-else>
       <SecretEditor :slug="slug" v-if="isAuthenticated"></SecretEditor>
       <p v-else>
         <router-link :to="{ name: 'login' }">Sign in</router-link>
@@ -50,6 +82,7 @@
       :key="index"
     >
     </RwvComment>
+    <pre><code v-text="JSON.stringify(article, null, 2)"></code></pre>
   </div>
 </template>
 
@@ -84,13 +117,27 @@ export default {
     SecretEditor
   },
   data() {
-    const currUrl = location
-      .toString()
-      .split("?")
-      .shift();
+    const baseUrl =
+      location
+        .toString()
+        .split("#")
+        .shift() + "#/";
     return {
-      shareableUrl: `${currUrl}?l=${this.slug}`
+      baseUrl,
+      shareableUrl: `${baseUrl}locations?l=${this.slug}`,
+      authorUrl: "",
+      publishDate: "",
+      tags: []
     };
+  },
+  watch: {
+    article(article) {
+      if (article !== undefined) {
+        this.authorUrl = `${this.baseUrl}@${this.article.author.username}`;
+        this.publishDate = this.article.createdAt.split("T").shift();
+        this.tags = this.article.tagList;
+      }
+    }
   },
   created() {
     Promise.all([
@@ -117,6 +164,9 @@ export default {
     },
     refreshSecrets() {
       this.$store.dispatch(FETCH_PASSWORDS, this.slug);
+    },
+    onFavorite(event) {
+      console.log("favorite", { event });
     },
     onShare(event) {
       console.log("share", { event });

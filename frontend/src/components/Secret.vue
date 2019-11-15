@@ -1,23 +1,37 @@
 <template>
-  <div class="card">
-    <div class="card-block">
-      <p class="card-text">{{ secret.secret }}</p>
+  <div class="secret">
+    <div class="header">
+      <div class="secret-info">
+        <code class="secret-value">{{ secret.secret }}</code>
+        &nbsp;
+        <code class="secret-published">{{ secret.createdAt.split("T")[0] }}</code>
+      </div>
+      <div class="secret-copy-container">
+        <button
+          v-clipboard:copy="secret.secret"
+          v-clipboard:success="onCopy"
+          v-clipboard:error="onCopyError"
+        >
+          <i class="ion-md-copy"></i>
+        </button>
+      </div>
+    </div>
+    <div class="secret-options">
+      <button class="approvalButton" v-on:click="approve(slug, secret.id)">
+        <i class="ion-md-thumbs-up"></i>
+        <br />
+        <span class="approvals">{{ secret.approvals.length }}</span>
+      </button>
+      <button class="disapprovalButton" v-on:click="disapprove(slug, secret.id)">
+        <i class="ion-md-thumbs-down"></i>
+        <br />
+        <span class="disapprovals">{{ secret.disapprovals.length }}</span>
+      </button>
+      <span class="secret-score">{{ secret.rating }}</span>
       <span v-if="isCurrentUser" class="mod-options">
         <i class="ion-md-trash" v-on:click="destroy(slug, secret.id)"></i>
       </span>
     </div>
-    <pre><code>{{ JSON.stringify(secret, null, 2) }}</code></pre>
-    <button class="approvalButton" v-on:click="approve(slug, secret.id)">
-      <i class="ion-md-thumbs-up"></i>
-      <br />
-      <span class="approvals">{{ secret.approvals.length }}</span>
-    </button>
-    <button class="disapprovalButton" v-on:click="disapprove(slug, secret.id)">
-      <i class="ion-md-thumbs-down"></i>
-      <br />
-      <span class="disapprovals">{{ secret.disapprovals.length }}</span>
-    </button>
-    <span class="secret-score">{{ secret.rating }}</span>
   </div>
 </template>
 
@@ -67,6 +81,12 @@ export default {
     },
     isCurrentlyDisapproved() {
       return this.secret.disapprovals.indexOf(this.currentUser.id) > -1;
+    },
+    onCopy(event) {
+      console.log("copied!", { event });
+    },
+    onCopyError(event) {
+      console.log("copy error...", { event });
     }
   }
 };

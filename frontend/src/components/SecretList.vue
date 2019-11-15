@@ -20,7 +20,6 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
 import Secret from "./Secret";
 
 export default {
