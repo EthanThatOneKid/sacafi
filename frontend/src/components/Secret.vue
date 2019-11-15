@@ -4,7 +4,9 @@
       <div class="secret-info">
         <code class="secret-value">{{ secret.secret }}</code>
         &nbsp;
-        <code class="secret-published">{{ secret.createdAt.split("T")[0] }}</code>
+        <code class="secret-published">{{
+          secret.createdAt.split("T")[0]
+        }}</code>
       </div>
       <div class="secret-copy-container">
         <button
@@ -22,7 +24,10 @@
         <br />
         <span class="approvals">{{ secret.approvals.length }}</span>
       </button>
-      <button class="disapprovalButton" v-on:click="disapprove(slug, secret.id)">
+      <button
+        class="disapprovalButton"
+        v-on:click="disapprove(slug, secret.id)"
+      >
         <i class="ion-md-thumbs-down"></i>
         <br />
         <span class="disapprovals">{{ secret.disapprovals.length }}</span>

@@ -2,6 +2,7 @@ var mongoose = require("mongoose");
 var uniqueValidator = require("mongoose-unique-validator");
 var slug = require("slug");
 var User = mongoose.model("User");
+var Password = mongoose.model("Password");
 
 var ArticleSchema = new mongoose.Schema(
   {
@@ -67,6 +68,7 @@ ArticleSchema.methods.updateFavoriteCount = function() {
 
 ArticleSchema.methods.toJSONFor = function(user) {
   const [lng, lat] = this.location.coordinates;
+  console.log(this.passwords[0]);
   return {
     slug: this.slug,
     title: this.title,

@@ -397,9 +397,13 @@ router.get("/:article/passwords", auth.required, function(req, res, next) {
         .execPopulate()
         .then(function(article) {
           return res.json({
-            passwords: req.article.passwords.map(function(password) {
-              return password.toJSONFor(user);
-            })
+            passwords: req.article.passwords
+              .map(function(password) {
+                return password.toJSONFor(user);
+              })
+              .sort(function(a, b) {
+                return b.rating - a.rating;
+              })
           });
         });
     })
