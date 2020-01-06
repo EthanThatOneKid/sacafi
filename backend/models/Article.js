@@ -57,18 +57,13 @@ ArticleSchema.methods.slugify = function() {
     ((Math.random() * Math.pow(36, 6)) | 0).toString(36);
 };
 
-ArticleSchema.methods.updateFavoriteCount = function() {
-  return User.count({ favorites: { $in: [this._id] } }).then(function(
-    count
-  ) {
-    this.favoritesCount = count;
-    return this.save();
-  });
+ArticleSchema.methods.updateFavoriteCount = async function() {
+  this.favoritesCount = await User.count({ favorites: { $in: [this._id] } });
+  return this.save();
 };
 
 ArticleSchema.methods.toJSONFor = function(user) {
   const [lng, lat] = this.location.coordinates;
-  console.log(this.passwords[0]);
   return {
     slug: this.slug,
     title: this.title,

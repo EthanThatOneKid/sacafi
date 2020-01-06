@@ -15,7 +15,7 @@
         </button>
         <br />
         <button v-on:click="onFavorite">
-          <i class="ion-md-heart"></i>
+          <i :class="favoriteClass"></i>
         </button>
         <br />
         <button
@@ -98,7 +98,9 @@ import TagList from "@/components/TagList";
 import {
   FETCH_ARTICLE,
   FETCH_COMMENTS,
-  FETCH_PASSWORDS
+  FETCH_PASSWORDS,
+  FAVORITE_ADD,
+  FAVORITE_REMOVE
 } from "@/store/actions.type";
 
 export default {
@@ -127,7 +129,8 @@ export default {
       shareableUrl: `${baseUrl}locations?l=${this.slug}`,
       authorUrl: "",
       publishDate: "",
-      tags: []
+      tags: [],
+      favoriteClass: "ion-md-heart-empty"
     };
   },
   watch: {
@@ -136,6 +139,9 @@ export default {
         this.authorUrl = `${this.baseUrl}@${this.article.author.username}`;
         this.publishDate = this.article.createdAt.split("T").shift();
         this.tags = this.article.tagList;
+        this.favoriteClass = `ion-md-${
+          this.article.favorited ? "heart" : "heart-empty"
+        }`;
       }
     }
   },
@@ -165,8 +171,17 @@ export default {
     refreshSecrets() {
       this.$store.dispatch(FETCH_PASSWORDS, this.slug);
     },
-    onFavorite(event) {
-      console.log("favorite", { event });
+    onFavorite() {
+      this.toggleFavorite();
+    },
+    toggleFavorite() {
+      this.$store.dispatch(
+        this.article.favorited ? FAVORITE_REMOVE : FAVORITE_ADD,
+        this.slug
+      );
+      this.favoriteClass = `ion-md-${
+        this.article.favorited ? "heart-empty" : "heart"
+      }`;
     },
     onShare(event) {
       console.log("share", { event });
