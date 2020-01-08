@@ -15,9 +15,16 @@
 // Entry Styles
 html, body {
     height: 100%;
-    font-family: $paragraph-font;
     padding: 0;
     margin: 0;
+}
+
+* {
+    font-family: $paragraph-font;
+    
+    &::selection {
+        background: $highlight;
+    }
 }
 
 #app {

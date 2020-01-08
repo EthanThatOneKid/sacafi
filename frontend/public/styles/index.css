@@ -378,9 +378,20 @@
 
 html, body {
   height: 100%;
-  font-family: "Exo 2", sans-serif;
   padding: 0;
   margin: 0;
+}
+
+* {
+  font-family: "Exo 2", sans-serif;
+}
+
+*::-moz-selection {
+  background: #F4D676;
+}
+
+*::selection {
+  background: #F4D676;
 }
 
 #app {
