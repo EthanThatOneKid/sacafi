@@ -25,6 +25,7 @@
 * Research for a good web transaction processor.
 
 ## Known Bugs 🐛
+* Various security risks within npm packages.
 * TagList does not load tags in editing page.
 * Cannot upload profile picture from device.
 
