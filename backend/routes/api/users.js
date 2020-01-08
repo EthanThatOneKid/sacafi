@@ -24,20 +24,21 @@ router.put("/user", auth.required, function(req, res, next) {
       }
 
       // only update fields that were actually passed...
-      if (typeof req.body.user.username !== "undefined") {
-        user.username = req.body.user.username;
+      const currentUser = req.body;
+      if (typeof currentUser.username !== "undefined") {
+        user.username = currentUser.username;
       }
-      if (typeof req.body.user.email !== "undefined") {
-        user.email = req.body.user.email;
+      if (typeof currentUser.email !== "undefined") {
+        user.email = currentUser.email;
       }
-      if (typeof req.body.user.bio !== "undefined") {
-        user.bio = req.body.user.bio;
+      if (typeof currentUser.bio !== "undefined") {
+        user.bio = currentUser.bio;
       }
-      if (typeof req.body.user.image !== "undefined") {
-        user.image = req.body.user.image;
+      if (typeof currentUser.image !== "undefined") {
+        user.image = currentUser.image;
       }
-      if (typeof req.body.user.password !== "undefined") {
-        user.setPassword(req.body.user.password);
+      if (typeof currentUser.password !== "undefined") {
+        user.setPassword(currentUser.password);
       }
 
       return user.save().then(function() {

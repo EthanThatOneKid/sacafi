@@ -24,6 +24,10 @@
 ## Todo ✔
 * Research for a good web transaction processor.
 
+## Known Bugs 🐛
+* TagList does not load tags in editing page.
+* Cannot upload profile picture from device.
+
 ---
 
 Engineered with 💖 by EthanThatOneKid

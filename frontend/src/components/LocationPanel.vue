@@ -183,11 +183,17 @@ export default {
         this.article.favorited ? "heart-empty" : "heart"
       }`;
     },
-    onShare(event) {
-      console.log("share", { event });
+    onShare() {
+      this.$notify({
+        text: "Copied to clipboard",
+        type: "copy-success"
+      });
     },
-    onShareError(event) {
-      console.log("share error", { event });
+    onShareError() {
+      this.$notify({
+        text: "Failed to copy to clipboard",
+        type: "copy-error"
+      });
     }
   }
 };

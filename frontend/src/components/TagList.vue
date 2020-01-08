@@ -49,7 +49,7 @@ export default {
   },
   data() {
     return {
-      tagOptions: ["cafe", "quiet", "library"],
+      tagOptions: ["cafe", "quiet", "library", "public-lavatory"],
       tagList: [],
       tagThresh: 10
     };

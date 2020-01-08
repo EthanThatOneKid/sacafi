@@ -7,6 +7,12 @@ import "./registerServiceWorker";
 import VueClipboard from "vue-clipboard2";
 Vue.use(VueClipboard);
 
+import Notifications from "vue-notification";
+Vue.use(Notifications);
+
+import ImageUploader from "vue-image-upload-resize";
+Vue.use(ImageUploader);
+
 import { CHECK_AUTH } from "./store/actions.type";
 import ApiService from "./common/api.service";
 import DateFilter from "./common/date.filter";

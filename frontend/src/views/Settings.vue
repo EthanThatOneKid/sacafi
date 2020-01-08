@@ -7,6 +7,18 @@
           <form @submit.prevent="updateSettings()">
             <fieldset>
               <fieldset class="form-group">
+                <image-uploader
+                  :debug="1"
+                  :maxWidth="512"
+                  :quality="0.7"
+                  :autoRotate="true"
+                  :preview="false"
+                  :className="['img-input']"
+                  :capture="false"
+                  accept="image/*"
+                  doNotResize="['gif', 'svg']"
+                  @input="updateUserImage"
+                ></image-uploader>
                 <input
                   class="form-control"
                   type="text"
@@ -77,6 +89,13 @@ export default {
         // #todo, nice toast and no redirect
         this.$router.push({ name: "home" });
       });
+    },
+    async updateUserImage(event) {
+      /* image-uploader TODO:
+       * @onUpload="startImageResize"
+       * @onComplete="endImageResize"
+       */
+      console.log(event);
     },
     logout() {
       this.$store.dispatch(LOGOUT).then(() => {
