@@ -51,6 +51,18 @@
     }
 }
 
+@mixin circle-anchor($c1, $c2, $c3, $size: 33px) {
+    align-items: center;
+    border: $size / 10 solid $c1;
+    background-color: $c2;
+    color: $c3;
+    border-radius: 50%;
+    margin: $size / 10;
+    width: $size;
+    height: $size;
+    font-family: $paragraph-font;
+}
+
 @mixin gentle-gradient($color, $theta: 135deg) {
     background: linear-gradient($theta, $color 0%, adjust-hue($color, -10deg) 100%);
 }

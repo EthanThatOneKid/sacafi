@@ -321,7 +321,110 @@
 
 .profile-page .profile-info .user-img {
   border-radius: 50%;
+  -webkit-box-shadow: 2px 2px 2px #302222;
+          box-shadow: 2px 2px 2px #302222;
   width: 200px;
+}
+
+.profile-page .locations-toggle {
+  text-align: center;
+}
+
+.profile-page .locations-toggle .nav {
+  list-style-type: none;
+  padding: 0;
+}
+
+.profile-page .locations-toggle .nav .nav-item {
+  display: inline-block;
+  margin: 0 5px 0 5px;
+}
+
+.profile-page .locations-toggle .nav .nav-item .nav-link {
+  color: #F9F9F9;
+  border-radius: 2em;
+  padding: 7px;
+  text-decoration: none;
+  background: linear-gradient(135deg, #1C0658 0%, #0e0658 100%);
+}
+
+.profile-page .locations-toggle .nav .nav-item .active {
+  padding: 10px;
+  text-decoration: underline;
+  background: linear-gradient(135deg, #FF1690 0%, #ff16b7 100%);
+}
+
+.profile-page .article-list {
+  text-align: center;
+}
+
+.profile-page .article-list .article-preview {
+  display: inline-block;
+  text-align: left;
+  width: 400px;
+  height: 200px;
+  overflow: hidden;
+  margin: 10px;
+  padding: 33px;
+  border-radius: 2em;
+  border: 1px double #5C2686;
+  background: -webkit-gradient(linear, left bottom, left top, from(#36CDC4), to(#36cdab));
+  background: linear-gradient(0deg, #36CDC4 0%, #36cdab 100%);
+}
+
+.profile-page .article-list .article-preview .preview-link {
+  color: #1C0658;
+  text-decoration: none;
+}
+
+.profile-page .article-list .article-preview .article-meta {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.profile-page .article-list .article-preview .article-meta .author-image {
+  border-radius: 50%;
+  width: 50px;
+}
+
+.pagination {
+  list-style-type: none;
+  padding: 0;
+  text-align: center;
+}
+
+.pagination .page-item {
+  display: inline-block;
+  margin: 0 5px 0 5px;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  border: 3.3px solid #FF1690;
+  background-color: rgba(0, 0, 0, 0);
+  color: #1C0658;
+  border-radius: 50%;
+  margin: 3.3px;
+  width: 33px;
+  height: 33px;
+  font-family: "Exo 2", sans-serif;
+}
+
+.pagination .active {
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  border: 3.3px solid #FF1690;
+  background-color: #F4D676;
+  color: #1C0658;
+  border-radius: 50%;
+  margin: 3.3px;
+  width: 33px;
+  height: 33px;
+  font-family: "Exo 2", sans-serif;
 }
 
 .card {

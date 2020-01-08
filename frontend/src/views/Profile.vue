@@ -7,12 +7,6 @@
             <img :src="profile.image" class="user-img" />
             <h1>{{ profile.username }}</h1>
             <p>{{ profile.bio }}</p>
-            <div v-if="isCurrentUser()">
-              <router-link class="settings-link" :to="{ name: 'settings' }">
-                <i class="ion-md-cog"></i>
-                Edit Profile
-              </router-link>
-            </div>
           </div>
         </div>
       </div>
@@ -20,8 +14,8 @@
     <div class="container">
       <div class="row">
         <div>
-          <div class="articles-toggle">
-            <ul class="nav nav-pills outline-active">
+          <div class="locations-toggle">
+            <ul class="nav">
               <li class="nav-item">
                 <router-link
                   class="nav-link"
@@ -29,6 +23,7 @@
                   exact
                   :to="{ name: 'profile' }"
                 >
+                  <i class="ion-md-person"></i>
                   My Articles
                 </router-link>
               </li>
@@ -39,7 +34,17 @@
                   exact
                   :to="{ name: 'profile-favorites' }"
                 >
+                  <i class="ion-md-heart"></i>
                   Favorited Articles
+                </router-link>
+              </li>
+              <li v-if="isCurrentUser()" class="nav-item">
+                <router-link
+                  class="nav-link settings-link"
+                  :to="{ name: 'settings' }"
+                >
+                  <i class="ion-md-cog"></i>
+                  Edit Profile
                 </router-link>
               </li>
             </ul>

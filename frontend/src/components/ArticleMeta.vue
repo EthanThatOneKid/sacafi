@@ -3,37 +3,28 @@
     <router-link
       :to="{ name: 'profile', params: { username: article.author.username } }"
     >
-      <img :src="article.author.image" />
+      <img class="author-image" :src="article.author.image" />
     </router-link>
-    <div class="info">
-      <router-link
-        :to="{ name: 'profile', params: { username: article.author.username } }"
-        class="author"
-      >
-        {{ article.author.username }}
-      </router-link>
-      <span class="date">{{ article.createdAt | date }}</span>
-    </div>
-    <template v-if="actions">
-      <rwv-article-actions
-        :article="article"
-        :canModify="isCurrentUser()"
-      ></rwv-article-actions>
-    </template>
-    <template v-else>
-      <button
-        class="btn btn-sm pull-xs-right"
-        v-if="!actions"
-        v-on:click="toggleFavorite"
+    <span>&nbsp;|&nbsp;</span>
+    <router-link
+      :to="{ name: 'profile', params: { username: article.author.username } }"
+      class="author"
+    >
+      @{{ article.author.username }}
+    </router-link>
+    <span>&nbsp;|&nbsp;</span>
+    <span class="date">{{ article.createdAt | date }}</span>
+    <span>&nbsp;|&nbsp;</span>
+    <button v-if="!actions" v-on:click="toggleFavorite">
+      <i
         :class="{
-          'btn-primary': article.favorited,
-          'btn-outline-primary': !article.favorited
+          'ion-md-heart': article.favorited,
+          'ion-md-heart-empty': !article.favorited
         }"
-      >
-        <i class="ion-heart"></i>
-        <span class="counter"> {{ article.favoritesCount }} </span>
-      </button>
-    </template>
+      ></i>
+      <br />
+      <span class="counter"> {{ article.favoritesCount }} </span>
+    </button>
   </div>
 </template>
 
