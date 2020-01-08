@@ -1,17 +1,51 @@
 @import "../_variables.scss";
+@import "../_mixins.scss";
 
 .card {
-    border: 1px solid $off-black;
-    margin: 5px;
+    background-color: $secondary;
+    border-radius: 2em;
+    padding: 20px;
+    margin: 5px 0 5px 0;
+    color: $primary;
+    @include gentle-gradient($secondary);
+
+    .card-block {
+
+        textarea {
+            width: 80%;
+            background-color: $highlight;
+            font-family: $paragraph-font;
+            color: $primary-dark;
+            border-radius: 2em;
+            border: none;
+            padding: 5px 20px 5px 20px;
+            @include gentle-gradient($highlight);
+        }
+
+        .card-text {
+            border-radius: 2em;
+            margin: 5px;
+            padding: 5px 10px 5px 10px;
+            border: 1px solid $primary;
+        }
+    }
 
     .card-footer {
+        display: flex;
+        align-items: center;
 
-        .comment-author {
+        .comment-author-img {
+            width: 50px;
+            border-radius: 50%;
+        }
 
-            .comment-author-img {
-                width: 50px;
-                border-radius: 50%;
-            }
+        button {
+            background-color: $primary-light;
+            color: $off-white;
+            border: none;
+            border-radius: 5px;
+            padding: 5px;
+            @include gentle-gradient($primary-light);
         }
     }
 }

@@ -1,9 +1,15 @@
 <template>
-  <div>
+  <div class="secret">
+    <div class="header">
+      <div class="secret-info">
+        <code class="secret-value">New Secret</code>
+      </div>
+    </div>
     <RwvListErrors :errors="errors" />
-    <form class="card comment-form" @submit.prevent="onSubmit(slug, password)">
-      <div class="card-block">
+    <form @submit.prevent="onSubmit(slug, password)">
+      <div>
         <VuePassword
+          class="secret-input"
           v-model="password"
           :disableStrength="true"
           type="password"
@@ -11,7 +17,7 @@
         />
       </div>
       <div class="card-footer">
-        <button class="btn btn-sm btn-primary">Post Secret</button>
+        <button class="secret-submit">Post Secret</button>
       </div>
     </form>
   </div>

@@ -25,9 +25,12 @@
         align-self: center;
         overflow-x: hidden;
         overflow-y: scroll;
-        background-color: $secondary;
-        box-shadow: 5px 5px 5px grey;
+        background-color: $primary;
+        background-size: cover;
+        box-shadow: 5px 5px 5px $off-black;
+        color: $off-white;
         @include custom-scrollbar;
+        @include gentle-gradient($primary-dark, 0deg);
 
         @media (max-width: $desktop-width) {
             right: 0;
@@ -35,7 +38,7 @@
             position: relative;
             width: 100%;
             height: calc(100vh / 2);
-            border-radius: 0;
+            border-radius: 20px 20px 0 0;
             box-shadow: none;
         }
 
@@ -46,6 +49,15 @@
             .article-info {
                 flex-direction: column;
                 flex: 1;
+
+                .article-title {
+                    font-family: $heading-font;
+                    font-size: 2.5em;
+                }
+
+                .article-author a {
+                    color: $off-white;
+                }
             }
 
             .article-menu {
@@ -54,6 +66,7 @@
                 text-align: center;
                 justify-content: center;
                 padding: 1em;
+                @include circle-button($primary-light, $transp, $highlight);
             }
         }
 
@@ -67,9 +80,14 @@
                 padding: 2px 10px 2px 10px;
                 margin: 0px 3px 0px 3px;
                 border-radius: 1em;
-                background-color: $secondary-dark;
-                color: white;
+                background-color: $highlight;
+                color: $primary-dark;
+                @include gentle-gradient($highlight);
             }
+        }
+
+        .network-info {
+            @include circle-button($secondary, $transp, $primary-light);
         }
 
         .secret-section {
@@ -77,10 +95,16 @@
             .secret {
                 display: flex;
                 flex-direction: column;
-                background-color: $secondary-dark;
-                color: white;
-                border-radius: 1em;
-                padding: 1em;
+                background-color: $primary-light;
+                color: $off-white;
+                border-radius: 2em;
+                padding: 20px;
+                margin: 5px 0 5px 0;
+                @include gentle-gradient($primary-light);
+
+                .error-messages {
+                    margin: 0;
+                }
 
                 .header {
                     flex-direction: row;
@@ -88,15 +112,51 @@
                     .secret-info {
                         flex: 1;
                         flex-direction: column;
+                        margin: 0 0 10px 0;
 
                         .secret-value {
                             font-size: 1.5em;
+                            border-left: 5px solid $primary;
+                            padding: 0 0 5px 5px;
                         }
                     }
 
                     .secret-copy-container {
                         flex-direction: column;
+                        @include circle-button($secondary, $transp, $primary-dark);
                     }
+                }
+
+                .secret-options {
+                    display: flex;
+                    align-items: center;
+                    @include circle-button($highlight, $primary, $secondary, 44px);
+
+                    .secret-score {
+                        margin: 0 10px 0 10px;
+                        font-size: 2em;
+                    }
+                }
+                
+
+                .secret-input .VuePassword__Input {
+                    font-family: $paragraph-font;
+                    background-color: $highlight;
+                    color: $primary-dark;
+                    border-radius: 2em;
+                    border: none;
+                    padding: 5px 20px 5px 20px;
+                    @include gentle-gradient($highlight);
+                }
+
+                .secret-submit {
+                    background-color: $secondary;
+                    color: $primary-dark;
+                    border: none;
+                    border-radius: 5px;
+                    padding: 5px;
+                    margin: 2px;
+                    @include gentle-gradient($secondary);
                 }
             }
         }

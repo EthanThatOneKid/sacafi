@@ -1,11 +1,16 @@
 // Colors
-$primary: #90E7FF;
-$primary-light: #D2F3FC;
-$primary-dark: #2794B3;
-$secondary: #FAA757;
-$secondary-dark: #B85A00;
+$primary: #5C2686;
+$primary-light: #FF1690;
+$primary-dark: #1C0658;
+$secondary: #36CDC4;
+$highlight: #F4D676;
 $off-white: #F9F9F9;
 $off-black: #302222;
+$transp: rgba(0, 0, 0, 0);
+
+// Type
+$paragraph-font: 'Exo 2', sans-serif;
+$heading-font: 'Caveat', cursive;
 
 // Breakpoints
 $tablet-width: 768px;

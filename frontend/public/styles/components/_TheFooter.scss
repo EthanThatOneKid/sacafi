@@ -2,7 +2,12 @@
 
 .the-footer {
     flex: none;
-    background-color: $secondary-dark;
+    color: $off-white;
+    background-color: $primary-dark;
+
+    a {
+        color: $off-white;
+    }
 }
 
 .attribution {

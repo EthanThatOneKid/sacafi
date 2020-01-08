@@ -7,13 +7,16 @@
       <a href="" class="comment-author">
         <img :src="comment.author.image" class="comment-author-img" />
       </a>
+      <span>&nbsp;|&nbsp;</span>
       <router-link
         class="comment-author"
         :to="{ name: 'profile', params: { username: comment.author.username } }"
       >
-        {{ comment.author.username }}
+        @{{ comment.author.username }}
       </router-link>
+      <span>&nbsp;|&nbsp;</span>
       <span class="date-posted">{{ comment.createdAt | date }}</span>
+      <span>&nbsp;|&nbsp;</span>
       <span v-if="isCurrentUser" class="mod-options">
         <i class="ion-md-trash" v-on:click="destroy(slug, comment.id)"></i>
       </span>

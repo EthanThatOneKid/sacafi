@@ -19,20 +19,20 @@
       </div>
     </div>
     <div class="secret-options">
-      <button class="approvalButton" v-on:click="approve(slug, secret.id)">
+      <button class="approval-button" v-on:click="approve(slug, secret.id)">
         <i class="ion-md-thumbs-up"></i>
         <br />
         <span class="approvals">{{ secret.approvals.length }}</span>
       </button>
       <button
-        class="disapprovalButton"
+        class="disapproval-button"
         v-on:click="disapprove(slug, secret.id)"
       >
         <i class="ion-md-thumbs-down"></i>
         <br />
         <span class="disapprovals">{{ secret.disapprovals.length }}</span>
       </button>
-      <span class="secret-score">{{ secret.rating }}</span>
+      <code class="secret-score">{{ secret.rating }}</code>
       <span v-if="isCurrentUser" class="mod-options">
         <i class="ion-md-trash" v-on:click="destroy(slug, secret.id)"></i>
       </span>

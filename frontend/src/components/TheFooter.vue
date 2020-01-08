@@ -4,6 +4,7 @@
       <router-link class="logo-font" :to="{ name: 'home', params: {} }">
         Sacafi
       </router-link>
+      <span>&nbsp;|&nbsp;</span>
       <span class="attribution">
         Code &amp; design licensed under MIT.
       </span>

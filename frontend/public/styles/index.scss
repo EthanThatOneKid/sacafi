@@ -1,6 +1,6 @@
 // Dependencies
 // @import "http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css";
-@import url('https://fonts.googleapis.com/css?family=Pacifico&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Caveat|Exo+2&display=swap');
 
 // Modules
 @import "./components/_TheHeader.scss";
@@ -15,6 +15,7 @@
 // Entry Styles
 html, body {
     height: 100%;
+    font-family: $paragraph-font;
     padding: 0;
     margin: 0;
 }
@@ -26,6 +27,6 @@ html, body {
 
     .the-content {
         flex: 1;
-        background-color: #ccc;
+        background-color: $off-white;
     }
 }

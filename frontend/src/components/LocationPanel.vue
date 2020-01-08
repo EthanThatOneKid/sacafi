@@ -86,7 +86,7 @@
       :key="index"
     >
     </RwvComment>
-    <pre><code v-text="JSON.stringify(article, null, 2)"></code></pre>
+    <!-- <pre><code v-text="JSON.stringify(article, null, 2)"></code></pre> -->
   </div>
 </template>
 

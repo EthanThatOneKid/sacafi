@@ -1,14 +1,16 @@
 @import "../_variables.scss";
+@import "../_mixins.scss";
 
 .navbar .container {
     display: flex;
     flex-direction: row;
-    background-color: $secondary-dark;
+    @include gentle-gradient($primary-dark);
 
     .navbar-brand {
         display: flex;
         align-self: center;
-        font-family: 'Pacifico', cursive;
+        color: $off-white;
+        font-family: $heading-font;
         font-size: 2em;
     }
 
@@ -27,6 +29,7 @@
                 display: block;
                 text-align: center;
                 text-decoration: none;
+                color: $off-white;
                 padding: 15px;
             }
         }

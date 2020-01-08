@@ -27,6 +27,9 @@
 ## Known Bugs 🐛
 * Various security risks within npm packages.
 * TagList does not load tags in editing page.
+* Does not redirect to location after creating/updating location data.
+* Description input should be a textarea.
+* Notification does not pop up upon copying data to clipboard.
 * Cannot upload profile picture from device.
 
 ---
