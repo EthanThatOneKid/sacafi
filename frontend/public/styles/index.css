@@ -310,6 +310,20 @@
   background: linear-gradient(135deg, #36CDC4 0%, #36cdab 100%);
 }
 
+.profile-page {
+  padding: 1em 0 0 0;
+  background: linear-gradient(135deg, #36CDC4 0%, #36cdab 100%);
+}
+
+.profile-page .profile-info {
+  text-align: center;
+}
+
+.profile-page .profile-info .user-img {
+  border-radius: 50%;
+  width: 200px;
+}
+
 .card {
   background-color: #36CDC4;
   border-radius: 2em;

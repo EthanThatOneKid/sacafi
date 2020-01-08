@@ -1,46 +1,25 @@
 <template>
   <div class="profile-page">
     <div class="user-info">
-      <div class="container">
-        <div class="row">
-          <div class="col-xs-12 col-md-10 offset-md-1">
+      <div>
+        <div>
+          <div class="profile-info">
             <img :src="profile.image" class="user-img" />
-            <h4>{{ profile.username }}</h4>
+            <h1>{{ profile.username }}</h1>
             <p>{{ profile.bio }}</p>
             <div v-if="isCurrentUser()">
-              <router-link
-                class="btn btn-sm btn-outline-secondary action-btn"
-                :to="{ name: 'settings' }"
-              >
-                <i class="ion-gear-a"></i> Edit Profile Settings
+              <router-link class="settings-link" :to="{ name: 'settings' }">
+                <i class="ion-md-cog"></i>
+                Edit Profile
               </router-link>
-            </div>
-            <div v-else>
-              <button
-                class="btn btn-sm btn-secondary action-btn"
-                v-if="profile.following"
-                @click.prevent="unfollow()"
-              >
-                <i class="ion-plus-round"></i> &nbsp;Unfollow
-                {{ profile.username }}
-              </button>
-              <button
-                class="btn btn-sm btn-outline-secondary action-btn"
-                v-if="!profile.following"
-                @click.prevent="follow()"
-              >
-                <i class="ion-plus-round"></i> &nbsp;Follow
-                {{ profile.username }}
-              </button>
             </div>
           </div>
         </div>
       </div>
     </div>
-
     <div class="container">
       <div class="row">
-        <div class="col-xs-12 col-md-10 offset-md-1">
+        <div>
           <div class="articles-toggle">
             <ul class="nav nav-pills outline-active">
               <li class="nav-item">
@@ -109,4 +88,23 @@ export default {
     }
   }
 };
+
+/* Reference this template when re-implementing the follow system:
+<div v-else>
+  <button
+    v-if="profile.following"
+    @click.prevent="unfollow()"
+  >
+    <i class="ion-plus-round"></i> &nbsp;Unfollow
+    {{ profile.username }}
+  </button>
+  <button
+    v-if="!profile.following"
+    @click.prevent="follow()"
+  >
+    <i class="ion-plus-round"></i> &nbsp;Follow
+    {{ profile.username }}
+  </button>
+</div>
+*/
 </script>

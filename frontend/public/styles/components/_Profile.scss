@@ -1,0 +1,16 @@
+@import "../_variables.scss";
+@import "../_mixins.scss";
+
+.profile-page {
+    padding: 1em 0 0 0;
+    @include gentle-gradient($secondary);
+
+    .profile-info {
+        text-align: center;
+
+        .user-img {
+            border-radius: 50%;
+            width: 200px;
+        }
+    }
+}
