@@ -13,17 +13,21 @@
         <button v-on:click="exit">
           <i class="ion-md-close"></i>
         </button>
-        <br />
         <button v-on:click="onFavorite">
           <i :class="favoriteClass"></i>
         </button>
-        <br />
         <button
           v-clipboard:copy="shareableUrl"
           v-clipboard:success="onShare"
           v-clipboard:error="onShareError"
         >
           <i class="ion-md-share-alt"></i>
+        </button>
+        <router-link v-if="isCurrentUser()" :to="editArticleLink">
+          <button><i class="ion-md-create"></i></button>
+        </router-link>
+        <button v-if="isCurrentUser()" @click="deleteArticle">
+          <i class="ion-md-trash"></i>
         </button>
       </div>
     </div>
@@ -100,7 +104,8 @@ import {
   FETCH_COMMENTS,
   FETCH_PASSWORDS,
   FAVORITE_ADD,
-  FAVORITE_REMOVE
+  FAVORITE_REMOVE,
+  ARTICLE_DELETE
 } from "@/store/actions.type";
 
 export default {
@@ -159,11 +164,20 @@ export default {
       "comments",
       "isAuthenticated",
       "passwords"
-    ])
+    ]),
+    editArticleLink() {
+      return { name: "article-edit", params: { slug: this.article.slug } };
+    }
   },
   methods: {
     parseMarkdown(content) {
       return marked(content);
+    },
+    isCurrentUser() {
+      if (this.currentUser.username && this.article.author.username) {
+        return this.currentUser.username === this.article.author.username;
+      }
+      return false;
     },
     exit() {
       this.$emit("exit");
@@ -194,6 +208,14 @@ export default {
         text: "Failed to copy to clipboard",
         type: "copy-error"
       });
+    },
+    async deleteArticle() {
+      try {
+        await this.$store.dispatch(ARTICLE_DELETE, this.article.slug);
+        this.$router.push("/");
+      } catch (err) {
+        console.error(err);
+      }
     }
   }
 };
