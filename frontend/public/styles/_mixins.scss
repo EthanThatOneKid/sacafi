@@ -52,17 +52,26 @@
 }
 
 @mixin circle-anchor($c1, $c2, $c3, $size: 33px) {
-    align-items: center;
-    border: $size / 10 solid $c1;
+    border: ($size / 10) solid $c1;
     background-color: $c2;
     color: $c3;
     border-radius: 50%;
-    margin: $size / 10;
+    margin: $size / 5;
     width: $size;
     height: $size;
     font-family: $paragraph-font;
+
+    &:visited {
+        color: $c3;
+    }
 }
 
-@mixin gentle-gradient($color, $theta: 135deg) {
+@mixin gentle-gradient($color, $theta: 135deg, $hover-effect: false) {
     background: linear-gradient($theta, $color 0%, adjust-hue($color, -10deg) 100%);
+    @if $hover-effect {
+        transition: background 1s cubic-bezier(1, 0, 0, 1);
+        &:hover {
+            background: linear-gradient($theta + 180deg, $color 0%, adjust-hue($color, -10deg) 100%);
+        }
+    }
 }

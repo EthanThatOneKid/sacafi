@@ -53,19 +53,29 @@
             height: 200px;
             overflow: hidden;
             margin: 10px;
-            padding: 33px;
+            padding: 20px;
             border-radius: 2em;
-            border: 1px double $primary;
+            border: 1px solid $primary;
             @include gentle-gradient($secondary, 0deg);
-    
-            .preview-link {
-                color: $primary-dark;
-                text-decoration: none;
+
+            @media (max-width: $desktop-width) {
+                width: 1% * (2 / 3 * 100);
+            }
+
+            .article-heading {
+                border-left: 5px solid $primary-light;
+                padding: 0 0 0 10px;
+                
+                .preview-link {
+                    color: $primary-dark;
+                    text-decoration: none;
+                }
             }
     
             .article-meta {
                 display: flex;
                 align-items: center;
+                @include circle-button($primary-dark, $transp, $primary, 45px);
     
                 .author-image {
                     border-radius: 50%;
@@ -77,17 +87,23 @@
 }
 
 .pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     list-style-type: none;
     padding: 0;
     text-align: center;
 
     .page-item {
-        display: inline-block;
+        display: flex;
+        align-items: center;
+        justify-content: center;
         margin: 0 5px 0 5px;
-        @include circle-anchor($primary-light, $transp, $primary-dark)
+        text-decoration: none;
+        @include circle-anchor($primary-dark, $transp, $primary-light);
     }
 
     .active {
-        @include circle-anchor($primary-light, $highlight, $primary-dark);
+        @include circle-anchor($primary-light, $transp, $primary, 45px);
     }
 }
