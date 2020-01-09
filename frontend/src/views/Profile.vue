@@ -24,7 +24,7 @@
                   :to="{ name: 'profile' }"
                 >
                   <i class="ion-md-person"></i>
-                  My Articles
+                  Mine
                 </router-link>
               </li>
               <li class="nav-item">
@@ -35,7 +35,7 @@
                   :to="{ name: 'profile-favorites' }"
                 >
                   <i class="ion-md-heart"></i>
-                  Favorited Articles
+                  Favorited
                 </router-link>
               </li>
               <li v-if="isCurrentUser()" class="nav-item">
