@@ -1,67 +1,64 @@
 <template>
   <div class="editor-page">
-    <div class="container page">
-      <div class="row">
-        <div class="col-md-10 offset-md-1 col-xs-12">
-          <RwvListErrors :errors="errors" />
-          <form v-on:submit.prevent="onPublish(article.slug)">
-            <fieldset :disabled="inProgress">
-              <fieldset class="form-group">
-                <input
-                  type="text"
-                  class="form-control form-control-lg"
-                  placeholder="Location Title"
-                  v-model="article.title"
-                />
-              </fieldset>
-              <fieldset class="form-group">
-                <input
-                  type="text"
-                  class="form-control form-control-lg"
-                  placeholder="Network name"
-                  v-model="article.networkTitle"
-                />
-              </fieldset>
-              <fieldset class="form-group">
-                <input
-                  type="text"
-                  class="form-control"
-                  v-model="article.description"
-                  placeholder="Give a brief description of this location..."
-                />
-              </fieldset>
-              <fieldset class="form-group">
-                <MapInput
-                  :value="article.location"
-                  v-on:input="updateTitle"
-                  v-model="article.location"
-                >
-                </MapInput>
-              </fieldset>
-              <fieldset class="form-group">
-                <input
-                  id="isOpenAccessToggle"
-                  type="checkbox"
-                  class="form-control"
-                  v-model="article.requiresPassword"
-                />
-                <label for="isOpenAccessToggle">Requires password</label>
-              </fieldset>
-              <fieldset class="form-group">
-                <TagList :isEditable="true" v-model="article.tagList" />
-              </fieldset>
-            </fieldset>
-            <button
-              :disabled="inProgress"
-              class="btn btn-lg pull-xs-right btn-primary"
-              type="submit"
-            >
-              Publish Article
-            </button>
-          </form>
-        </div>
-      </div>
-    </div>
+    <RwvListErrors :errors="errors" />
+    <form v-on:submit.prevent="onPublish(article.slug)">
+      <fieldset :disabled="inProgress">
+        <fieldset class="form-group">
+          <label>Location Title:</label>
+          <input
+            type="text"
+            class="title-input"
+            placeholder="Location Title"
+            v-model="article.title"
+          />
+        </fieldset>
+        <fieldset class="form-group">
+          <label>Network Name:</label>
+          <input
+            type="text"
+            class="network-input"
+            placeholder="Network Name"
+            v-model="article.networkTitle"
+          />
+        </fieldset>
+        <fieldset class="form-group">
+          <label>Location Description:</label>
+          <textarea
+            class="form-control"
+            v-model="article.description"
+            rows="3"
+            placeholder="Give a brief description of this location..."
+          />
+        </fieldset>
+        <fieldset class="form-group">
+          <MapInput
+            :value="article.location"
+            v-on:input="updateTitle"
+            v-model="article.location"
+          >
+          </MapInput>
+        </fieldset>
+        <fieldset class="form-group">
+          <input
+            id="isOpenAccessToggle"
+            type="checkbox"
+            class="form-control"
+            v-model="article.requiresPassword"
+          />
+          <label for="isOpenAccessToggle">Requires password</label>
+        </fieldset>
+        <fieldset class="form-group">
+          <TagList :isEditable="true" v-model="article.tagList" />
+        </fieldset>
+      </fieldset>
+      <button
+        :disabled="inProgress"
+        class="btn btn-lg pull-xs-right btn-primary"
+        type="submit"
+      >
+        Publish Article
+      </button>
+    </form>
   </div>
 </template>
 
@@ -140,7 +137,12 @@ export default {
         .dispatch(action)
         .then(({ data }) => {
           this.inProgress = false;
-          this.$router.push(`locations?l=${data.article.slug}`);
+          this.$router.replace({
+            name: "locations",
+            query: {
+              l: data.article.slug
+            }
+          });
         })
         .catch(({ response }) => {
           this.inProgress = false;
