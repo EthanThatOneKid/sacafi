@@ -142,11 +142,13 @@ export default {
     article(article) {
       if (article !== undefined) {
         this.authorUrl = `${this.baseUrl}@${this.article.author.username}`;
-        this.publishDate = this.article.createdAt.split("T").shift();
         this.tags = this.article.tagList;
         this.favoriteClass = `ion-md-${
           this.article.favorited ? "heart" : "heart-empty"
         }`;
+        if (this.article.createdAt !== undefined) {
+          this.publishDate = this.article.createdAt.split("T").shift();
+        }
       }
     }
   },

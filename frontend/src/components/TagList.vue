@@ -50,7 +50,7 @@ export default {
   data() {
     return {
       tagOptions: ["cafe", "quiet", "library", "public-lavatory"],
-      tagList: [],
+      tagList: this.value || [],
       tagThresh: 10
     };
   },

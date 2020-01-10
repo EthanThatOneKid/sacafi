@@ -1,6 +1,7 @@
 <template>
   <div class="article-preview">
     <div class="article-heading">
+      <span v-if="!article.requiresPassword"></span>
       <router-link :to="articleLink" class="preview-link">
         <h1 v-text="article.title" />
         <p v-text="article.description" />

@@ -123,6 +123,15 @@ export default {
   computed: {
     ...mapGetters(["article"])
   },
+  // watch: {
+  //   article(article) {
+  //     if (article !== undefined) {
+  //       if (this.article.tagList !== undefined) {
+  //         this.tagInput = this.article.tagList;
+  //       }
+  //     }
+  //   }
+  // },
   methods: {
     onPublish(slug) {
       let action = slug ? ARTICLE_EDIT : ARTICLE_PUBLISH;

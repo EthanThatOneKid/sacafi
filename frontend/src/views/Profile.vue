@@ -1,63 +1,54 @@
 <template>
   <div class="profile-page">
-    <div class="user-info">
-      <div>
-        <div>
-          <div class="profile-info">
-            <img :src="profile.image" class="user-img" />
-            <h1>{{ profile.username }}</h1>
-            <p>{{ profile.bio }}</p>
-          </div>
-        </div>
+    <div class="profile-panel">
+      <div class="profile-info">
+        <img :src="profile.image" class="user-img" />
+        <h1>{{ profile.username }}</h1>
+        <p v-html="parseMarkdown(profile.bio)"></p>
+      </div>
+      <div class="locations-toggle">
+        <ul class="nav">
+          <li class="nav-item">
+            <router-link
+              class="nav-link"
+              active-class="active"
+              exact
+              :to="{ name: 'profile' }"
+            >
+              <i class="ion-md-person"></i>
+              Locations
+            </router-link>
+          </li>
+          <li class="nav-item">
+            <router-link
+              class="nav-link"
+              active-class="active"
+              exact
+              :to="{ name: 'profile-favorites' }"
+            >
+              <i class="ion-md-heart"></i>
+              Favorites
+            </router-link>
+          </li>
+          <li v-if="isCurrentUser()" class="nav-item">
+            <router-link
+              class="nav-link settings-link"
+              :to="{ name: 'settings' }"
+            >
+              <i class="ion-md-cog"></i>
+              Edit Profile
+            </router-link>
+          </li>
+        </ul>
       </div>
     </div>
-    <div class="container">
-      <div class="row">
-        <div>
-          <div class="locations-toggle">
-            <ul class="nav">
-              <li class="nav-item">
-                <router-link
-                  class="nav-link"
-                  active-class="active"
-                  exact
-                  :to="{ name: 'profile' }"
-                >
-                  <i class="ion-md-person"></i>
-                  Mine
-                </router-link>
-              </li>
-              <li class="nav-item">
-                <router-link
-                  class="nav-link"
-                  active-class="active"
-                  exact
-                  :to="{ name: 'profile-favorites' }"
-                >
-                  <i class="ion-md-heart"></i>
-                  Favorited
-                </router-link>
-              </li>
-              <li v-if="isCurrentUser()" class="nav-item">
-                <router-link
-                  class="nav-link settings-link"
-                  :to="{ name: 'settings' }"
-                >
-                  <i class="ion-md-cog"></i>
-                  Edit Profile
-                </router-link>
-              </li>
-            </ul>
-          </div>
-          <router-view></router-view>
-        </div>
-      </div>
-    </div>
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
 import { mapGetters } from "vuex";
+import marked from "marked";
 import {
   FETCH_PROFILE,
   FETCH_PROFILE_FOLLOW,
@@ -78,6 +69,9 @@ export default {
         return this.currentUser.username === this.profile.username;
       }
       return false;
+    },
+    parseMarkdown(content = "") {
+      return marked(content);
     },
     follow() {
       if (!this.isAuthenticated) return;

@@ -3,41 +3,61 @@
 
 .profile-page {
     padding: 1em 0 0 0;
+    display: flex;
+    flex: 1;
     @include gentle-gradient($secondary);
 
-    .profile-info {
-        text-align: center;
-
-        .user-img {
-            border-radius: 50%;
-            box-shadow: 2px 2px 2px $off-black;
-            width: 200px;
-        }
+    @media (max-width: $desktop-width) {
+        flex-direction: column;
     }
 
-    .locations-toggle {
-        text-align: center;
+    .profile-panel {
+        border-radius: 2em;
+        height: min-content;
+        border: 0.5em solid $primary;
+        margin: 2em;
+        padding: 2em;
 
-        .nav {
-            list-style-type: none;
+        @media (max-width: $desktop-width) {
+            border: none;
+            margin: 0;
             padding: 0;
+        }
 
-            .nav-item {
-                display: inline-block;
-                margin: 0 5px 0 5px;
-
-                .nav-link {
-                    color: $off-white;
-                    border-radius: 2em;
-                    padding: 7px;
-                    text-decoration: none;
-                    @include gentle-gradient($primary-dark);
-                }
-
-                .active {
-                    padding: 10px;
-                    text-decoration: underline;
-                    @include gentle-gradient($primary-light);
+        .profile-info {
+            text-align: center;
+    
+            .user-img {
+                border-radius: 50%;
+                width: 200px;
+            }
+        }
+    
+        .locations-toggle {
+            text-align: center;
+    
+            .nav {
+                list-style-type: none;
+                padding: 0;
+    
+                .nav-item {
+                    display: inline-block;
+                    margin: 0 5px 0 5px;
+    
+                    .nav-link {
+                        color: $off-white;
+                        border-radius: 2em;
+                        padding: 7px;
+                        text-decoration: none;
+                        line-height: 3em;
+                        @include gentle-gradient($primary-dark);
+                    }
+    
+                    .active {
+                        padding: 10px;
+                        text-decoration: underline;
+                        @include gentle-gradient($primary-light);
+                    }
                 }
             }
         }
@@ -45,6 +65,8 @@
 
     .article-list {
         text-align: center;
+        flex-direction: column;
+        flex: 2;
 
         .article-preview {
             display: inline-block;

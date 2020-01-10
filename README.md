@@ -23,6 +23,13 @@
 ## Todo ✔
 * Research for a good web transaction processor.
 
+## Designed Veiws 💅
+[x] Locations
+[x] Profile
+[ ] New Location
+[ ] Settings
+[ ] Home
+
 ## Known Bugs 🐛
 * Various security risks within npm packages.
 * TagList does not load tags in editing page.
