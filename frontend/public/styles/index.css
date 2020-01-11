@@ -342,6 +342,8 @@
   height: -moz-min-content;
   height: min-content;
   border: 0.5em solid #5C2686;
+  -webkit-box-shadow: 0 0 20px 10px #F4D676;
+          box-shadow: 0 0 20px 10px #F4D676;
   margin: 2em;
   padding: 2em;
 }
@@ -409,10 +411,10 @@
   width: 400px;
   height: 200px;
   overflow: hidden;
-  margin: 10px;
+  margin: 15px;
   padding: 20px;
   border-radius: 2em;
-  border: 1px solid #5C2686;
+  border: 2px solid #5C2686;
   background: -webkit-gradient(linear, left bottom, left top, from(#36CDC4), to(#36cdab));
   background: linear-gradient(0deg, #36CDC4 0%, #36cdab 100%);
 }
@@ -512,6 +514,30 @@
 
 .pagination .active:visited {
   color: #5C2686;
+}
+
+.editor-page {
+  background: linear-gradient(135deg, #FF1690 0%, #ff16b7 100%);
+}
+
+.editor-page .form-group {
+  border: none;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.editor-page .form-group input {
+  border: 1px solid #FF1690;
+  background-color: #F4D676;
+  color: #5C2686;
+  font-size: 2em;
+  text-align: center;
+  border-radius: 2em;
+}
+
+.editor-page .form-group .network-input {
+  font-size: 1em;
 }
 
 .card {

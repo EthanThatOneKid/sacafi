@@ -2,5 +2,23 @@
 @import "../_mixins.scss";
 
 .editor-page {
-    
+    @include gentle-gradient($primary-light);
+
+    .form-group {
+        border: none;
+        align-items: center;
+
+        input {
+            border: 1px solid $primary-light;
+            background-color: $highlight;
+            color: $primary;
+            font-size: 2em;
+            text-align: center;
+            border-radius: 2em;
+        }
+
+        .network-input {
+            font-size: 1em;
+        }
+    }
 }

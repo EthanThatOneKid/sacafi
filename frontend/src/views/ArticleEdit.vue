@@ -7,7 +7,7 @@
           <label>Location Title:</label>
           <input
             type="text"
-            class="title-input"
+            class="title-input form-control"
             placeholder="Location Title"
             v-model="article.title"
           />
@@ -16,7 +16,7 @@
           <label>Network Name:</label>
           <input
             type="text"
-            class="network-input"
+            class="network-input form-control"
             placeholder="Network Name"
             v-model="article.networkTitle"
           />
@@ -24,13 +24,13 @@
         <fieldset class="form-group">
           <label>Location Description:</label>
           <textarea
-            class="form-control"
+            class="description-input form-control"
             v-model="article.description"
             rows="3"
             placeholder="Give a brief description of this location..."
           />
         </fieldset>
-        <fieldset class="form-group">
+        <fieldset class="map-input-container form-group">
           <MapInput
             :value="article.location"
             v-on:input="updateTitle"
@@ -51,12 +51,8 @@
           <TagList :isEditable="true" v-model="article.tagList" />
         </fieldset>
       </fieldset>
-      <button
-        :disabled="inProgress"
-        class="btn btn-lg pull-xs-right btn-primary"
-        type="submit"
-      >
-        Publish Article
+      <button :disabled="inProgress" class="publish-button" type="submit">
+        Confirm Location Data
       </button>
     </form>
   </div>

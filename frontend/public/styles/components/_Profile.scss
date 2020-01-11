@@ -15,6 +15,7 @@
         border-radius: 2em;
         height: min-content;
         border: 0.5em solid $primary;
+        box-shadow: 0 0 20px 10px $highlight;
         margin: 2em;
         padding: 2em;
 
@@ -74,10 +75,10 @@
             width: 400px;
             height: 200px;
             overflow: hidden;
-            margin: 10px;
+            margin: 15px;
             padding: 20px;
             border-radius: 2em;
-            border: 1px solid $primary;
+            border: 2px solid $primary;
             @include gentle-gradient($secondary, 0deg);
 
             @media (max-width: $desktop-width) {
