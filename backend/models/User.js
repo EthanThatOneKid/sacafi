@@ -22,6 +22,10 @@ var UserSchema = new mongoose.Schema(
       match: [/\S+@\S+\.\S+/, "is invalid"],
       index: true
     },
+    score: {
+      type: Number,
+      default: 0
+    },
     bio: String,
     image: String,
     favorites: [{ type: mongoose.Schema.Types.ObjectId, ref: "Article" }],
@@ -80,15 +84,25 @@ UserSchema.methods.toProfileJSONFor = function(user) {
     bio: this.bio,
     image:
       this.image || "https://static.productionready.io/images/smiley-cyrus.jpg",
-    following: user ? user.isFollowing(this._id) : false
+    following: user ? user.isFollowing(this._id) : false,
+    score: user.score
   };
 };
+
+UserSchema.methods.incrementPoints = function() {
+  this.score++;
+  return this.save();
+}
+
+UserSchema.methods.decrementPoints = function() {
+  this.score--;
+  return this.save();
+}
 
 UserSchema.methods.favorite = function(id) {
   if (this.favorites.indexOf(id) === -1) {
     this.favorites = this.favorites.concat([id]);
   }
-
   return this.save();
 };
 
@@ -107,7 +121,6 @@ UserSchema.methods.follow = function(id) {
   if (this.following.indexOf(id) === -1) {
     this.following = this.following.concat([id]);
   }
-
   return this.save();
 };
 

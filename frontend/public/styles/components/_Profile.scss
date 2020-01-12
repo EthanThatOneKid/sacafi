@@ -33,6 +33,22 @@
                 border-radius: 50%;
                 width: 200px;
             }
+
+            .score-circle {
+                $circle-size: 50px;
+                z-index: 10;
+                position: relative;
+                bottom: 20px;
+                right: 50px;
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                border-radius: 50%;
+                width: $circle-size;
+                height: $circle-size;
+                margin: 0;
+                @include gentle-gradient($highlight);
+            }
         }
     
         .locations-toggle {

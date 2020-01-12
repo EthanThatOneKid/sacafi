@@ -24,7 +24,6 @@ router.get("/:username", auth.optional, function(req, res, next) {
       if (!user) {
         return res.json({ profile: req.profile.toProfileJSONFor(false) });
       }
-
       return res.json({ profile: req.profile.toProfileJSONFor(user) });
     });
   } else {
@@ -40,7 +39,6 @@ router.post("/:username/follow", auth.required, function(req, res, next) {
       if (!user) {
         return res.sendStatus(401);
       }
-
       return user.follow(profileId).then(function() {
         return res.json({ profile: req.profile.toProfileJSONFor(user) });
       });
@@ -56,7 +54,6 @@ router.delete("/:username/follow", auth.required, function(req, res, next) {
       if (!user) {
         return res.sendStatus(401);
       }
-
       return user.unfollow(profileId).then(function() {
         return res.json({ profile: req.profile.toProfileJSONFor(user) });
       });

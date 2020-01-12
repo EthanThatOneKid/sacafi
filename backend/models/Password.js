@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const User = mongoose.model("User");
 
 const PasswordSchema = new mongoose.Schema(
   {
@@ -11,28 +12,32 @@ const PasswordSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-PasswordSchema.methods.approve = function(user) {
+PasswordSchema.methods.approve = async function(user) {
   if (this.approvals.indexOf(user._id) === -1) {
     this.approvals = this.approvals.concat([user._id]);
   }
-  return this.save();
+  await user.incrementPoints();
+  return await this.save();
 };
 
-PasswordSchema.methods.disapprove = function(user) {
+PasswordSchema.methods.disapprove = async function(user) {
   if (this.disapprovals.indexOf(user._id) === -1) {
     this.disapprovals = this.disapprovals.concat([user._id]);
   }
-  return this.save();
+  await user.decrementPoints();
+  return await this.save();
 };
 
-PasswordSchema.methods.unapprove = function(user) {
+PasswordSchema.methods.unapprove = async function(user) {
   this.approvals.remove(user._id);
-  return this.save();
+  await user.decrementPoints();
+  return await this.save();
 };
 
-PasswordSchema.methods.undisapprove = function(user) {
+PasswordSchema.methods.undisapprove = async function(user) {
   this.disapprovals.remove(user._id);
-  return this.save();
+  await user.incrementPoints();
+  return await this.save();
 };
 
 // Requires population of author

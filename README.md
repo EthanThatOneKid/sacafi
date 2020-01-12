@@ -26,9 +26,11 @@
 ## Designed Veiws 💅
 * [x] Locations
 * [x] Profile
-* [ ] New/Edit Location
+* [x] New/Edit Location
 * [ ] Settings
 * [ ] Home
+* [ ] Sign Up
+* [ ] Login
 
 ## Known Bugs 🐛
 * Various security risks within npm packages.

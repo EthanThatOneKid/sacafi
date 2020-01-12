@@ -2,7 +2,12 @@
   <div class="profile-page">
     <div class="profile-panel">
       <div class="profile-info">
-        <img :src="profile.image" class="user-img" />
+        <img
+          :src="profile.image"
+          :data-score="profile.score"
+          class="user-img"
+        />
+        <p class="score-circle">{{ profile.score }}</p>
         <h1>{{ profile.username }}</h1>
         <p v-html="parseMarkdown(profile.bio)"></p>
       </div>
@@ -71,7 +76,6 @@ export default {
       return false;
     },
     parseMarkdown(content = "") {
-      console.log(this.currentUser);
       return marked(content);
     },
     follow() {
