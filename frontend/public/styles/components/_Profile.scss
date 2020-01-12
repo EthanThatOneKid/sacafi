@@ -15,12 +15,13 @@
         border-radius: 2em;
         height: min-content;
         border: 0.5em solid $primary;
-        box-shadow: 0 0 20px 10px $highlight;
         margin: 2em;
         padding: 2em;
+        @include gentle-gradient($secondary, 180deg);
 
         @media (max-width: $desktop-width) {
             border: none;
+            background: none;
             margin: 0;
             padding: 0;
         }

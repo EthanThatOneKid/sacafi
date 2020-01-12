@@ -342,15 +342,16 @@
   height: -moz-min-content;
   height: min-content;
   border: 0.5em solid #5C2686;
-  -webkit-box-shadow: 0 0 20px 10px #F4D676;
-          box-shadow: 0 0 20px 10px #F4D676;
   margin: 2em;
   padding: 2em;
+  background: -webkit-gradient(linear, left top, left bottom, from(#36CDC4), to(#36cdab));
+  background: linear-gradient(180deg, #36CDC4 0%, #36cdab 100%);
 }
 
 @media (max-width: 1024px) {
   .profile-page .profile-panel {
     border: none;
+    background: none;
     margin: 0;
     padding: 0;
   }
@@ -517,27 +518,149 @@
 }
 
 .editor-page {
-  background: linear-gradient(135deg, #FF1690 0%, #ff16b7 100%);
+  color: #F9F9F9;
+  text-align: center;
+  vertical-align: center;
+  background: linear-gradient(135deg, #5C2686 0%, #4c2686 100%);
+}
+
+.editor-page form, .editor-page form > fieldset {
+  border: none;
+}
+
+.editor-page .meta-map-row {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  height: -webkit-min-content;
+  height: -moz-min-content;
+  height: min-content;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+@media (max-width: 1024px) {
+  .editor-page .meta-map-row {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
+}
+
+.editor-page .meta-info-container .meta-info .title-label {
+  margin: 0;
+}
+
+.editor-page .meta-info-container .meta-info .title-input {
+  border: 3px solid #FF1690;
+  color: #F4D676;
+  font-size: 2em;
+  text-align: center;
+  border-radius: 2em;
+  padding: 0.5em;
+  background: linear-gradient(135deg, #1C0658 0%, #0e0658 100%);
 }
 
 .editor-page .form-group {
   border: none;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
 }
 
-.editor-page .form-group input {
-  border: 1px solid #FF1690;
-  background-color: #F4D676;
-  color: #5C2686;
-  font-size: 2em;
-  text-align: center;
+.editor-page .location-metadata {
+  text-align: left;
+  display: inline-block;
+  border: 2px solid #36CDC4;
+  padding: 1em;
+  margin: 0 1em 0 0;
   border-radius: 2em;
+  background: linear-gradient(135deg, #5C2686 0%, #4c2686 100%);
 }
 
-.editor-page .form-group .network-input {
-  font-size: 1em;
+@media (max-width: 1024px) {
+  .editor-page .location-metadata {
+    margin: 0 0 1em 0;
+  }
+}
+
+.editor-page .location-metadata .required-metadata {
+  display: inline-block;
+}
+
+.editor-page .location-metadata .required-metadata .description-label, .editor-page .location-metadata .required-metadata .network-label, .editor-page .location-metadata .required-metadata .tags-label {
+  margin-left: 0.75em;
+}
+
+.editor-page .location-metadata .required-metadata .description-input, .editor-page .location-metadata .required-metadata .network-input {
+  border: 3px solid #FF1690;
+  color: #F4D676;
+  border-radius: 2em;
+  padding: 0.5em;
+  margin: 0.5em;
+  background: linear-gradient(135deg, #1C0658 0%, #0e0658 100%);
+}
+
+.editor-page .location-metadata .tags-input-container {
+  vertical-align: top;
+  display: inline-block;
+}
+
+.editor-page .location-metadata .tags-input-container .tag-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.editor-page .location-metadata .tags-input-container .tag-list .tag-pill {
+  border-radius: 2em;
+  border: 3px solid #F4D676;
+  padding: 10px;
+  margin: 2px;
+  background: linear-gradient(135deg, #1C0658 0%, #0e0658 100%);
+}
+
+.editor-page .location-metadata .tags-input-container .tag-list .tag-pill input {
+  background: none;
+  border: none;
+  color: #F4D676;
+}
+
+.editor-page .location-metadata .tags-input-container .tag-list .add-tag {
+  margin-top: 10px;
+  text-align: center;
+  color: #FF1690;
+  border: 3px solid #36CDC4;
+  background: -webkit-gradient(linear, left top, left bottom, from(true), color-stop(0%, #1C0658), to(#0e0658));
+  background: linear-gradient(true, #1C0658 0%, #0e0658 100%);
+}
+
+.editor-page .map-input-container {
+  border: 2px solid #36CDC4;
+  width: 100%;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  padding: 0;
+  border-radius: 2em;
+  overflow: hidden;
+}
+
+@media (max-width: 1024px) {
+  .editor-page .map-input-container {
+    height: 50vh;
+  }
+}
+
+.editor-page .publish-button {
+  background: none;
+  border: none;
+  font-size: 1.25em;
+  border-radius: 2em;
+  padding: 20px;
+  border: 2px solid #36CDC4;
+  margin: 1em;
+  background-color: #1C0658;
+  color: #F4D676;
 }
 
 .card {

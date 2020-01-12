@@ -71,6 +71,7 @@ export default {
       return false;
     },
     parseMarkdown(content = "") {
+      console.log(this.currentUser);
       return marked(content);
     },
     follow() {

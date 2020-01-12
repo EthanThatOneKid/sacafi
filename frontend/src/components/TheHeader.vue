@@ -4,49 +4,7 @@
       <router-link class="navbar-brand" :to="{ name: 'home' }">
         Sacafi
       </router-link>
-      <ul v-if="!isAuthenticated" class="nav navbar-nav pull-xs-right">
-        <li class="nav-item">
-          <router-link
-            class="nav-link"
-            active-class="active"
-            exact
-            :to="{ name: 'home' }"
-          >
-            Home
-          </router-link>
-        </li>
-        <li class="nav-item">
-          <router-link
-            class="nav-link"
-            active-class="active"
-            exact
-            :to="{ name: 'login' }"
-          >
-            <i class="ion-compose"></i>Sign in
-          </router-link>
-        </li>
-        <li class="nav-item">
-          <router-link
-            class="nav-link"
-            active-class="active"
-            exact
-            :to="{ name: 'register' }"
-          >
-            <i class="ion-compose"></i>Sign up
-          </router-link>
-        </li>
-      </ul>
-      <ul v-else class="nav navbar-nav pull-xs-right">
-        <li class="nav-item">
-          <router-link
-            class="nav-link"
-            active-class="active"
-            :to="{ name: 'locations' }"
-          >
-            <i class="ion-md-pin"></i>
-            &nbsp;Locations
-          </router-link>
-        </li>
+      <ul class="nav navbar-nav">
         <li class="nav-item">
           <router-link
             class="nav-link"
@@ -62,24 +20,23 @@
           <router-link
             class="nav-link"
             active-class="active"
+            :to="{ name: 'locations' }"
+          >
+            <i class="ion-md-pin"></i>
+            &nbsp;Locations
+          </router-link>
+        </li>
+        <li class="nav-item" v-if="isAuthenticated">
+          <router-link
+            class="nav-link"
+            active-class="active"
             :to="{ name: 'article-edit' }"
           >
             <i class="ion-md-add"></i>
             &nbsp;New Location
           </router-link>
         </li>
-        <li class="nav-item">
-          <router-link
-            class="nav-link"
-            active-class="active"
-            exact
-            :to="{ name: 'settings' }"
-          >
-            <i class="ion-md-cog"></i>
-            &nbsp;Settings
-          </router-link>
-        </li>
-        <li class="nav-item" v-if="currentUser.username">
+        <li class="nav-item" v-if="isAuthenticated">
           <router-link
             class="nav-link"
             active-class="active"
@@ -91,6 +48,26 @@
           >
             <i class="ion-md-person"></i>
             &nbsp;{{ currentUser.username }}
+          </router-link>
+        </li>
+        <li class="nav-item" v-if="!isAuthenticated">
+          <router-link
+            class="nav-link"
+            active-class="active"
+            exact
+            :to="{ name: 'login' }"
+          >
+            <i class="ion-md-log-in"></i>&nbsp;Sign in
+          </router-link>
+        </li>
+        <li class="nav-item" v-if="!isAuthenticated">
+          <router-link
+            class="nav-link"
+            active-class="active"
+            exact
+            :to="{ name: 'register' }"
+          >
+            <i class="ion-md-person-add"></i>&nbsp;Sign up
           </router-link>
         </li>
       </ul>

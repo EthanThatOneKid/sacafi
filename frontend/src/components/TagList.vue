@@ -22,8 +22,16 @@
         </span>
         <span v-else v-text="tag" />
       </li>
-      <li class="add-tag" v-if="isEditable" key="add-tag">
-        <i class="ion-md-add-circle-outline" v-on:click="addTag"></i>
+      <li
+        class="tag-pill add-tag"
+        v-if="isEditable"
+        v-on:click="addTag"
+        key="add-tag"
+      >
+        <span>
+          <i class="ion-md-add-circle-outline"></i>
+          &nbsp;Add Tag
+        </span>
         <datalist id="tagOptions">
           <option v-for="tagOption of tagOptions" :key="`tag-opt-${tagOption}`">
             {{ tagOption }}

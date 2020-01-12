@@ -37,6 +37,7 @@
 * Notification does not pop up upon copying data to clipboard.
 * Cannot upload profile picture from device.
 * Add edit/delete buttons to VArticlePreview.
+* TagList:edit only replaces first \s with \-.
 
 ---
 

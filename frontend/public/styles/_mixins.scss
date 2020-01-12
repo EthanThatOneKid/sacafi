@@ -66,6 +66,18 @@
     }
 }
 
+@mixin neon($base, $color, $strength: 150px) {
+    box-shadow:
+        0 0 ($strength / 30) $base,
+        0 0 ($strength / 15) $base,
+        0 0 ($strength / 7.5) $base,
+        0 0 ($strength / 3.75) $color,
+        0 0 ($strength / 1.875) $color,
+        0 0 (3 * $strength / 5) $color,
+        0 0 ($strength / 1.5) $color,
+        0 0 strength $color;
+}
+
 @mixin gentle-gradient($color, $theta: 135deg, $hover-effect: false) {
     background: linear-gradient($theta, $color 0%, adjust-hue($color, -10deg) 100%);
     @if $hover-effect {
@@ -73,5 +85,62 @@
         &:hover {
             background: linear-gradient($theta + 180deg, $color 0%, adjust-hue($color, -10deg) 100%);
         }
+    }
+}
+
+@mixin chrome-text($font-size) {
+    font-weight: 900;
+    font-size: $font-size;
+    background-image: linear-gradient(#2989cc 0%, #d3e5ec 50%, #592451 51%, #b3628d 55%, #592451 59%, #b3628d 65%, #ac86a6 75%, #b3628d 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent; 
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: rgba(255, 255, 255, 0.4);
+    position: relative;
+    
+    &::before {
+        content: attr(data-text);
+        text-shadow:
+            -1px -1px 1px #2989cc,
+            -2px -2px 1px #2989cc,
+            -3px -3px 1px #2989cc,
+            1px 1px 1px #000,
+            0px -1px 2px #000,
+            -1px -2px 2px #000,
+            0 0 5px rgba(255, 255, 255, 1); 
+        opacity: 1;
+        position: absolute;
+        z-index: -1;
+    }
+}
+
+@mixin sheen() {
+    $shine-delay: 0s;
+
+    @keyframes shine {
+        0% {
+            background-position: 0% 51%
+        }
+        50% {
+            background-position: 100% 50%
+        }
+        100% {
+            background-position: 0% 51%
+        }
+    }
+
+    &::after {
+        content: attr(data-text);
+        background-image: linear-gradient(225deg, transparent 53%, white 55%, transparent 58%);
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        background-clip: text;
+        z-index: 999;
+        background-size: 400% 400%;
+        animation: shine 10s ease infinite;
+        animation-delay: $shine-delay;
     }
 }

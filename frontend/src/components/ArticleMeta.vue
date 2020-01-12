@@ -13,7 +13,7 @@
       @{{ article.author.username }}
     </router-link>
     <span>&nbsp;|&nbsp;</span>
-    <span class="date">{{ article.createdAt | date }}</span>
+    <span class="date">{{ createdAt }}</span>
     <span>&nbsp;|&nbsp;</span>
     <button v-if="!actions" v-on:click="toggleFavorite">
       <i
@@ -25,13 +25,23 @@
       <br />
       <span class="counter"> {{ article.favoritesCount }} </span>
     </button>
+    <router-link v-if="isCurrentUser()" :to="editArticleLink">
+      <button><i class="ion-md-create"></i></button>
+    </router-link>
+    <button v-if="isCurrentUser()" @click="deleteArticle">
+      <i class="ion-md-trash"></i>
+    </button>
   </div>
 </template>
 
 <script>
 import { mapGetters } from "vuex";
 import RwvArticleActions from "@/components/ArticleActions";
-import { FAVORITE_ADD, FAVORITE_REMOVE } from "@/store/actions.type";
+import {
+  FAVORITE_ADD,
+  FAVORITE_REMOVE,
+  ARTICLE_DELETE
+} from "@/store/actions.type";
 
 export default {
   name: "RwvArticleMeta",
@@ -50,7 +60,18 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(["currentUser", "isAuthenticated"])
+    ...mapGetters(["currentUser", "isAuthenticated"]),
+    editArticleLink() {
+      return { name: "article-edit", params: { slug: this.article.slug } };
+    },
+    createdAt() {
+      return this.article.createdAt !== undefined
+        ? new Date(this.article.createdAt)
+            .toISOString()
+            .split("T")
+            .shift()
+        : "";
+    }
   },
   methods: {
     isCurrentUser() {
@@ -66,6 +87,14 @@ export default {
       }
       const action = this.article.favorited ? FAVORITE_REMOVE : FAVORITE_ADD;
       this.$store.dispatch(action, this.article.slug);
+    },
+    async deleteArticle() {
+      try {
+        await this.$store.dispatch(ARTICLE_DELETE, this.article.slug);
+        this.$router.push("/");
+      } catch (err) {
+        console.error(err);
+      }
     }
   }
 };

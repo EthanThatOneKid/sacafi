@@ -2,23 +2,135 @@
 @import "../_mixins.scss";
 
 .editor-page {
-    @include gentle-gradient($primary-light);
+    color: $off-white;
+    text-align: center;
+    vertical-align: center;
+    @include gentle-gradient($primary);
+
+    form, form > fieldset {
+        border: none;
+    }
+
+    .meta-map-row {
+        display: flex;
+        height: min-content;
+        flex-direction: row;
+
+        @media (max-width: $desktop-width) {
+            flex-direction: column;
+        }
+    }
+
+    .meta-info-container {
+
+        .meta-info {
+            
+            .title-label {
+                margin: 0;
+            }
+
+            .title-input {
+                border: 3px solid $primary-light;
+                color: $highlight;
+                font-size: 2em;
+                text-align: center;
+                border-radius: 2em;
+                padding: 0.5em;
+                @include gentle-gradient($primary-dark);
+            }
+        }
+    }
 
     .form-group {
         border: none;
-        align-items: center;
+    }
 
-        input {
-            border: 1px solid $primary-light;
-            background-color: $highlight;
-            color: $primary;
-            font-size: 2em;
-            text-align: center;
-            border-radius: 2em;
+    .location-metadata {
+        text-align: left;
+        display: inline-block;
+        border: 2px solid $secondary;
+        padding: 1em;
+        margin: 0 1em 0 0;
+        border-radius: 2em;
+        @include gentle-gradient($primary);
+
+        @media (max-width: $desktop-width) {
+            margin: 0 0 1em 0;
         }
 
-        .network-input {
-            font-size: 1em;
+        .required-metadata {
+            display: inline-block;
+
+            .description-label, .network-label, .tags-label {
+                margin-left: 0.75em;
+            }
+
+            .description-input, .network-input {
+                border: 3px solid $primary-light;
+                color: $highlight;
+                border-radius: 2em;
+                padding: 0.5em;
+                margin: 0.5em;
+                @include gentle-gradient($primary-dark);
+            }
         }
+
+        .tags-input-container {
+            vertical-align: top;
+            display: inline-block;
+
+            .tag-list {
+                list-style-type: none;
+                padding: 0;
+
+                .tag-pill {
+                    border-radius: 2em;
+                    border: 3px solid $highlight;
+                    padding: 10px;
+                    margin: 2px;
+                    @include gentle-gradient($primary-dark);
+
+                    input {
+                        background: none;
+                        border: none;
+                        color: $highlight;
+                    }
+                }
+
+                .add-tag {
+                    margin-top: 10px;
+                    text-align: center;
+                    color: $primary-light;
+                    border: 3px solid $secondary;
+                    @include gentle-gradient($primary-dark, true);
+                }
+            }
+        }
+    }
+
+    .map-input-container {
+        border: 2px solid $secondary;
+        width: 100%;
+        flex: 1;
+        padding: 0;
+        border-radius: 2em;
+        overflow: hidden;
+
+        @media (max-width: $desktop-width) {
+            height: 50vh;
+        }
+    }
+
+
+    .publish-button {
+        background: none;
+        border: none;
+        font-size: 1.25em;
+        border-radius: 2em;
+        padding: 20px;
+        border: 2px solid $secondary;
+        margin: 1em;
+        background-color: $primary-dark;
+        color: $highlight;
     }
 }

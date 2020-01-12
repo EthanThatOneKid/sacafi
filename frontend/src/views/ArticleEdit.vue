@@ -3,57 +3,74 @@
     <RwvListErrors :errors="errors" />
     <form v-on:submit.prevent="onPublish(article.slug)">
       <fieldset :disabled="inProgress">
-        <fieldset class="form-group">
-          <label>Location Title:</label>
-          <input
-            type="text"
-            class="title-input form-control"
-            placeholder="Location Title"
-            v-model="article.title"
-          />
-        </fieldset>
-        <fieldset class="form-group">
-          <label>Network Name:</label>
-          <input
-            type="text"
-            class="network-input form-control"
-            placeholder="Network Name"
-            v-model="article.networkTitle"
-          />
-        </fieldset>
-        <fieldset class="form-group">
-          <label>Location Description:</label>
-          <textarea
-            class="description-input form-control"
-            v-model="article.description"
-            rows="3"
-            placeholder="Give a brief description of this location..."
-          />
-        </fieldset>
-        <fieldset class="map-input-container form-group">
-          <MapInput
-            :value="article.location"
-            v-on:input="updateTitle"
-            v-model="article.location"
-          >
-          </MapInput>
-        </fieldset>
-        <fieldset class="form-group">
-          <input
-            id="isOpenAccessToggle"
-            type="checkbox"
-            class="form-control"
-            v-model="article.requiresPassword"
-          />
-          <label for="isOpenAccessToggle">Requires password</label>
-        </fieldset>
-        <fieldset class="form-group">
-          <TagList :isEditable="true" v-model="article.tagList" />
-        </fieldset>
+        <div class="meta-map-row">
+          <div class="location-metadata">
+            <div class="meta-info-container">
+              <fieldset class="form-group meta-info">
+                <h1 class="title-label" data-text="Location Title:">
+                  Location Title:
+                </h1>
+                <br />
+                <input
+                  type="text"
+                  class="title-input form-control"
+                  placeholder="Location Title"
+                  v-model="article.title"
+                />
+              </fieldset>
+            </div>
+            <h1>Location Metadata:</h1>
+            <div class="required-metadata">
+              <fieldset class="form-group meta-info">
+                <label class="description-label">Location Description:</label>
+                <br />
+                <textarea
+                  class="description-input form-control"
+                  v-model="article.description"
+                  rows="7"
+                  placeholder="Give a brief description of this location..."
+                />
+              </fieldset>
+              <fieldset class="form-group meta-info">
+                <label class="network-label">Network Name:</label>
+                <br />
+                <input
+                  type="text"
+                  class="network-input form-control"
+                  placeholder="Network Name"
+                  v-model="article.networkTitle"
+                />
+              </fieldset>
+              <fieldset class="form-group">
+                <input
+                  id="isOpenAccessToggle"
+                  type="checkbox"
+                  class="open-access-toggle form-control"
+                  v-model="article.requiresPassword"
+                />
+                <label for="isOpenAccessToggle"
+                  >Network Requires Password</label
+                >
+              </fieldset>
+            </div>
+            <fieldset class="tags-input-container form-group">
+              <label class="tags-label">Tags:</label>
+              <TagList :isEditable="true" v-model="article.tagList" />
+            </fieldset>
+            <button :disabled="inProgress" class="publish-button" type="submit">
+              Confirm Location Data
+            </button>
+          </div>
+          <fieldset class="map-input-container form-group">
+            <MapInput
+              :value="article.location"
+              v-on:input="updateTitle"
+              v-model="article.location"
+            >
+            </MapInput>
+          </fieldset>
+        </div>
       </fieldset>
-      <button :disabled="inProgress" class="publish-button" type="submit">
-        Confirm Location Data
-      </button>
     </form>
   </div>
 </template>
@@ -116,15 +133,6 @@ export default {
   computed: {
     ...mapGetters(["article"])
   },
-  // watch: {
-  //   article(article) {
-  //     if (article !== undefined) {
-  //       if (this.article.tagList !== undefined) {
-  //         this.tagInput = this.article.tagList;
-  //       }
-  //     }
-  //   }
-  // },
   methods: {
     onPublish(slug) {
       let action = slug ? ARTICLE_EDIT : ARTICLE_PUBLISH;
