@@ -1,0 +1,52 @@
+@import "../_variables.scss";
+@import "../_mixins.scss";
+
+.home-page {
+    color: $off-white;
+    width: 100%;
+    @include gentle-gradient($primary);
+
+    .splash {
+        text-align: center;
+        padding: 20px;
+
+        .logo {
+            width: 200px;
+            vertical-align: bottom;
+        }
+        
+        .title {
+            display: inline-block;
+            font-family: $heading-font;
+            text-shadow: 0 0 20px $secondary;
+            font-size: 10em;
+            padding: 0;
+            margin: 0;
+
+            @media (max-width: $desktop-width) {
+                font-size: 7em;
+            }
+        }
+    }
+
+    .home-info {
+        display: flex;
+        justify-content: center;
+
+        .about {
+            width: 50vw;
+            font-size: 2em;
+            text-align: justify;
+            border: 0.33em solid $off-white;
+            padding: 0.67em;
+            border-radius: 2em;
+            box-shadow:
+                0 0 20px $primary-light,
+                inset 0 0 20px $primary-light;
+
+            @media (max-width: $desktop-width) {
+                font-size: 1em;
+            }
+        }
+    }
+}

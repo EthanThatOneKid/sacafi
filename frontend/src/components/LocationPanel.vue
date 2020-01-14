@@ -56,14 +56,20 @@
       <span><i>no password necessary</i></span>
     </div>
     <div class="secret-section" v-else>
-      <SecretEditor :slug="slug" v-if="isAuthenticated"></SecretEditor>
+      <div v-if="isAuthenticated">
+        <SecretEditor :slug="slug"></SecretEditor>
+        <SecretList
+          :slug="slug"
+          :secrets="passwords"
+          @update="refreshSecrets"
+        />
+      </div>
       <p v-else class="signin-warning">
         <router-link :to="{ name: 'login' }">Sign in</router-link>
         or
         <router-link :to="{ name: 'register' }">sign up</router-link>
-        to add secrets on this location.
+        to view add secrets to this location.
       </p>
-      <SecretList :slug="slug" :secrets="passwords" @update="refreshSecrets" />
     </div>
     <hr />
     <h2>Comments</h2>

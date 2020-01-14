@@ -29,7 +29,7 @@
 }
 
 .navbar .container .navbar-brand .brand-text {
-  color: #36CDC4;
+  color: #F9F9F9;
   font-family: "Caveat", cursive;
   font-size: 2.25em;
   -webkit-transition: text-shadow 250ms ease-in;
@@ -104,6 +104,63 @@
 
 .navbar .container .navbar-nav .nav-item .active:hover {
   text-shadow: none;
+}
+
+.home-page {
+  color: #F9F9F9;
+  width: 100%;
+  background: linear-gradient(135deg, #5C2686 0%, #4c2686 100%);
+}
+
+.home-page .splash {
+  text-align: center;
+  padding: 20px;
+}
+
+.home-page .splash .logo {
+  width: 200px;
+  vertical-align: bottom;
+}
+
+.home-page .splash .title {
+  display: inline-block;
+  font-family: "Caveat", cursive;
+  text-shadow: 0 0 20px #36CDC4;
+  font-size: 10em;
+  padding: 0;
+  margin: 0;
+}
+
+@media (max-width: 1024px) {
+  .home-page .splash .title {
+    font-size: 7em;
+  }
+}
+
+.home-page .home-info {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.home-page .home-info .about {
+  width: 50vw;
+  font-size: 2em;
+  text-align: justify;
+  border: 0.33em solid #F9F9F9;
+  padding: 0.67em;
+  border-radius: 2em;
+  -webkit-box-shadow: 0 0 20px #FF1690, inset 0 0 20px #FF1690;
+          box-shadow: 0 0 20px #FF1690, inset 0 0 20px #FF1690;
+}
+
+@media (max-width: 1024px) {
+  .home-page .home-info .about {
+    font-size: 1em;
+  }
 }
 
 .map-content {
