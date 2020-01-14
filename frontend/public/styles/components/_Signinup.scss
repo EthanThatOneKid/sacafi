@@ -1,0 +1,42 @@
+@import "../_mixins.scss";
+@import "../_variables.scss";
+
+.auth-page {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    @include gentle-gradient($off-white);
+
+    .auth-form {
+        width: min-content;
+        height: min-content;
+        border: 5px solid $off-white;
+        border-radius: 2em;
+        padding: 2em;
+        box-shadow:
+            0 0 10px $primary-light,
+            inset 0 0 10px $primary-light;
+
+        .auth-title {
+            margin: 0;
+        }
+
+        .auth-submit {
+            border: 5px solid $off-white;
+            border-radius: 2em;
+            padding: 10px;
+            margin-top: 7px;
+            cursor: pointer;
+            box-shadow:
+                0 0 10px $secondary,
+                inset 0 0 10px $secondary;
+        }
+
+        .form-control {
+            border: 1px solid $primary;
+            border-radius: 2em;
+            padding: 7px;
+            margin: 3px;
+        }
+    }
+}

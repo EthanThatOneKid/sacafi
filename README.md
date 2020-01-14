@@ -27,10 +27,10 @@
 * [x] Locations
 * [x] Profile
 * [x] New/Edit Location
-* [ ] Settings
+* [x] Settings
 * [ ] Home
-* [ ] Sign Up
-* [ ] Login
+* [x] Sign Up
+* [x] Login
 
 ## Known Bugs 🐛
 * Various security risks within npm packages.
