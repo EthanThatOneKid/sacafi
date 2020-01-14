@@ -8,7 +8,7 @@
           <br />
           <img
             class="img-preview"
-            alt="Profile picture error"
+            alt="No Picture Uploaded"
             :src="currentUser.image"
           />
           <br />
@@ -85,7 +85,7 @@
             Confirm Changes
           </button>
           <button @click="logout" class="logout-button">
-            Log out
+            Log Out
           </button>
         </fieldset>
         <!-- <fieldset class="password-form form-group">
@@ -121,7 +121,7 @@ export default {
         this.$router.push({ path: `@${username}`, username });
       });
     },
-    parseMarkdown(content) {
+    parseMarkdown(content = "") {
       return marked(content);
     },
     logout() {
