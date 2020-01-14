@@ -40,6 +40,7 @@
 * Cannot upload profile picture from device.
 * Add edit/delete buttons to VArticlePreview.
 * TagList:edit only replaces first \s with \-.
+* User points only update when adjusting own locations' secrets' points.
 
 ---
 
