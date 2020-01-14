@@ -2,7 +2,8 @@
   <nav class="navbar navbar-light">
     <div class="container">
       <router-link class="navbar-brand" :to="{ name: 'home' }">
-        Sacafi
+        <img src="logo.svg" alt="Sacafi Logo" class="logo" />
+        <span class="brand-text">Sacafi</span>
       </router-link>
       <ul class="nav navbar-nav">
         <li class="nav-item">
@@ -57,7 +58,7 @@
             exact
             :to="{ name: 'login' }"
           >
-            <i class="ion-md-log-in"></i>&nbsp;Sign in
+            <i class="ion-md-log-in"></i>&nbsp;Login
           </router-link>
         </li>
         <li class="nav-item" v-if="!isAuthenticated">
@@ -67,7 +68,7 @@
             exact
             :to="{ name: 'register' }"
           >
-            <i class="ion-md-person-add"></i>&nbsp;Sign up
+            <i class="ion-md-person-add"></i>&nbsp;Signup
           </router-link>
         </li>
       </ul>

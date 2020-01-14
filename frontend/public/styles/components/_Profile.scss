@@ -13,6 +13,7 @@
 
     .profile-panel {
         border-radius: 2em;
+        max-width: 410px;
         height: min-content;
         border: 0.5em solid $primary;
         margin: 2em;
@@ -47,6 +48,7 @@
                 width: $circle-size;
                 height: $circle-size;
                 margin: 0;
+                border: 5px solid $secondary;
                 @include gentle-gradient($highlight);
             }
         }

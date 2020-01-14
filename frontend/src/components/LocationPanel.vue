@@ -57,7 +57,7 @@
     </div>
     <div class="secret-section" v-else>
       <SecretEditor :slug="slug" v-if="isAuthenticated"></SecretEditor>
-      <p v-else>
+      <p v-else class="signin-warning">
         <router-link :to="{ name: 'login' }">Sign in</router-link>
         or
         <router-link :to="{ name: 'register' }">sign up</router-link>
@@ -73,7 +73,7 @@
       :userImage="currentUser.image"
     >
     </RwvCommentEditor>
-    <p v-else>
+    <p v-else class="signin-warning">
       <router-link :to="{ name: 'login' }">Sign in</router-link>
       or
       <router-link :to="{ name: 'register' }">sign up</router-link>
@@ -86,7 +86,6 @@
       :key="index"
     >
     </RwvComment>
-    <!-- <pre><code v-text="JSON.stringify(article, null, 2)"></code></pre> -->
   </div>
 </template>
 

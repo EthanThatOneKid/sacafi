@@ -1,0 +1,77 @@
+@import "../_mixins.scss";
+@import "../_variables.scss";
+
+form, fieldset {
+    border: none;
+    padding: 0;
+    margin: 0;
+}
+
+.settings-page {
+    @include gentle-gradient($highlight);
+
+    .settings-title {
+        text-align: center;
+    }
+
+    .visible-img-input, button {
+        color: $off-white;
+        border: 1px solid $primary-dark;
+        display: inline-block;
+        border-radius: 2em;
+        padding: 6px 12px;
+        margin: 12px;
+        cursor: pointer;
+        @include gentle-gradient($primary-light);
+    }
+
+    fieldset {
+        text-align: center;
+
+        .form-group {
+            text-align: left;
+            display: inline-block;
+            vertical-align: top;
+            margin: 12px;
+        }
+
+        .visible-img-input {
+            color: $primary;
+            @include gentle-gradient($highlight);
+        }
+
+        .username-input, .bio-input, .email-input, .password-input {
+            border: 1px solid $primary-dark;
+            border-radius: 2em;
+            padding: 12px;
+            background-color: $off-white;
+        }
+
+        .img-form, .bio-preview {
+            border: 2px solid $primary-dark;
+            border-radius: 2em;
+            padding: 0.75em;
+            text-align: center;
+            max-width: 410px;
+            margin: 0;
+            @include gentle-gradient($secondary, 180deg);
+
+            .img-preview {
+                border-radius: 50%;
+            }
+
+            .img-input {
+                display: none;
+            }
+        }
+    }
+}
+
+@keyframes rainbow {
+    @for $percent from 0 through 100 {
+        #{$percent + '%'} {
+            color: hsl(0.01 * $percent * 360 + 180, 100%, 50%);
+            background-color: hsl(0.01 * $percent * 360, 100%, 50%);
+        }
+    }
+}

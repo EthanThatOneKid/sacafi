@@ -7,6 +7,7 @@
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
+  height: 100%;
   background: linear-gradient(135deg, #1C0658 0%, #0e0658 100%);
 }
 
@@ -16,17 +17,54 @@
   display: flex;
   -ms-flex-item-align: center;
       align-self: center;
-  color: #F9F9F9;
+  width: 100%;
+  text-decoration: none;
+  margin: 0 0 0 2em;
+}
+
+@media (max-width: 1024px) {
+  .navbar .container .navbar-brand {
+    margin: 0;
+  }
+}
+
+.navbar .container .navbar-brand .brand-text {
+  color: #36CDC4;
   font-family: "Caveat", cursive;
-  font-size: 2em;
+  font-size: 2.25em;
+  -webkit-transition: text-shadow 250ms ease-in;
+  transition: text-shadow 250ms ease-in;
+}
+
+.navbar .container .navbar-brand .brand-text:hover {
+  text-shadow: 0 0 5px #FF1690;
+}
+
+@media (max-width: 1024px) {
+  .navbar .container .navbar-brand .brand-text {
+    display: none;
+  }
+}
+
+.navbar .container .navbar-brand .logo {
+  height: 42px;
+}
+
+@media (max-width: 1024px) {
+  .navbar .container .navbar-brand .logo {
+    height: 69px;
+    padding: 18px;
+    width: 100%;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+  }
 }
 
 .navbar .container .navbar-nav {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -ms-flex-item-align: center;
-      align-self: center;
   list-style-type: none;
   margin: 0;
   padding: 0;
@@ -38,17 +76,34 @@
 }
 
 .navbar .container .navbar-nav .nav-item .nav-link {
+  height: 100%;
   display: block;
   text-align: center;
   text-decoration: none;
   color: #F9F9F9;
   padding: 15px;
+  -webkit-transition: text-shadow 250ms ease-in;
+  transition: text-shadow 250ms ease-in;
+}
+
+.navbar .container .navbar-nav .nav-item .nav-link:hover {
+  text-shadow: 0 0 5px #FF1690;
+}
+
+@media (max-width: 1024px) {
+  .navbar .container .navbar-nav .nav-item .nav-link {
+    padding: 5px;
+  }
 }
 
 .navbar .container .navbar-nav .nav-item .active {
   color: #F4D676;
   -webkit-box-shadow: inset 0 5px #FF1690;
           box-shadow: inset 0 5px #FF1690;
+}
+
+.navbar .container .navbar-nav .nav-item .active:hover {
+  text-shadow: none;
 }
 
 .map-content {
@@ -180,6 +235,10 @@
   width: 33px;
   height: 33px;
   font-family: "Exo 2", sans-serif;
+}
+
+.map-content .article-page .signin-warning a {
+  color: #F4D676;
 }
 
 .map-content .article-page .article-tags .tag-list {
@@ -338,6 +397,7 @@
 
 .profile-page .profile-panel {
   border-radius: 2em;
+  max-width: 410px;
   height: -webkit-min-content;
   height: -moz-min-content;
   height: min-content;
@@ -384,6 +444,7 @@
   width: 50px;
   height: 50px;
   margin: 0;
+  border: 5px solid #36CDC4;
   background: linear-gradient(135deg, #F4D676 0%, #f4c176 100%);
 }
 
@@ -682,6 +743,887 @@
   margin: 1em;
   background-color: #1C0658;
   color: #F4D676;
+}
+
+form, fieldset {
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+
+.settings-page {
+  background: linear-gradient(135deg, #F4D676 0%, #f4c176 100%);
+}
+
+.settings-page .settings-title {
+  text-align: center;
+}
+
+.settings-page .visible-img-input, .settings-page button {
+  color: #F9F9F9;
+  border: 1px solid #1C0658;
+  display: inline-block;
+  border-radius: 2em;
+  padding: 6px 12px;
+  margin: 12px;
+  cursor: pointer;
+  background: linear-gradient(135deg, #FF1690 0%, #ff16b7 100%);
+}
+
+.settings-page fieldset {
+  text-align: center;
+}
+
+.settings-page fieldset .form-group {
+  text-align: left;
+  display: inline-block;
+  vertical-align: top;
+  margin: 12px;
+}
+
+.settings-page fieldset .visible-img-input {
+  color: #5C2686;
+  background: linear-gradient(135deg, #F4D676 0%, #f4c176 100%);
+}
+
+.settings-page fieldset .username-input, .settings-page fieldset .bio-input, .settings-page fieldset .email-input, .settings-page fieldset .password-input {
+  border: 1px solid #1C0658;
+  border-radius: 2em;
+  padding: 12px;
+  background-color: #F9F9F9;
+}
+
+.settings-page fieldset .img-form, .settings-page fieldset .bio-preview {
+  border: 2px solid #1C0658;
+  border-radius: 2em;
+  padding: 0.75em;
+  text-align: center;
+  max-width: 410px;
+  margin: 0;
+  background: -webkit-gradient(linear, left top, left bottom, from(#36CDC4), to(#36cdab));
+  background: linear-gradient(180deg, #36CDC4 0%, #36cdab 100%);
+}
+
+.settings-page fieldset .img-form .img-preview, .settings-page fieldset .bio-preview .img-preview {
+  border-radius: 50%;
+}
+
+.settings-page fieldset .img-form .img-input, .settings-page fieldset .bio-preview .img-input {
+  display: none;
+}
+
+@-webkit-keyframes rainbow {
+  0% {
+    color: cyan;
+    background-color: red;
+  }
+  1% {
+    color: #00f0ff;
+    background-color: #ff0f00;
+  }
+  2% {
+    color: #00e0ff;
+    background-color: #ff1f00;
+  }
+  3% {
+    color: #00d1ff;
+    background-color: #ff2e00;
+  }
+  4% {
+    color: #00c2ff;
+    background-color: #ff3d00;
+  }
+  5% {
+    color: #00b3ff;
+    background-color: #ff4d00;
+  }
+  6% {
+    color: #00a3ff;
+    background-color: #ff5c00;
+  }
+  7% {
+    color: #0094ff;
+    background-color: #ff6b00;
+  }
+  8% {
+    color: #0085ff;
+    background-color: #ff7a00;
+  }
+  9% {
+    color: #0075ff;
+    background-color: #ff8a00;
+  }
+  10% {
+    color: #0066ff;
+    background-color: #ff9900;
+  }
+  11% {
+    color: #0057ff;
+    background-color: #ffa800;
+  }
+  12% {
+    color: #0047ff;
+    background-color: #ffb800;
+  }
+  13% {
+    color: #0038ff;
+    background-color: #ffc700;
+  }
+  14% {
+    color: #0029ff;
+    background-color: #ffd600;
+  }
+  15% {
+    color: #001aff;
+    background-color: #ffe600;
+  }
+  16% {
+    color: #000aff;
+    background-color: #fff500;
+  }
+  17% {
+    color: #0500ff;
+    background-color: #faff00;
+  }
+  18% {
+    color: #1400ff;
+    background-color: #ebff00;
+  }
+  19% {
+    color: #2400ff;
+    background-color: #dbff00;
+  }
+  20% {
+    color: #3300ff;
+    background-color: #ccff00;
+  }
+  21% {
+    color: #4200ff;
+    background-color: #bdff00;
+  }
+  22% {
+    color: #5200ff;
+    background-color: #adff00;
+  }
+  23% {
+    color: #6100ff;
+    background-color: #9eff00;
+  }
+  24% {
+    color: #7000ff;
+    background-color: #8fff00;
+  }
+  25% {
+    color: #8000ff;
+    background-color: #80ff00;
+  }
+  26% {
+    color: #8f00ff;
+    background-color: #70ff00;
+  }
+  27% {
+    color: #9e00ff;
+    background-color: #61ff00;
+  }
+  28% {
+    color: #ad00ff;
+    background-color: #52ff00;
+  }
+  29% {
+    color: #bd00ff;
+    background-color: #42ff00;
+  }
+  30% {
+    color: #cc00ff;
+    background-color: #33ff00;
+  }
+  31% {
+    color: #db00ff;
+    background-color: #24ff00;
+  }
+  32% {
+    color: #eb00ff;
+    background-color: #14ff00;
+  }
+  33% {
+    color: #fa00ff;
+    background-color: #05ff00;
+  }
+  34% {
+    color: #ff00f5;
+    background-color: #00ff0a;
+  }
+  35% {
+    color: #ff00e6;
+    background-color: #00ff1a;
+  }
+  36% {
+    color: #ff00d6;
+    background-color: #00ff29;
+  }
+  37% {
+    color: #ff00c7;
+    background-color: #00ff38;
+  }
+  38% {
+    color: #ff00b8;
+    background-color: #00ff47;
+  }
+  39% {
+    color: #ff00a8;
+    background-color: #00ff57;
+  }
+  40% {
+    color: #ff0099;
+    background-color: #00ff66;
+  }
+  41% {
+    color: #ff008a;
+    background-color: #00ff75;
+  }
+  42% {
+    color: #ff007a;
+    background-color: #00ff85;
+  }
+  43% {
+    color: #ff006b;
+    background-color: #00ff94;
+  }
+  44% {
+    color: #ff005c;
+    background-color: #00ffa3;
+  }
+  45% {
+    color: #ff004d;
+    background-color: #00ffb3;
+  }
+  46% {
+    color: #ff003d;
+    background-color: #00ffc2;
+  }
+  47% {
+    color: #ff002e;
+    background-color: #00ffd1;
+  }
+  48% {
+    color: #ff001f;
+    background-color: #00ffe0;
+  }
+  49% {
+    color: #ff000f;
+    background-color: #00fff0;
+  }
+  50% {
+    color: red;
+    background-color: cyan;
+  }
+  51% {
+    color: #ff0f00;
+    background-color: #00f0ff;
+  }
+  52% {
+    color: #ff1f00;
+    background-color: #00e0ff;
+  }
+  53% {
+    color: #ff2e00;
+    background-color: #00d1ff;
+  }
+  54% {
+    color: #ff3d00;
+    background-color: #00c2ff;
+  }
+  55% {
+    color: #ff4d00;
+    background-color: #00b3ff;
+  }
+  56% {
+    color: #ff5c00;
+    background-color: #00a3ff;
+  }
+  57% {
+    color: #ff6b00;
+    background-color: #0094ff;
+  }
+  58% {
+    color: #ff7a00;
+    background-color: #0085ff;
+  }
+  59% {
+    color: #ff8a00;
+    background-color: #0075ff;
+  }
+  60% {
+    color: #ff9900;
+    background-color: #0066ff;
+  }
+  61% {
+    color: #ffa800;
+    background-color: #0057ff;
+  }
+  62% {
+    color: #ffb800;
+    background-color: #0047ff;
+  }
+  63% {
+    color: #ffc700;
+    background-color: #0038ff;
+  }
+  64% {
+    color: #ffd600;
+    background-color: #0029ff;
+  }
+  65% {
+    color: #ffe600;
+    background-color: #001aff;
+  }
+  66% {
+    color: #fff500;
+    background-color: #000aff;
+  }
+  67% {
+    color: #faff00;
+    background-color: #0500ff;
+  }
+  68% {
+    color: #ebff00;
+    background-color: #1400ff;
+  }
+  69% {
+    color: #dbff00;
+    background-color: #2400ff;
+  }
+  70% {
+    color: #ccff00;
+    background-color: #3300ff;
+  }
+  71% {
+    color: #bdff00;
+    background-color: #4200ff;
+  }
+  72% {
+    color: #adff00;
+    background-color: #5200ff;
+  }
+  73% {
+    color: #9eff00;
+    background-color: #6100ff;
+  }
+  74% {
+    color: #8fff00;
+    background-color: #7000ff;
+  }
+  75% {
+    color: #80ff00;
+    background-color: #8000ff;
+  }
+  76% {
+    color: #70ff00;
+    background-color: #8f00ff;
+  }
+  77% {
+    color: #61ff00;
+    background-color: #9e00ff;
+  }
+  78% {
+    color: #52ff00;
+    background-color: #ad00ff;
+  }
+  79% {
+    color: #42ff00;
+    background-color: #bd00ff;
+  }
+  80% {
+    color: #33ff00;
+    background-color: #cc00ff;
+  }
+  81% {
+    color: #24ff00;
+    background-color: #db00ff;
+  }
+  82% {
+    color: #14ff00;
+    background-color: #eb00ff;
+  }
+  83% {
+    color: #05ff00;
+    background-color: #fa00ff;
+  }
+  84% {
+    color: #00ff0a;
+    background-color: #ff00f5;
+  }
+  85% {
+    color: #00ff1a;
+    background-color: #ff00e6;
+  }
+  86% {
+    color: #00ff29;
+    background-color: #ff00d6;
+  }
+  87% {
+    color: #00ff38;
+    background-color: #ff00c7;
+  }
+  88% {
+    color: #00ff47;
+    background-color: #ff00b8;
+  }
+  89% {
+    color: #00ff57;
+    background-color: #ff00a8;
+  }
+  90% {
+    color: #00ff66;
+    background-color: #ff0099;
+  }
+  91% {
+    color: #00ff75;
+    background-color: #ff008a;
+  }
+  92% {
+    color: #00ff85;
+    background-color: #ff007a;
+  }
+  93% {
+    color: #00ff94;
+    background-color: #ff006b;
+  }
+  94% {
+    color: #00ffa3;
+    background-color: #ff005c;
+  }
+  95% {
+    color: #00ffb3;
+    background-color: #ff004d;
+  }
+  96% {
+    color: #00ffc2;
+    background-color: #ff003d;
+  }
+  97% {
+    color: #00ffd1;
+    background-color: #ff002e;
+  }
+  98% {
+    color: #00ffe0;
+    background-color: #ff001f;
+  }
+  99% {
+    color: #00fff0;
+    background-color: #ff000f;
+  }
+  100% {
+    color: cyan;
+    background-color: red;
+  }
+}
+
+@keyframes rainbow {
+  0% {
+    color: cyan;
+    background-color: red;
+  }
+  1% {
+    color: #00f0ff;
+    background-color: #ff0f00;
+  }
+  2% {
+    color: #00e0ff;
+    background-color: #ff1f00;
+  }
+  3% {
+    color: #00d1ff;
+    background-color: #ff2e00;
+  }
+  4% {
+    color: #00c2ff;
+    background-color: #ff3d00;
+  }
+  5% {
+    color: #00b3ff;
+    background-color: #ff4d00;
+  }
+  6% {
+    color: #00a3ff;
+    background-color: #ff5c00;
+  }
+  7% {
+    color: #0094ff;
+    background-color: #ff6b00;
+  }
+  8% {
+    color: #0085ff;
+    background-color: #ff7a00;
+  }
+  9% {
+    color: #0075ff;
+    background-color: #ff8a00;
+  }
+  10% {
+    color: #0066ff;
+    background-color: #ff9900;
+  }
+  11% {
+    color: #0057ff;
+    background-color: #ffa800;
+  }
+  12% {
+    color: #0047ff;
+    background-color: #ffb800;
+  }
+  13% {
+    color: #0038ff;
+    background-color: #ffc700;
+  }
+  14% {
+    color: #0029ff;
+    background-color: #ffd600;
+  }
+  15% {
+    color: #001aff;
+    background-color: #ffe600;
+  }
+  16% {
+    color: #000aff;
+    background-color: #fff500;
+  }
+  17% {
+    color: #0500ff;
+    background-color: #faff00;
+  }
+  18% {
+    color: #1400ff;
+    background-color: #ebff00;
+  }
+  19% {
+    color: #2400ff;
+    background-color: #dbff00;
+  }
+  20% {
+    color: #3300ff;
+    background-color: #ccff00;
+  }
+  21% {
+    color: #4200ff;
+    background-color: #bdff00;
+  }
+  22% {
+    color: #5200ff;
+    background-color: #adff00;
+  }
+  23% {
+    color: #6100ff;
+    background-color: #9eff00;
+  }
+  24% {
+    color: #7000ff;
+    background-color: #8fff00;
+  }
+  25% {
+    color: #8000ff;
+    background-color: #80ff00;
+  }
+  26% {
+    color: #8f00ff;
+    background-color: #70ff00;
+  }
+  27% {
+    color: #9e00ff;
+    background-color: #61ff00;
+  }
+  28% {
+    color: #ad00ff;
+    background-color: #52ff00;
+  }
+  29% {
+    color: #bd00ff;
+    background-color: #42ff00;
+  }
+  30% {
+    color: #cc00ff;
+    background-color: #33ff00;
+  }
+  31% {
+    color: #db00ff;
+    background-color: #24ff00;
+  }
+  32% {
+    color: #eb00ff;
+    background-color: #14ff00;
+  }
+  33% {
+    color: #fa00ff;
+    background-color: #05ff00;
+  }
+  34% {
+    color: #ff00f5;
+    background-color: #00ff0a;
+  }
+  35% {
+    color: #ff00e6;
+    background-color: #00ff1a;
+  }
+  36% {
+    color: #ff00d6;
+    background-color: #00ff29;
+  }
+  37% {
+    color: #ff00c7;
+    background-color: #00ff38;
+  }
+  38% {
+    color: #ff00b8;
+    background-color: #00ff47;
+  }
+  39% {
+    color: #ff00a8;
+    background-color: #00ff57;
+  }
+  40% {
+    color: #ff0099;
+    background-color: #00ff66;
+  }
+  41% {
+    color: #ff008a;
+    background-color: #00ff75;
+  }
+  42% {
+    color: #ff007a;
+    background-color: #00ff85;
+  }
+  43% {
+    color: #ff006b;
+    background-color: #00ff94;
+  }
+  44% {
+    color: #ff005c;
+    background-color: #00ffa3;
+  }
+  45% {
+    color: #ff004d;
+    background-color: #00ffb3;
+  }
+  46% {
+    color: #ff003d;
+    background-color: #00ffc2;
+  }
+  47% {
+    color: #ff002e;
+    background-color: #00ffd1;
+  }
+  48% {
+    color: #ff001f;
+    background-color: #00ffe0;
+  }
+  49% {
+    color: #ff000f;
+    background-color: #00fff0;
+  }
+  50% {
+    color: red;
+    background-color: cyan;
+  }
+  51% {
+    color: #ff0f00;
+    background-color: #00f0ff;
+  }
+  52% {
+    color: #ff1f00;
+    background-color: #00e0ff;
+  }
+  53% {
+    color: #ff2e00;
+    background-color: #00d1ff;
+  }
+  54% {
+    color: #ff3d00;
+    background-color: #00c2ff;
+  }
+  55% {
+    color: #ff4d00;
+    background-color: #00b3ff;
+  }
+  56% {
+    color: #ff5c00;
+    background-color: #00a3ff;
+  }
+  57% {
+    color: #ff6b00;
+    background-color: #0094ff;
+  }
+  58% {
+    color: #ff7a00;
+    background-color: #0085ff;
+  }
+  59% {
+    color: #ff8a00;
+    background-color: #0075ff;
+  }
+  60% {
+    color: #ff9900;
+    background-color: #0066ff;
+  }
+  61% {
+    color: #ffa800;
+    background-color: #0057ff;
+  }
+  62% {
+    color: #ffb800;
+    background-color: #0047ff;
+  }
+  63% {
+    color: #ffc700;
+    background-color: #0038ff;
+  }
+  64% {
+    color: #ffd600;
+    background-color: #0029ff;
+  }
+  65% {
+    color: #ffe600;
+    background-color: #001aff;
+  }
+  66% {
+    color: #fff500;
+    background-color: #000aff;
+  }
+  67% {
+    color: #faff00;
+    background-color: #0500ff;
+  }
+  68% {
+    color: #ebff00;
+    background-color: #1400ff;
+  }
+  69% {
+    color: #dbff00;
+    background-color: #2400ff;
+  }
+  70% {
+    color: #ccff00;
+    background-color: #3300ff;
+  }
+  71% {
+    color: #bdff00;
+    background-color: #4200ff;
+  }
+  72% {
+    color: #adff00;
+    background-color: #5200ff;
+  }
+  73% {
+    color: #9eff00;
+    background-color: #6100ff;
+  }
+  74% {
+    color: #8fff00;
+    background-color: #7000ff;
+  }
+  75% {
+    color: #80ff00;
+    background-color: #8000ff;
+  }
+  76% {
+    color: #70ff00;
+    background-color: #8f00ff;
+  }
+  77% {
+    color: #61ff00;
+    background-color: #9e00ff;
+  }
+  78% {
+    color: #52ff00;
+    background-color: #ad00ff;
+  }
+  79% {
+    color: #42ff00;
+    background-color: #bd00ff;
+  }
+  80% {
+    color: #33ff00;
+    background-color: #cc00ff;
+  }
+  81% {
+    color: #24ff00;
+    background-color: #db00ff;
+  }
+  82% {
+    color: #14ff00;
+    background-color: #eb00ff;
+  }
+  83% {
+    color: #05ff00;
+    background-color: #fa00ff;
+  }
+  84% {
+    color: #00ff0a;
+    background-color: #ff00f5;
+  }
+  85% {
+    color: #00ff1a;
+    background-color: #ff00e6;
+  }
+  86% {
+    color: #00ff29;
+    background-color: #ff00d6;
+  }
+  87% {
+    color: #00ff38;
+    background-color: #ff00c7;
+  }
+  88% {
+    color: #00ff47;
+    background-color: #ff00b8;
+  }
+  89% {
+    color: #00ff57;
+    background-color: #ff00a8;
+  }
+  90% {
+    color: #00ff66;
+    background-color: #ff0099;
+  }
+  91% {
+    color: #00ff75;
+    background-color: #ff008a;
+  }
+  92% {
+    color: #00ff85;
+    background-color: #ff007a;
+  }
+  93% {
+    color: #00ff94;
+    background-color: #ff006b;
+  }
+  94% {
+    color: #00ffa3;
+    background-color: #ff005c;
+  }
+  95% {
+    color: #00ffb3;
+    background-color: #ff004d;
+  }
+  96% {
+    color: #00ffc2;
+    background-color: #ff003d;
+  }
+  97% {
+    color: #00ffd1;
+    background-color: #ff002e;
+  }
+  98% {
+    color: #00ffe0;
+    background-color: #ff001f;
+  }
+  99% {
+    color: #00fff0;
+    background-color: #ff000f;
+  }
+  100% {
+    color: cyan;
+    background-color: red;
+  }
 }
 
 .card {

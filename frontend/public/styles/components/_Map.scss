@@ -70,6 +70,10 @@
             }
         }
 
+        .signin-warning a {
+            color: $highlight;
+        }
+
         .article-tags .tag-list {
             margin: 0;
             list-style-type: none;
@@ -137,7 +141,6 @@
                         font-size: 2em;
                     }
                 }
-                
 
                 .secret-input .VuePassword__Input {
                     font-family: $paragraph-font;

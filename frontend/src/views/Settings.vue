@@ -1,101 +1,128 @@
 <template>
   <div class="settings-page">
-    <div class="container page">
-      <div class="row">
-        <div class="col-md-6 offset-md-3 col-xs-12">
-          <h1 class="text-xs-center">Your Settings</h1>
-          <form @submit.prevent="updateSettings()">
-            <fieldset>
-              <fieldset class="form-group">
-                <image-uploader
-                  :debug="1"
-                  :maxWidth="512"
-                  :quality="0.7"
-                  :autoRotate="true"
-                  :preview="false"
-                  :className="['img-input']"
-                  :capture="false"
-                  accept="image/*"
-                  doNotResize="['gif', 'svg']"
-                  @input="updateUserImage"
-                ></image-uploader>
-                <input
-                  class="form-control"
-                  type="text"
-                  v-model="currentUser.image"
-                  placeholder="URL of profile picture"
-                />
-              </fieldset>
-              <fieldset class="form-group">
-                <input
-                  class="form-control form-control-lg"
-                  type="text"
-                  v-model="currentUser.username"
-                  placeholder="Your username"
-                />
-              </fieldset>
-              <fieldset class="form-group">
-                <textarea
-                  class="form-control form-control-lg"
-                  rows="8"
-                  v-model="currentUser.bio"
-                  placeholder="Short bio about you"
-                ></textarea>
-              </fieldset>
-              <fieldset class="form-group">
-                <input
-                  class="form-control form-control-lg"
-                  type="text"
-                  v-model="currentUser.email"
-                  placeholder="Email"
-                />
-              </fieldset>
-              <fieldset class="form-group">
-                <input
-                  class="form-control form-control-lg"
-                  type="password"
-                  v-model="currentUser.password"
-                  placeholder="Password"
-                />
-              </fieldset>
-              <button class="btn btn-lg btn-primary pull-xs-right">
-                Update Settings
-              </button>
-            </fieldset>
-          </form>
-          <!-- Line break for logout button -->
-          <hr />
-          <button @click="logout" class="btn btn-outline-danger">
-            Or click here to logout.
+    <h1 class="settings-title">Your Settings</h1>
+    <form @submit.prevent="updateSettings()">
+      <fieldset>
+        <fieldset class="img-form form-group">
+          <label class="img-preview-label">Current Profile Picture:</label>
+          <br />
+          <img
+            class="img-preview"
+            alt="Profile picture error"
+            :src="currentUser.image"
+          />
+          <br />
+          <!-- image-uploader props documentation:
+            -- https://www.npmjs.com/package/vue-image-upload-resize#props
+            -->
+          <label class="visible-img-input">
+            Update Profile Picture
+            <image-uploader
+              :debug="0"
+              :maxWidth="200"
+              :quality="0.9"
+              :autoRotate="true"
+              :preview="false"
+              :className="['img-input']"
+              :capture="false"
+              accept="image/*"
+              doNotResize="['gif', 'svg']"
+              v-model="currentUser.image"
+            />
+          </label>
+        </fieldset>
+        <fieldset class="bio-form form-group">
+          <label class="bio-label">
+            Bio:
+            <sup>
+              <a href="https://commonmark.org/help/" target="blank_">
+                markdown-compatible
+              </a>
+            </sup>
+          </label>
+          <br />
+          <textarea
+            class="bio-input"
+            rows="8"
+            v-model="currentUser.bio"
+            placeholder="Short bio about you"
+          ></textarea>
+          <br />
+          <label class="bio-preview-label">Bio Preview:</label>
+          <p class="bio-preview" v-html="parseMarkdown(currentUser.bio)"></p>
+        </fieldset>
+        <fieldset class="form-group">
+          <label class="username-label">Username:</label>
+          <br />
+          <input
+            class="username-input"
+            type="text"
+            v-model="currentUser.username"
+            placeholder="Your username"
+          />
+          <br />
+          <label class="email-label">Email:</label>
+          <br />
+          <input
+            class="email-input"
+            type="text"
+            v-model="currentUser.email"
+            placeholder="Email"
+          />
+          <br />
+          <label class="password-label">Password:</label>
+          <br />
+          <input
+            class="password-input"
+            type="password"
+            v-model="currentUser.password"
+            placeholder="password"
+          />
+        </fieldset>
+        <br />
+        <fieldset>
+          <button class="submit-settings-button">
+            Confirm Changes
           </button>
-        </div>
-      </div>
-    </div>
+          <button @click="logout" class="logout-button">
+            Log out
+          </button>
+        </fieldset>
+        <!-- <fieldset class="password-form form-group">
+          <VuePassword
+            class="password-input"
+            v-model="currentUser.password"
+            :disableStrength="false"
+            type="password"
+            new-password
+          />
+        </fieldset> -->
+      </fieldset>
+    </form>
   </div>
 </template>
 
 <script>
 import { mapGetters } from "vuex";
+import marked from "marked";
 import { LOGOUT, UPDATE_USER } from "@/store/actions.type";
+import { VuePassword } from "vue-password";
 
 export default {
   name: "RwvSettings",
+  components: { VuePassword },
   computed: {
     ...mapGetters(["currentUser"])
   },
   methods: {
     updateSettings() {
       this.$store.dispatch(UPDATE_USER, this.currentUser).then(() => {
-        // #todo, nice toast and no redirect
-        this.$router.push({ name: "home" });
+        const { username } = this.currentUser;
+        this.$router.push({ path: `@${username}`, username });
       });
     },
-    async updateUserImage(event) {
-      /* image-uploader TODO:
-       * @onUpload="startImageResize"
-       * @onComplete="endImageResize"
-       */
-      console.log(event);
+    parseMarkdown(content) {
+      return marked(content);
     },
     logout() {
       this.$store.dispatch(LOGOUT).then(() => {

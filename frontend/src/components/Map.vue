@@ -122,6 +122,17 @@ export default {
     },
     exitLocationPanel() {
       this.selectedLocation = null;
+    },
+    chooseIcon({ requiresPassword }) {
+      // TODO: customize markers
+      const iconConfig = {
+        iconUrl: requiresPassword
+          ? "../../public/location-secure.svg"
+          : "../../public/location-open.svg",
+        iconSize: [40, 40],
+        iconAnchor: [20, 20]
+      };
+      return iconConfig;
     }
   }
 };
@@ -131,6 +142,7 @@ export default {
 @import "~leaflet/dist/leaflet.css";
 @import "~leaflet-geosearch/assets/css/leaflet.css";
 .leaflet-fake-icon-image-2x {
+  background-image: url(../../public/location-open.svg);
   background-image: url(../../node_modules/leaflet/dist/images/marker-icon-2x.png);
 }
 .leaflet-fake-icon-shadow {
