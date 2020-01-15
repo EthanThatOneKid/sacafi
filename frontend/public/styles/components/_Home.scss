@@ -18,10 +18,10 @@
         .title {
             display: inline-block;
             font-family: $heading-font;
-            text-shadow: 0 0 20px $secondary;
             font-size: 10em;
             padding: 0;
             margin: 0;
+            @include neon($secondary, 20px);
 
             @media (max-width: $desktop-width) {
                 font-size: 7em;

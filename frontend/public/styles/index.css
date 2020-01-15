@@ -32,12 +32,36 @@
   color: #F9F9F9;
   font-family: "Caveat", cursive;
   font-size: 2.25em;
-  -webkit-transition: text-shadow 250ms ease-in;
-  transition: text-shadow 250ms ease-in;
 }
 
 .navbar .container .navbar-brand .brand-text:hover {
   text-shadow: 0 0 5px #FF1690;
+  -webkit-transition: text-shadow 250ms ease-in;
+  transition: text-shadow 250ms ease-in;
+  -webkit-animation: 3s ease-in-out flicker infinite;
+          animation: 3s ease-in-out flicker infinite;
+}
+
+@-webkit-keyframes flicker {
+  0%, 19.999%, 22%, 62.999%, 64%, 64.999%, 70%, 100% {
+    opacity: 0.99;
+    text-shadow: 0 0 5px #FF1690;
+  }
+  20%, 21.999%, 63%, 63.999%, 65%, 69.999% {
+    opacity: 0.90;
+    text-shadow: none;
+  }
+}
+
+@keyframes flicker {
+  0%, 19.999%, 22%, 62.999%, 64%, 64.999%, 70%, 100% {
+    opacity: 0.99;
+    text-shadow: 0 0 5px #FF1690;
+  }
+  20%, 21.999%, 63%, 63.999%, 65%, 69.999% {
+    opacity: 0.90;
+    text-shadow: none;
+  }
 }
 
 @media (max-width: 1024px) {
@@ -125,10 +149,25 @@
 .home-page .splash .title {
   display: inline-block;
   font-family: "Caveat", cursive;
-  text-shadow: 0 0 20px #36CDC4;
   font-size: 10em;
   padding: 0;
   margin: 0;
+  text-shadow: 0 0 20px #36CDC4;
+  -webkit-transition: text-shadow 250ms ease-in;
+  transition: text-shadow 250ms ease-in;
+  -webkit-animation: 3s ease-in-out flicker infinite;
+          animation: 3s ease-in-out flicker infinite;
+}
+
+@keyframes flicker {
+  0%, 19.999%, 22%, 62.999%, 64%, 64.999%, 70%, 100% {
+    opacity: 0.99;
+    text-shadow: 0 0 20px #36CDC4;
+  }
+  20%, 21.999%, 63%, 63.999%, 65%, 69.999% {
+    opacity: 0.90;
+    text-shadow: none;
+  }
 }
 
 @media (max-width: 1024px) {
@@ -262,6 +301,22 @@
 .map-content .article-page .header .article-info .article-title {
   font-family: "Caveat", cursive;
   font-size: 2.5em;
+  text-shadow: 0 0 20px #FF1690;
+  -webkit-transition: text-shadow 250ms ease-in;
+  transition: text-shadow 250ms ease-in;
+  -webkit-animation: 3s ease-in-out flicker infinite;
+          animation: 3s ease-in-out flicker infinite;
+}
+
+@keyframes flicker {
+  0%, 19.999%, 22%, 62.999%, 64%, 64.999%, 70%, 100% {
+    opacity: 0.99;
+    text-shadow: 0 0 20px #FF1690;
+  }
+  20%, 21.999%, 63%, 63.999%, 65%, 69.999% {
+    opacity: 0.90;
+    text-shadow: none;
+  }
 }
 
 .map-content .article-page .header .article-info .article-author a {

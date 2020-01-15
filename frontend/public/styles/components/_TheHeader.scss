@@ -22,10 +22,9 @@
             color: $off-white;
             font-family: $heading-font;
             font-size: 2.25em;
-            transition: text-shadow 250ms ease-in;
 
             &:hover {
-                text-shadow: 0 0 5px $primary-light;
+                @include neon($primary-light);
             }
 
             @media (max-width: $desktop-width) {

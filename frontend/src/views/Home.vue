@@ -1,5 +1,6 @@
 <template>
   <div class="home-page">
+    <div class="background-art" />
     <div class="splash">
       <img class="logo" src="logo.svg" />
       <h1 class="title">Sacafi</h1>
@@ -18,24 +19,24 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
-import RwvTag from "@/components/VTag";
-import { FETCH_TAGS } from "@/store/actions.type";
+// import { mapGetters } from "vuex";
+// import RwvTag from "@/components/VTag";
+// import { FETCH_TAGS } from "@/store/actions.type";
 
 export default {
-  name: "home",
-  components: {
-    RwvTag
-  },
-  mounted() {
-    this.$store.dispatch(FETCH_TAGS);
-  },
-  computed: {
-    ...mapGetters(["isAuthenticated", "tags"]),
-    tag() {
-      return this.$route.params.tag;
-    }
-  }
+  name: "home"
+  // components: {
+  //   RwvTag
+  // },
+  // mounted() {
+  //   this.$store.dispatch(FETCH_TAGS);
+  // },
+  // computed: {
+  //   ...mapGetters(["isAuthenticated", "tags"]),
+  //   tag() {
+  //     return this.$route.params.tag;
+  //   }
+  // }
 };
 
 // Reference this when reimplementing feed system:
