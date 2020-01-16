@@ -1,8 +1,9 @@
-var mongoose = require("mongoose");
-var uniqueValidator = require("mongoose-unique-validator");
-var crypto = require("crypto");
-var jwt = require("jsonwebtoken");
-var secret = require("../config").secret;
+const mongoose = require("mongoose");
+const uniqueValidator = require("mongoose-unique-validator");
+const crypto = require("crypto");
+const jwt = require("jsonwebtoken");
+const secret = require("../config").secret;
+const defaultStaticProfileImage = "https://static.productionready.io/images/smiley-cyrus.jpg";
 
 var UserSchema = new mongoose.Schema(
   {
@@ -83,19 +84,21 @@ UserSchema.methods.toProfileJSONFor = function(user) {
     username: this.username,
     bio: this.bio,
     image:
-      this.image || "https://static.productionready.io/images/smiley-cyrus.jpg",
+      this.image || defaultStaticProfileImage,
     following: user ? user.isFollowing(this._id) : false,
-    score: user.score
+    score: this.score || 0
   };
 };
 
-UserSchema.methods.incrementPoints = function() {
+UserSchema.methods.incrementPoints = function(user) {
   this.score++;
+  console.log(`incrementing ${this.username}`);
   return this.save();
 }
 
-UserSchema.methods.decrementPoints = function() {
+UserSchema.methods.decrementPoints = function(user) {
   this.score--;
+  console.log(`decrementing ${this.username}`);
   return this.save();
 }
 

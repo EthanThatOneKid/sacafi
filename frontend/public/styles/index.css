@@ -246,6 +246,8 @@
   -webkit-box-shadow: 5px 5px 5px #302222;
           box-shadow: 5px 5px 5px #302222;
   color: #F9F9F9;
+  scrollbar-color: #FF1690 rgba(0, 0, 0, 0);
+  scrollbar-width: thin;
   background: -webkit-gradient(linear, left bottom, left top, from(#1C0658), to(#0e0658));
   background: linear-gradient(0deg, #1C0658 0%, #0e0658 100%);
 }
@@ -267,12 +269,12 @@
 
 @media (max-width: 1024px) {
   .map-content .article-page {
-    right: 0;
-    padding: 0;
+    left: 0;
+    padding: 0 5px 0 5px;
     position: relative;
     width: 100%;
     height: calc(100vh / 2);
-    border-radius: 20px 20px 0 0;
+    border-radius: 2em 2em 0 0;
     -webkit-box-shadow: none;
             box-shadow: none;
   }
@@ -786,9 +788,9 @@
 @media (max-width: 1024px) {
   .editor-page .meta-map-row {
     -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-        -ms-flex-direction: column;
-            flex-direction: column;
+    -webkit-box-direction: reverse;
+        -ms-flex-direction: column-reverse;
+            flex-direction: column-reverse;
   }
 }
 
@@ -806,6 +808,12 @@
   background: linear-gradient(135deg, #1C0658 0%, #0e0658 100%);
 }
 
+@media (max-width: 1024px) {
+  .editor-page .meta-info-container .meta-info .title-input {
+    font-size: 1.5em;
+  }
+}
+
 .editor-page .form-group {
   border: none;
 }
@@ -815,14 +823,18 @@
   display: inline-block;
   border: 2px solid #36CDC4;
   padding: 1em;
-  margin: 0 1em 0 0;
+  margin: 0 1em 0 0.5em;
   border-radius: 2em;
   background: linear-gradient(135deg, #5C2686 0%, #4c2686 100%);
 }
 
 @media (max-width: 1024px) {
   .editor-page .location-metadata {
-    margin: 0 0 1em 0;
+    -ms-flex-item-align: center;
+        -ms-grid-row-align: center;
+        align-self: center;
+    margin: 1em;
+    max-width: 100vw;
   }
 }
 
@@ -872,6 +884,7 @@
   text-align: center;
   color: #FF1690;
   border: 3px solid #36CDC4;
+  cursor: pointer;
   background: -webkit-gradient(linear, left top, left bottom, from(true), color-stop(0%, #1C0658), to(#0e0658));
   background: linear-gradient(true, #1C0658 0%, #0e0658 100%);
 }
@@ -885,11 +898,19 @@
   padding: 0;
   border-radius: 2em;
   overflow: hidden;
+  margin: 0 1em 0 0.5em;
 }
 
 @media (max-width: 1024px) {
   .editor-page .map-input-container {
     height: 50vh;
+    width: 75%;
+    -webkit-box-flex: 0;
+        -ms-flex: none;
+            flex: none;
+    -ms-flex-item-align: center;
+        -ms-grid-row-align: center;
+        align-self: center;
   }
 }
 
@@ -903,6 +924,7 @@
   margin: 1em;
   background-color: #1C0658;
   color: #F4D676;
+  cursor: pointer;
 }
 
 form, fieldset {
@@ -1852,31 +1874,14 @@ form, fieldset {
   font-size: 1em;
 }
 
-/* According to `vue-notification` NPM package
- * https://github.com/euvl/vue-notification
+/* According to `mini-toastr` NPM package
+ * https://github.com/se-panfilov/mini-toastr
  */
-.vue-notification {
-  padding: 10px;
-  margin: 0 5px 5px;
-  font-size: 12px;
-  color: #ffffff;
-  background: #44A4FC;
-  border-left: 5px solid #187FE7;
-}
-
-.vue-notification.warn {
-  background: #ffb648;
-  border-left-color: #f48a06;
-}
-
-.vue-notification.error {
-  background: #E54D42;
-  border-left-color: #B82E24;
-}
-
-.vue-notification.success {
-  background: #68CD86;
-  border-left-color: #42A85F;
+.mini-toastr__notification {
+  border-radius: 2em;
+  padding: 0.5em;
+  opacity: 1;
+  font-family: "Exo 2", sans-serif;
 }
 
 html, body {

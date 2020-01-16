@@ -12,11 +12,19 @@ const PasswordSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
+PasswordSchema.methods.updateAuthorPoints = function(willIncrement) {
+  return User.findById(this.author)
+    .then(author => {
+      return willIncrement
+        ? author.incrementPoints()
+        : author.decrementPoints();
+    });
+}
+
 PasswordSchema.methods.approve = async function(user) {
   if (this.approvals.indexOf(user._id) === -1) {
     this.approvals = this.approvals.concat([user._id]);
   }
-  await user.incrementPoints();
   return await this.save();
 };
 
@@ -24,19 +32,18 @@ PasswordSchema.methods.disapprove = async function(user) {
   if (this.disapprovals.indexOf(user._id) === -1) {
     this.disapprovals = this.disapprovals.concat([user._id]);
   }
-  await user.decrementPoints();
   return await this.save();
 };
 
 PasswordSchema.methods.unapprove = async function(user) {
   this.approvals.remove(user._id);
-  await user.decrementPoints();
+  await this.updateAuthorPoints(false);
   return await this.save();
 };
 
 PasswordSchema.methods.undisapprove = async function(user) {
   this.disapprovals.remove(user._id);
-  await user.incrementPoints();
+  await this.updateAuthorPoints(true);
   return await this.save();
 };
 

@@ -4,12 +4,31 @@ import router from "./router";
 import store from "./store";
 import "./registerServiceWorker";
 
+// Clipboard Library Setup > [Reference](https://github.com/Inndy/vue-clipboard2#it-doesnt-work-with-bootstrap-modals)
 import VueClipboard from "vue-clipboard2";
 Vue.use(VueClipboard);
 
-import Notifications from "vue-notification";
-Vue.use(Notifications);
+// Notification Library Setup > [Reference](https://se-panfilov.github.io/vue-notifications/docs/html/getting-started.html)
+import VueNotifications from "vue-notifications";
+import miniToastr from "mini-toastr";
+miniToastr.init({
+  types: {
+    success: "success",
+    error: "error",
+    info: "info",
+    warn: "warn"
+  }
+});
+const toast = ({ title, message, type, timeout, cb }) =>
+  miniToastr[type](message, title, timeout, cb);
+Vue.use(VueNotifications, {
+  success: toast,
+  error: toast,
+  info: toast,
+  warn: toast
+});
 
+// Image Uploader Library Setup > [Reference](https://github.com/kartoteket/vue-image-upload-resize#usage)
 import ImageUploader from "vue-image-upload-resize";
 Vue.use(ImageUploader);
 
@@ -18,7 +37,7 @@ import ApiService from "./common/api.service";
 import DateFilter from "./common/date.filter";
 import ErrorFilter from "./common/error.filter";
 
-// Resolve Leaflet issues
+// Resolve Leaflet Issues > [Reference](https://vue-leaflet.github.io/Vue2Leaflet/#/quickstart?id=system-wide-components)
 import { Icon } from "leaflet";
 import "leaflet/dist/leaflet.css";
 delete Icon.Default.prototype._getIconUrl;

@@ -7,6 +7,9 @@
 }
 
 @mixin custom-scrollbar {
+    scrollbar-color: $primary-light $transp;
+    scrollbar-width: thin;
+
     &::-webkit-scrollbar {
         width: $scrollbar-size;
         height: $scrollbar-size;

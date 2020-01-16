@@ -45,8 +45,8 @@
         <code>{{ article.networkTitle }}</code>
         <button
           v-clipboard:copy="article.networkTitle"
-          v-clipboard:success="onShare"
-          v-clipboard:error="onShareError"
+          v-clipboard:success="onCopyNetwork"
+          v-clipboard:error="onCopyNetworkError"
         >
           <i class="ion-md-copy"></i>
         </button>
@@ -196,33 +196,53 @@ export default {
       this.toggleFavorite();
     },
     toggleFavorite() {
-      this.$store.dispatch(
-        this.article.favorited ? FAVORITE_REMOVE : FAVORITE_ADD,
-        this.slug
-      );
-      this.favoriteClass = `ion-md-${
-        this.article.favorited ? "heart-empty" : "heart"
-      }`;
+      if (this.article.favorited) {
+        this.$store.dispatch(FAVORITE_REMOVE);
+        this.favoriteClass = "ion-md-heart-empty";
+      } else {
+        this.$store.dispatch(FAVORITE_ADD);
+        this.favoriteClass = "ion-md-heart";
+      }
     },
     onShare() {
-      this.$notify({
-        text: "Copied to clipboard",
-        type: "copy-success"
-      });
+      const message = `Copied sharable link for '${this.article.title}'`;
+      this.showCopySuccess({ message });
     },
     onShareError() {
-      this.$notify({
-        text: "Failed to copy to clipboard",
-        type: "copy-error"
-      });
+      const message = "Failed to copy sharable link";
+      this.showCopyError({ message });
+    },
+    onCopyNetwork() {
+      const message = "Copied network name";
+      this.showCopySuccess({ message });
+    },
+    onCopyNetworkError() {
+      const message = "Failed to copy network name";
+      this.showCopyError({ message });
     },
     async deleteArticle() {
       try {
         await this.$store.dispatch(ARTICLE_DELETE, this.article.slug);
+        this.showDeleteSuccess();
         this.$router.push("/");
       } catch (err) {
         console.error(err);
       }
+    }
+  },
+  notifications: {
+    showCopySuccess: {
+      title: "Copied!",
+      type: "success"
+    },
+    showCopyError: {
+      title: "Copy Failed!",
+      type: "error"
+    },
+    showDeleteSuccess: {
+      title: "Removed Location!",
+      message: "Removed this location from Sacafi!",
+      type: "success"
     }
   }
 };

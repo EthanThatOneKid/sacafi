@@ -33,12 +33,12 @@
         @include gentle-gradient($primary-dark, 0deg);
 
         @media (max-width: $desktop-width) {
-            right: 0;
-            padding: 0;
+            left: 0;
+            padding: 0 5px 0 5px;
             position: relative;
             width: 100%;
             height: calc(100vh / 2);
-            border-radius: 20px 20px 0 0;
+            border-radius: 2em 2em 0 0;
             box-shadow: none;
         }
 

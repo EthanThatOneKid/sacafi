@@ -85,7 +85,7 @@ export default {
         setTimeout(() => this.removeTag(index), 0);
         return;
       }
-      this.tagList[index] = value.toLowerCase().replace(/\s/, "-");
+      this.tagList[index] = value.toLowerCase().replace(/\s/g, "-");
       const data = [...new Set(this.tagList.filter(tag => tag.length > 0))];
       this.$emit("input", data);
     },
