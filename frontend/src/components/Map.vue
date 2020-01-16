@@ -16,6 +16,7 @@
           v-for="article in articles"
           :lat-lng="article.location"
           :key="article.slug"
+          :icon="chooseIcon(article)"
           @click="selectLocation(article.slug)"
         ></l-marker>
       </l-map>
@@ -32,10 +33,16 @@
 <script>
 import { LMap, LTileLayer, LMarker, LPopup } from "vue2-leaflet";
 import { OpenStreetMapProvider } from "leaflet-geosearch";
+import L from "leaflet";
 import VGeosearch from "vue2-leaflet-geosearch";
 import LocationPanel from "@/components/LocationPanel";
 import { mapGetters } from "vuex";
 import { FETCH_ARTICLE, FETCH_ARTICLES } from "../store/actions.type";
+
+// Visual Assets
+import OpenMarker from "../../static/marker-open.svg";
+import SecureMarker from "../../static/marker-secure.svg";
+import ShadowMarker from "../../node_modules/leaflet/dist/images/marker-shadow.png";
 
 export default {
   name: "Map",
@@ -124,15 +131,15 @@ export default {
       this.selectedLocation = null;
     },
     chooseIcon({ requiresPassword }) {
-      // TODO: customize markers
-      const iconConfig = {
-        iconUrl: requiresPassword
-          ? "../../public/img/icons/marker-secure.svg"
-          : "../../public/img/icons/marker-open.svg",
-        iconSize: [40, 40],
-        iconAnchor: [20, 20]
-      };
-      return iconConfig;
+      return L.icon({
+        iconUrl: requiresPassword ? SecureMarker : OpenMarker,
+        iconSize: [38, 38],
+        iconAnchor: [19, 38], // [22, 44]
+        popupAnchor: [-3, -76],
+        shadowUrl: ShadowMarker,
+        shadowSize: [45, 45],
+        shadowAnchor: [15, 44]
+      });
     }
   }
 };
