@@ -91,10 +91,17 @@ export default {
     async deleteArticle() {
       try {
         await this.$store.dispatch(ARTICLE_DELETE, this.article.slug);
-        this.$router.push("/");
+        this.showDeleteSuccess();
       } catch (err) {
         console.error(err);
       }
+    }
+  },
+  notifications: {
+    showDeleteSuccess: {
+      title: "Removed Location!",
+      message: "Removed this location from Sacafi!",
+      type: "success"
     }
   }
 };

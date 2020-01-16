@@ -28,13 +28,12 @@
 * [x] Profile
 * [x] New/Edit Location
 * [x] Settings
-* [ ] Home
+* [x] Home
 * [x] Sign Up
 * [x] Login
 
 ## Known Bugs 🐛
 * Various security risks within npm packages.
-* Notification does not pop up upon copying data to clipboard.
 
 ---
 

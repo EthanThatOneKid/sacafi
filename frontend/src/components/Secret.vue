@@ -87,11 +87,23 @@ export default {
     isCurrentlyDisapproved() {
       return this.secret.disapprovals.indexOf(this.currentUser.id) > -1;
     },
-    onCopy(event) {
-      console.log("copied!", { event });
+    onCopy() {
+      this.showCopySuccess();
     },
-    onCopyError(event) {
-      console.log("copy error...", { event });
+    onCopyError() {
+      this.showCopyError();
+    }
+  },
+  notifications: {
+    showCopySuccess: {
+      title: "Copied!",
+      message: "Copied wifi password to clipboard",
+      type: "success"
+    },
+    showCopyError: {
+      title: "Copy Failed!",
+      message: "Failed to copy to clipboard",
+      type: "error"
     }
   }
 };

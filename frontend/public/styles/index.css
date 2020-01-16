@@ -77,7 +77,7 @@
 @media (max-width: 1024px) {
   .navbar .container .navbar-brand .logo {
     height: 69px;
-    padding: 18px;
+    padding: 18px 0 18px 0;
     width: 100%;
     -webkit-box-pack: center;
         -ms-flex-pack: center;
@@ -198,7 +198,8 @@
 
 @media (max-width: 1024px) {
   .home-page .home-info .about {
-    font-size: 1em;
+    font-size: 1.5em;
+    width: 75vw;
   }
 }
 
@@ -349,6 +350,7 @@
   width: 33px;
   height: 33px;
   font-family: "Exo 2", sans-serif;
+  cursor: pointer;
 }
 
 .map-content .article-page .signin-warning a {
@@ -380,6 +382,7 @@
   width: 33px;
   height: 33px;
   font-family: "Exo 2", sans-serif;
+  cursor: pointer;
 }
 
 .map-content .article-page .secret-section .secret {
@@ -442,6 +445,7 @@
   width: 33px;
   height: 33px;
   font-family: "Exo 2", sans-serif;
+  cursor: pointer;
 }
 
 .map-content .article-page .secret-section .secret .secret-options {
@@ -462,6 +466,7 @@
   width: 44px;
   height: 44px;
   font-family: "Exo 2", sans-serif;
+  cursor: pointer;
 }
 
 .map-content .article-page .secret-section .secret .secret-options .secret-score {
@@ -526,7 +531,7 @@
   .profile-page .profile-panel {
     border: none;
     background: none;
-    margin: 0;
+    margin: 0 auto;
     padding: 0;
   }
 }
@@ -650,6 +655,13 @@
   width: 45px;
   height: 45px;
   font-family: "Exo 2", sans-serif;
+  cursor: pointer;
+}
+
+@media (max-width: 1024px) {
+  .profile-page .article-list .article-preview .article-meta button {
+    display: inline-block;
+  }
 }
 
 .profile-page .article-list .article-preview .article-meta .author-image {

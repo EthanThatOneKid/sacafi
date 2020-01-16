@@ -224,7 +224,10 @@ export default {
       try {
         await this.$store.dispatch(ARTICLE_DELETE, this.article.slug);
         this.showDeleteSuccess();
-        this.$router.push("/");
+        this.$router.push({
+          name: "profile",
+          username: this.currentUser.username
+        });
       } catch (err) {
         console.error(err);
       }

@@ -45,7 +45,8 @@
                 inset 0 0 20px $primary-light;
 
             @media (max-width: $desktop-width) {
-                font-size: 1em;
+                font-size: 1.5em;
+                width: 75vw;
             }
         }
     }
