@@ -1,0 +1,19 @@
+{
+  "name": "sacafi",
+  "version": "0.1.0",
+  "description": "> Gimme dat wifi baus!!",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EthanThatOneKid/sacafi.git"
+  },
+  "author": "EthanThatOneKid",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/EthanThatOneKid/sacafi/issues"
+  },
+  "homepage": "https://github.com/EthanThatOneKid/sacafi#readme"
+}
