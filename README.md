@@ -37,6 +37,8 @@ Location Comment: ![Location Comment](screenshots/location-comment.png)
 Profile Page: ![Profile Page](screenshots/profile.png)
 Settings Page: ![Settings Page](screenshots/settings.png)
 
+## Sacafi Logo 🎉
+![Sacafi Logo](frontend/public/logo.svg)
 
 ---
 
