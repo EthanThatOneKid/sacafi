@@ -35,6 +35,18 @@
 ## Known Bugs 🐛
 * Various security risks within npm packages.
 
+## Screenshots 📸
+![Home Page](screenshots/home.png)
+![Sign Up Page](screenshots/signup.png)
+![Login Page](screenshots/login.png)
+![Profile Page (empty)](screenshots/profile-empty.png)
+![New Location](screenshots/new-location.png)
+![Location Panel](screenshots/location-panel.png)
+![Location Comment](screenshots/location-comment.png)
+![Profile Page](screenshots/profile.png)
+![Settings Page](screenshots/settings.png)
+
+
 ---
 
 Engineered with 💖 by EthanThatOneKid

@@ -91,7 +91,7 @@ export default {
     async deleteArticle() {
       try {
         await this.$store.dispatch(ARTICLE_DELETE, this.article.slug);
-        this.$router.push("/");
+        this.$router.push("/"); // TODO: Just reload page
       } catch (err) {
         console.error(err);
       }

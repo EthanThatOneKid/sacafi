@@ -3,8 +3,8 @@
     <div class="article-heading">
       <span v-if="!article.requiresPassword"></span>
       <router-link :to="articleLink" class="preview-link">
-        <h1 v-text="article.title" />
-        <p v-text="article.description" />
+        <h1 v-text="abbreviate(article.title, 40)" />
+        <p v-text="abbreviate(article.description, 100)" />
       </router-link>
     </div>
     <RwvArticleMeta isPreview :article="article" />
@@ -21,6 +21,15 @@ export default {
   },
   props: {
     article: { type: Object, required: true }
+  },
+  methods: {
+    abbreviate(message, limit = 100) {
+      const isNecessary = message.length > limit;
+      const ellipses = "...";
+      return isNecessary
+        ? [...message].slice(0, limit + ellipses.length).join("") + ellipses
+        : message;
+    }
   },
   computed: {
     articleLink() {
