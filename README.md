@@ -15,27 +15,27 @@
 * Check out [Ionicons](https://ionicons.com/) to pick out the perfect icon for some element or another.
 
 ## Designed Veiws 💅
-* [x] Locations
-* [x] Profile
-* [x] New/Edit Location
-* [x] Settings
-* [x] Home
-* [x] Sign Up
-* [x] Login
+* [x] [Locations](frontend/src/views/Locations.vue)
+* [x] [Profile](frontend/src/views/Profile.vue)
+* [x] [New/Edit Location](frontend/src/views/ArticleEdit.vue)
+* [x] [Settings](frontend/src/views/Settings.vue)
+* [x] [Home](frontend/src/views/Home.vue)
+* [x] [Sign Up](frontend/src/views/Register.vue)
+* [x] [Login](frontend/src/views/Login.vue)
 
 ## Known Bugs 🐛
 * Various security risks within npm packages.
 
 ## Screenshots 📸
-Home Page: ![Home Page](screenshots/home.png)
-Sign Up Page: ![Sign Up Page](screenshots/signup.png)
-Login Page: ![Login Page](screenshots/login.png)
-Profile Page (empty): ![Profile Page (empty)](screenshots/profile-empty.png)
-New Location: ![New Location](screenshots/new-location.png)
-Location Panel: ![Location Panel](screenshots/location-panel.png)
-Location Comment: ![Location Comment](screenshots/location-comment.png)
-Profile Page: ![Profile Page](screenshots/profile.png)
-Settings Page: ![Settings Page](screenshots/settings.png)
+> Home Page: ![Home Page](screenshots/home.png)
+> Sign Up Page: ![Sign Up Page](screenshots/signup.png)
+> Login Page: ![Login Page](screenshots/login.png)
+> Profile Page (empty): ![Profile Page (empty)](screenshots/profile-empty.png)
+> New Location: ![New Location](screenshots/new-location.png)
+> Location Panel: ![Location Panel](screenshots/location-panel.png)
+> Location Comment: ![Location Comment](screenshots/location-comment.png)
+> Profile Page: ![Profile Page](screenshots/profile.png)
+> Settings Page: ![Settings Page](screenshots/settings.png)
 
 ## Sacafi Logo 🎉
 ![Sacafi Logo](frontend/public/logo.svg)
