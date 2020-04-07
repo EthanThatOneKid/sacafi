@@ -28,13 +28,21 @@
 
 ## Screenshots 📸
 > Home Page: ![Home Page](screenshots/home.png)
+
 > Sign Up Page: ![Sign Up Page](screenshots/signup.png)
+
 > Login Page: ![Login Page](screenshots/login.png)
+
 > Profile Page (empty): ![Profile Page (empty)](screenshots/profile-empty.png)
+
 > New Location: ![New Location](screenshots/new-location.png)
+
 > Location Panel: ![Location Panel](screenshots/location-panel.png)
+
 > Location Comment: ![Location Comment](screenshots/location-comment.png)
+
 > Profile Page: ![Profile Page](screenshots/profile.png)
+
 > Settings Page: ![Settings Page](screenshots/settings.png)
 
 ## Sacafi Logo 🎉
