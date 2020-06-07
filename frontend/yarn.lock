@@ -2165,6 +2165,11 @@ bluebird@^3.1.1, bluebird@^3.5.1, bluebird@^3.5.5:
   resolved "https://registry.yarnpkg.com/bluebird/-/bluebird-3.5.5.tgz#a8d0afd73251effbbd5fe384a77d73003c17a71f"
   integrity sha512-5am6HnnfN+urzt4yfg7IgTbotDjIT/u8AJpEt0sIU9FtXfVeezXAPKswrG+xKUCOYAINpSdgZVDU6QFh+cuH3w==
 
+blueimp-canvas-to-blob@^3.14.0:
+  version "3.27.0"
+  resolved "https://registry.yarnpkg.com/blueimp-canvas-to-blob/-/blueimp-canvas-to-blob-3.27.0.tgz#a2bd5c43587b95dedf0f6998603452d1bfcc9b9e"
+  integrity sha512-AcIj+hCw6WquxzJuzC6KzgYmqxLFeTWe88KuY2BEIsW1zbEOfoinDAGlhyvFNGt+U3JElkVSK7anA1FaSdmmfA==
+
 bn.js@^4.0.0, bn.js@^4.1.0, bn.js@^4.1.1, bn.js@^4.4.0:
   version "4.11.8"
   resolved "https://registry.yarnpkg.com/bn.js/-/bn.js-4.11.8.tgz#2cde09eb5ee341f484746bb0309b3253b1b1442f"
@@ -7185,6 +7190,11 @@ mini-css-extract-plugin@^0.6.0:
     schema-utils "^1.0.0"
     webpack-sources "^1.1.0"
 
+mini-toastr@^0.8.1:
+  version "0.8.1"
+  resolved "https://registry.yarnpkg.com/mini-toastr/-/mini-toastr-0.8.1.tgz#8b8632210a0266ece061f69920522e76996facfa"
+  integrity sha512-LCZGshd3D4OuIT/Ae8uPrfZw2gLbSxD8PeUQaie8yc70OMLRrQ13Dc+MmcI+95RYBnT9R+mZ3mXhmb9wD00HUA==
+
 minimalistic-assert@^1.0.0, minimalistic-assert@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/minimalistic-assert/-/minimalistic-assert-1.0.1.tgz#2e194de044626d4a10e7f7fbc00ce73e83e4d5c7"
@@ -10717,6 +10727,14 @@ vue-hot-reload-api@^2.3.0:
   resolved "https://registry.yarnpkg.com/vue-hot-reload-api/-/vue-hot-reload-api-2.3.3.tgz#2756f46cb3258054c5f4723de8ae7e87302a1ccf"
   integrity sha512-KmvZVtmM26BQOMK1rwUZsrqxEGeKiYSZGA7SNWE6uExx8UX/cj9hq2MRV/wWC3Cq6AoeDGk57rL9YMFRel/q+g==
 
+vue-image-upload-resize@^2.2.1:
+  version "2.3.0"
+  resolved "https://registry.yarnpkg.com/vue-image-upload-resize/-/vue-image-upload-resize-2.3.0.tgz#c2e8e887a81afc641122f21284540e5849475bf7"
+  integrity sha512-ElzyAVCluiDt8xSZkSK9FbuLY5mr23JlO4cHyyRo86RfEGLWtvXrTq7vYOgDstT8rNBmnTgNCkPKc0rpmyl1yA==
+  dependencies:
+    blueimp-canvas-to-blob "^3.14.0"
+    vue "^2.5.17"
+
 vue-jest@^3.0.4:
   version "3.0.4"
   resolved "https://registry.yarnpkg.com/vue-jest/-/vue-jest-3.0.4.tgz#b6a2b0d874968f26fa775ac901903fece531e08b"
@@ -10743,6 +10761,11 @@ vue-loader@^15.7.0:
     loader-utils "^1.1.0"
     vue-hot-reload-api "^2.3.0"
     vue-style-loader "^4.1.0"
+
+vue-notifications@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/vue-notifications/-/vue-notifications-1.0.2.tgz#988a0f42b472eb28afdcae4d7300307da3de1734"
+  integrity sha512-D9a3bhqW18tf4uRqFwh3Q0vIlcP9ipVnieyX2hAb/bqrGyVAx/JWPTqky7py9mU/DDaL5BY49MJzsctIDr7i2g==
 
 vue-password@^2.0.3:
   version "2.0.3"
@@ -10798,7 +10821,7 @@ vue2-leaflet@^2.2.1:
   resolved "https://registry.yarnpkg.com/vue2-leaflet/-/vue2-leaflet-2.4.1.tgz#851ce4fd01e28b1fb29af162c4baf4b395adbe15"
   integrity sha512-hns250cnMBCwKd8Msk95jFu6YhGN36moFy297JDBKZWOrCyiswMiAcSq8TLFNeR/fKJ0rH5frXQQZcgORB27Lw==
 
-vue@^2.0.0-rc.8:
+vue@^2.0.0-rc.8, vue@^2.5.17:
   version "2.6.11"
   resolved "https://registry.yarnpkg.com/vue/-/vue-2.6.11.tgz#76594d877d4b12234406e84e35275c6d514125c5"
   integrity sha512-VfPwgcGABbGAue9+sfrD4PuwFar7gPb1yl1UK1MwXoQPAw0BKSqWfoYCT/ThFrdEVWoI51dBuyCoiNU9bZDZxQ==
@@ -11001,9 +11024,9 @@ websocket-driver@>=0.5.1:
     websocket-extensions ">=0.1.1"
 
 websocket-extensions@>=0.1.1:
-  version "0.1.3"
-  resolved "https://registry.yarnpkg.com/websocket-extensions/-/websocket-extensions-0.1.3.tgz#5d2ff22977003ec687a4b87073dfbbac146ccf29"
-  integrity sha512-nqHUnMXmBzT0w570r2JpJxfiSD1IzoI+HGVdd3aZ0yNi3ngvQ4jv1dtHt5VGxfI2yj5yqImPhOK4vmIh2xMbGg==
+  version "0.1.4"
+  resolved "https://registry.yarnpkg.com/websocket-extensions/-/websocket-extensions-0.1.4.tgz#7f8473bc839dfd87608adb95d7eb075211578a42"
+  integrity sha512-OqedPIGOfsDlo31UNwYbCFMSaO9m9G/0faIHj5/dZFDMFqPTcx6UwqyOy3COEaEOg/9VsGIpdqn62W5KhoKSpg==
 
 whatwg-encoding@^1.0.1, whatwg-encoding@^1.0.3:
   version "1.0.5"
