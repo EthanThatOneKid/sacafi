@@ -1,6 +1,10 @@
 # Sacafi 🥡
 > The platform for users to post about real-world open wi-fi networks (i.e.: public libraries, cafes, etc) for others to study.
 
+## Todo ✅
+
+- [ ] Reorganize and modernize the monorepo into one server-side application.
+
 ## Screenshots 📸
 > Home Page: ![Home Page](screenshots/home.png)
 
