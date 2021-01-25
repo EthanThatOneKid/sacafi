@@ -4,7 +4,7 @@
 
 The platform for users to post about real-world open wi-fi networks (i.e.: public libraries, cafes, etc) for others to study.
 
-## Screenshots 📸
+## Screenshots
 
 > Home Page: ![Home Page](screenshots/home.png)
 
@@ -24,7 +24,7 @@ The platform for users to post about real-world open wi-fi networks (i.e.: publi
 
 > Settings Page: ![Settings Page](screenshots/settings.png)
 
-## Sacafi Logo 🎉
+## Sacafi Logo
 
 ![Sacafi Logo](frontend/public/logo.svg)
 
@@ -38,7 +38,7 @@ The platform for users to post about real-world open wi-fi networks (i.e.: publi
 - [x] [Sign Up](frontend/src/views/Register.vue)
 - [x] [Login](frontend/src/views/Login.vue)
 
-## Todo ✅
+## Todo
 
 - [ ] Reorganize and modernize the monorepo into one server-side application.
 
